@@ -6,7 +6,6 @@
   </head>
   <body>
     <header>
-<<<<<<< HEAD
       <h1>My Site</h1>
       {% if user.is_authenticated %}
         <a href="{% url 'logout' %}">logout</a>
@@ -14,10 +13,6 @@
         <a href="{% url 'login' %}">login</a> / <a href="{% url 'signup' %}">signup</a>
       {% endif %}
       <hr>
-=======
-      <h1>TOWIMA</h1>
-        <a href="{% url 'signup' %}">signup</a>
->>>>>>> c6a07ca8cb4850ef838e55ffd7ef533924476210
     </header>
     <main>
       {% block content %}
