@@ -2,17 +2,12 @@
 <html lang="en">
   <head>
     <meta charset="utf-8">
-    <title>{% block title %}Simple is Better Than Complex{% endblock %}</title>
+    <title>{% block title %}Towima pharma service{% endblock %}</title>
   </head>
   <body>
     <header>
-      <h1>My Site</h1>
-      {% if user.is_authenticated %}
-        
-      {% else %}
+      <h1>TOWIMA</h1>
         <a href="{% url 'signup' %}">signup</a>
-      {% endif %}
-      <hr>
     </header>
     <main>
       {% block content %}
