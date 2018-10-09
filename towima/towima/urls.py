@@ -20,5 +20,5 @@ from towima import views as core_views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    url( r'^signup/$', core_views.signup, name='signup'),
+    path( 'signup/', core_views.signup, name='signup'),
 ]
