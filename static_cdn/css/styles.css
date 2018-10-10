@@ -12,7 +12,7 @@ h2 {
 }
 
 .green {
-    color: green;
+    color: darkgreen;
 }
 
 /* HEADER */
@@ -24,9 +24,9 @@ header {
 
 header h1 {
     font-family: Verdana, Geneva, sans-serif;
-    font-size: 25px; 
+    font-size: 20px; 
     font-weight: bold;
-    text-transform: uppercase;    
+    text-transform: uppercase; 
 }
 
 header::after {
@@ -34,10 +34,6 @@ header::after {
     display: table;
     clear: both;
         
-}
-
-.logo {
-    float: left;
 }
 
 
@@ -55,9 +51,7 @@ header ul {
 header nav ul li {
     display: inline-block;
     margin-left: 70px;
-    padding-top: 23px;
-    
-    position: relative;
+    padding-top: 25px;
     
 }
 
@@ -66,29 +60,7 @@ header nav ul li a {
     font-weight: bold;
     text-decoration: none;
     color: black;
-}
-
-header nav ul li a:hover {
-    color:dimgray;
-}
-
-header nav ul li a::before {
-    content: '';
-    display: block;
-    height: 5px;
-    width: 100%;
-    background-color: dimgray;
-    
-    position: absolute;
-    top: 0;
-    width: 0%;
-    
-    transition: all ease-in-out 250ms;
-}
-
-header nav ul li a:hover::before {
-    width: 100%;
-    
+    margin-right: 20px;
 }
 
 

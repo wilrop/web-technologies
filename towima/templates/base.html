@@ -3,35 +3,28 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <link rel="stylesheet" type="text/css" href='{% static "css/styles.css" %}'>
+    <link rel="stylesheet" type="text/css" href='../static/css/styles.css'>
     <meta charset="utf-8">
     <title>{% block title %}Towima pharma service{% endblock %}</title>   
   </head>
   <body>
     <header>
         <div class="wrapper">
+            <div class=logo>
+                <h1><span class=green>Pharma</span>towi</h1>
+            </div>
             <nav>
                 <ul>
                     <li><a href="{% url 'home' %}">home</a></li>
-              
-                    <li><a href="{% url 'signup' %}">signup</a></li>
+                    {% if user.is_authenticated %}
+                        <li> <a href="{% url 'logout' %}">logout</a></li>
+                    {% else %}
+                        <li><a href="{% url 'login' %}">login</a></li>
+                        <li><a href="{% url 'signup' %}">signup</a></li>
+                    {% endif %}
                 </ul>
-            </nav>
-            
-            
-            
-            
+            </nav>            
         </div>
-        
-        
-        
-        
-      {% if user.is_authenticated %}
-        <a href="{% url 'logout' %}">logout</a>
-      {% else %}
-        <a href="{% url 'login' %}">login</a> / <a href="{% url 'signup' %}">signup</a>
-      {% endif %}
-      <hr>
     </header>
       
     
