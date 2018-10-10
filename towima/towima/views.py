@@ -9,9 +9,11 @@ def signup(request):
             form.save()
             username = form.cleaned_data.get('username')
             raw_password = form.cleaned_data.get('password1')
-            user = authenticate(username=username, password=raw_password)
-            
-            
+            user = authenticate(username=username, password=raw_password)            
     else:
         form = UserCreationForm()
     return render(request, 'signup.html', {'form': form})
+def home(request):
+    template = "home.html"
+    context={}
+    return render(request, template, context)

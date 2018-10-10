@@ -1,0 +1,22 @@
+/* GENERAL */
+
+*
+{
+    margin: 0;
+    padding: 0;
+}
+
+body
+{
+    font: Arial, sans-serif;
+    font-size: 55px;
+}
+
+h2 {
+    color: #FCA205;
+    font-family: 'Lobster';
+}
+
+
+
+/* HEADER */
