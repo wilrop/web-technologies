@@ -23,10 +23,11 @@ from django.conf.urls.static import static
 
 urlpatterns = [
     path('', TemplateView.as_view(template_name='home.html'), name='home'),
-    path(r'^$', home, name='home'),
-    path(r'^admin/', admin.site.urls),
-    path(r'^signup/', core_views.signup, name='signup'),
-    path(r'^accounts/', include('django.contrib.auth.urls')),
+    path(r'', home, name='home'),
+    path(r'admin/', admin.site.urls, name='sign'),
+    path(r'signup/', core_views.signup, name='signup'),
+    path(r'login/', core_views.login, name='login'),
+   # path(r'^accounts/', include('django.contrib.auth.urls')),
 ]
 
 if settings.DEBUG:

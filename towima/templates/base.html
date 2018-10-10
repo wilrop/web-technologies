@@ -1,9 +1,9 @@
-{% load static %}
+{% load staticfiles %}
 
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <link rel="stylesheet" type="text/css" href='/static/css/styles.css'>
+    <link rel="stylesheet" type="text/css" href='{% static "css/styles.css" %}'>
     <meta charset="utf-8">
     <title>{% block title %}Towima pharma service{% endblock %}</title>   
   </head>
@@ -13,7 +13,7 @@
             <nav>
                 <ul>
                     <li><a href="{% url 'home' %}">home</a></li>
-                    <li><a href="{% url 'signup' %}">signup</a></li>
+              
                     <li><a href="{% url 'signup' %}">signup</a></li>
                 </ul>
             </nav>

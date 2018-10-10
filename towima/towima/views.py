@@ -17,3 +17,7 @@ def home(request):
     template = "home.html"
     context={}
     return render(request, template, context)
+def login(request):
+    template = "login.html"
+    context = {}
+    return render(request, template, context)
