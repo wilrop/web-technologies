@@ -1,6 +1,6 @@
 /* GENERAL */
 h2 {
-    color:blue;
+    color:green;
     font-family: Verdana, Geneva, sans-serif;
     font-size: 30px;
 }
@@ -36,9 +36,29 @@ header::after {
         
 }
 
+
+/* LOGO HEADER
+
+The next css code is for the logo on the header menu */
 .logo {
     float: left;
 }
+
+header a:visited {
+    color: black;
+}
+
+header a:active {
+    color: black;
+}
+
+
+
+
+
+/*NAV BAR HEADER
+
+ The next css code is all for the nav bar on the header menu*/
 
 
 header nav {
