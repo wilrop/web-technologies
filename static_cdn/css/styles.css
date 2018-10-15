@@ -1,6 +1,6 @@
 /* GENERAL */
 h2 {
-    color:blue;
+    color:green;
     font-family: Verdana, Geneva, sans-serif;
     font-size: 30px;
 }
@@ -12,7 +12,7 @@ h2 {
 }
 
 .green {
-    color: darkgreen;
+    color: green;
 }
 
 /* HEADER */
@@ -24,9 +24,9 @@ header {
 
 header h1 {
     font-family: Verdana, Geneva, sans-serif;
-    font-size: 20px; 
+    font-size: 25px; 
     font-weight: bold;
-    text-transform: uppercase; 
+    text-transform: uppercase;    
 }
 
 header::after {
@@ -35,6 +35,30 @@ header::after {
     clear: both;
         
 }
+
+
+/* LOGO HEADER
+
+The next css code is for the logo on the header menu */
+.logo {
+    float: left;
+}
+
+header a:visited {
+    color: black;
+}
+
+header a:active {
+    color: black;
+}
+
+
+
+
+
+/*NAV BAR HEADER
+
+ The next css code is all for the nav bar on the header menu*/
 
 
 header nav {
@@ -51,7 +75,9 @@ header ul {
 header nav ul li {
     display: inline-block;
     margin-left: 70px;
-    padding-top: 25px;
+    padding-top: 23px;
+    
+    position: relative;
     
 }
 
@@ -60,7 +86,29 @@ header nav ul li a {
     font-weight: bold;
     text-decoration: none;
     color: black;
-    margin-right: 20px;
+}
+
+header nav ul li a:hover {
+    color:dimgray;
+}
+
+header nav ul li a::before {
+    content: '';
+    display: block;
+    height: 5px;
+    width: 100%;
+    background-color: dimgray;
+    
+    position: absolute;
+    top: 0;
+    width: 0%;
+    
+    transition: all ease-in-out 250ms;
+}
+
+header nav ul li a:hover::before {
+    width: 100%;
+    
 }
 
 
