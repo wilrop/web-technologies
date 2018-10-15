@@ -13,21 +13,19 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
+
+# Necessary imports for the urls
 from django.contrib import admin
 from django.urls import path, include
-from django.views.generic.base import TemplateView
-from .views import home
-from towima import views as core_views
+from towima import views
 from django.conf import settings
 from django.conf.urls.static import static
 
 urlpatterns = [
-    path('', TemplateView.as_view(template_name='home.html'), name='home'),
-    path(r'', home, name='home'),
-    path(r'admin/', admin.site.urls, name='admin'),
-    path(r'signup/', core_views.signup, name='signup'),
-    path(r'login/', core_views.login, name='login'),
-    path(r'accounts/', include('django.contrib.auth.urls')),
+    path('', views.home, name='home'),                              # The url for the homepage is empty
+    path('admin/', admin.site.urls, name='admin'),                  # The url for the admin page
+    path('signup/', views.signup, name='signup'),                   # The url for the signup page
+    path('accounts/', include('django.contrib.auth.urls')),         # The url where the accounts app runs
 ]
 
 if settings.DEBUG:
