@@ -7,12 +7,18 @@
 <section id="main-image">
 <!-- <img src='{% static "media/frontpage.jpg" %}' 
      style="width:100%; height: 50%px;"> -->
-<div class="wrapper">
-    <h2>Home</h2>
-    <p>
-        Welcome to Pharmatowi, an online platform to order and connect with your local pharmacys
-        <button type="button" class="btn btn-primary">shit</button>
-    </p>  
+<div class="wrapper">  
+    <div class="jumbotron">
+            <h1 class="display-4">PharmaTowima</h1>
+            <p class="lead">Welcome to Pharmatowi, an online platform to order and connect with your local pharmacys.</p>
+            <hr class="my-4">
+            <p>Make an account today!</p>
+            <a class="btn btn-primary btn-lg" href="{% url 'signup' %}" role="button">Singup</a>
+            <a class="btn btn-primary btn-lg" href="{% url 'login' %}" role="button">Login</a>
+            <button type="button" class="btn btn-primary">shit</button>
+          </div>
+
+          <img src="https://www.dailydot.com/wp-content/uploads/fe6/a1/17ff3d8fbe7af2a0530f9be6c178f025.jpg" class="img-fluid" alt="Responsive image">
     
 </div>
  
