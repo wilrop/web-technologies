@@ -16,12 +16,13 @@ def signup(request):
     else:
         form = SignUpForm()
     return render(request, 'signup.html', {'form': form})
+
 def home(request):
     template = "home.html"
     context={}
     return render(request, template, context)
 
-def login(request):
-    template = "login.html"
-    context = {}
-    return render(request, template, context)
+#def login(request):
+#   template = "login.html"
+#   context = {}
+#   return render(request, template, context)
