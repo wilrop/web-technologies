@@ -4,24 +4,46 @@
 {% extends 'base.html' %}
 {% load staticfiles %}
 {% block content %}
-<section id="main-image">
-<!-- <img src='{% static "media/frontpage.jpg" %}' 
-     style="width:100%; height: 50%px;"> -->
-<div class="wrapper">  
-    <div class="jumbotron">
-            <h1 class="display-4">PharmaTowima</h1>
-            <p class="lead">Welcome to Pharmatowi, an online platform to order and connect with your local pharmacys.</p>
-            <hr class="my-4">
-            <p>Make an account today!</p>
-            <a class="btn btn-primary btn-lg" href="{% url 'signup' %}" role="button">Singup</a>
-            <a class="btn btn-primary btn-lg" href="{% url 'login' %}" role="button">Login</a>
-            <button type="button" class="btn btn-primary">shit</button>
-          </div>
+    <div id="home">
+            <div class="landing-text">
+                <h1>PHARMATOWI</h1>
+                <h3>Online platform to order and connect with you local pharmacies</h3>
+                <a href="{% url 'signup' %}">Sign Up Now</a>
+            </div>
+    </div>
 
-          <img src="https://www.dailydot.com/wp-content/uploads/fe6/a1/17ff3d8fbe7af2a0530f9be6c178f025.jpg" class="img-fluid" alt="Responsive image">
+    <!-- Three responsive columns divided equally over the entire width. 
+         It always has to add up to 12 -->
+        <div class="container-fluid">
+            <div class="row">
+                    <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 localpharmacy">
+                        <div class="three-columns">
+                            <h4>Find your local pharmacie</h4>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 localpharmacy1">
+                        <div class="three-columns">
+                            <h4>Order your products</h4>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 localpharmacy2">
+                        <div class="three-columns">
+                            <h4>Discuss with your pharmacist</h4>
+                        </div>
+                    </div>
+            </div>
+        </div>
+
+
     
-</div>
- 
-</section>
+    <div id="fixed"> 
+    </div>
+
+    <div class="container-fluid">
+        <p>
+        Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Praesent vitae arcu tempor neque lacinia pretium. Suspendisse nisl. Nam sed tellus id magna elementum tincidunt. Donec ipsum massa, ullamcorper in, auctor et, scelerisque sed, est. Proin mattis lacinia justo. Praesent dapibus. Mauris metus. Maecenas fermentum, sem in pharetra pellentesque, velit turpis volutpat ante, in pharetra metus odio a lectus. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum fermentum tortor id mi.
+
+        </p>
+    </div>
   
 {% endblock %}

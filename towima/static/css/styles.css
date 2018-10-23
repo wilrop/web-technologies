@@ -1,5 +1,52 @@
 
 
+#home {
+    background: url('../media/landing-page-picture.jpg') no-repeat center center fixed;
+    display: table;
+    min-height:  300px;
+    position: relative;
+    width: 100%;
+    background-size: cover;
+}
+
+.landing-text {
+    display: table-cell;
+    text-align: center;
+    vertical-align: middle;
+    color: white;
+}
+
+#fixed {
+    background: url(../media/frontpage.jpg) no-repeat center center fixed;
+    display: table;
+    min-height: 300px;
+    position: relative;
+    width: 100%;
+    background-size: cover; 
+}
+
+.row {
+    min-height: 400px;
+}
+
+.three-columns {
+    text-align: center;
+    color: white;
+}
+
+.localpharmacy {
+    background-color: darkgreen;
+}
+
+.localpharmacy1 {
+    background-color: blue;
+}
+
+.localpharmacy2 {
+    background-color: red;
+}
+
+
 
 
 
