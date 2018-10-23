@@ -3,7 +3,7 @@ from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 from towima.models import Profile
 
-
+# This class will create a signup form, from an existing template provided by django.
 class SignUpForm(UserCreationForm):
     first_name = forms.CharField(max_length=30, required=True)
     last_name = forms.CharField(max_length=30, required=True)
@@ -14,8 +14,9 @@ class SignUpForm(UserCreationForm):
 
     class Meta:
         model = User
-        fields = ('username', 'first_name', 'last_name', 'date_of_birth', 'phone_number', 'email', 'password1', 'password2', )
+        fields = ('username', 'first_name', 'last_name', 'date_of_birth', 'phone_number', 'email', 'password1', 'password2', ) # The order of the fields
 
+    # A custom save function, so that the user data, as well as additional profile data is saved in the database.
     def save(self, commit = True):
         user = super().save(commit=False)
         phone_number = self.cleaned_data['phone_number']
@@ -23,6 +24,6 @@ class SignUpForm(UserCreationForm):
         address = self.cleaned_data['address']
         if commit:
             user.save()
-            profile = Profile(user=user, phone_number=phone_number, date_of_birth=date_of_birth, address=address)
+            profile = Profile(user=user, phone_number=phone_number, date_of_birth=date_of_birth, address=address) # Create a new profile.            
             profile.save()  
         return user
