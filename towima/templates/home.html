@@ -7,28 +7,44 @@
     <div id="home">
             <div class="landing-text">
                 <h1>PHARMATOWI</h1>
-                <h3>Online platform to order and connect with you local pharmacies</h3>
-                <a href="{% url 'signup' %}">Sign Up Now</a>
+                <h3>An online platform to order and connect with your local pharmacies</h3>
+                <a href="{% url 'signup' %}" class="btn btn-primary">Sign Up Now</a>
             </div>
     </div>
 
     <!-- Three responsive columns divided equally over the entire width. 
-         It always has to add up to 12 -->
+         It always has to add up to 12
+        Each column is a card with everytime a picture, the title of the card and a description. There is also a button to take the user to the desired page -->
         <div class="container-fluid">
             <div class="row">
                     <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 localpharmacy">
-                        <div class="three-columns">
-                            <h4>Find your local pharmacie</h4>
+                        <div class="card">
+                          <img class="card-img-top" src="../static/media/find.jpg">
+                          <div class="card-body">
+                            <h5 class="card-title">Find your local pharmacy</h5>
+                            <p class="card-text">  Find your local pharmacy and their information, reviews and many more.</p>
+                            <a href="#" class="btn btn-primary">Find now</a>
+                          </div>
                         </div>
                     </div>
                     <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 localpharmacy1">
-                        <div class="three-columns">
-                            <h4>Order your products</h4>
+                        <div class="card">
+                          <img class="card-img-top" src="../static/media/order.jpg">
+                          <div class="card-body">
+                            <h5 class="card-title">Order your medicines</h5>
+                            <p class="card-text">Order from home and come pick it up when it's ready. No need to wait anymore!</p>
+                            <a href="#" class="btn btn-primary">Order now</a>
+                          </div>
                         </div>
                     </div>
                     <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 localpharmacy2">
-                        <div class="three-columns">
-                            <h4>Discuss with your pharmacist</h4>
+                        <div class="card">
+                          <img class="card-img-top" src="../static/media/talk.jpg">
+                          <div class="card-body">
+                            <h5 class="card-title">Talk to your pharmacist</h5>
+                            <p class="card-text">Have a question? Talk to your pharmacist to get a fast and professional answer.</p>
+                            <a href="#" class="btn btn-primary">Talk now</a>
+                          </div>
                         </div>
                     </div>
             </div>
@@ -41,7 +57,9 @@
 
     <div class="container-fluid">
         <p>
-        Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Praesent vitae arcu tempor neque lacinia pretium. Suspendisse nisl. Nam sed tellus id magna elementum tincidunt. Donec ipsum massa, ullamcorper in, auctor et, scelerisque sed, est. Proin mattis lacinia justo. Praesent dapibus. Mauris metus. Maecenas fermentum, sem in pharetra pellentesque, velit turpis volutpat ante, in pharetra metus odio a lectus. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum fermentum tortor id mi.
+        Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Praesent vitae arcu tempor neque lacinia pretium. Suspendisse nisl. Nam sed tellus id magna elementum tincidunt. Donec ipsum massa, ullamcorper in, auctor et, scelerisque sed, est. Proin mattis lacinia justo. Praesent dapibus. Mauris metus. Maecenas fermentum, sem in pharetra pellentesque, velit turpis volutpat ante, in pharetra metus odio a lectus. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum fermentum tortor id mi. <br>  <br>
+         Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Praesent vitae arcu tempor neque lacinia pretium. Suspendisse nisl. Nam sed tellus id magna elementum tincidunt. Donec ipsum massa, ullamcorper in, auctor et, scelerisque sed, est. Proin mattis lacinia justo. Praesent dapibus. Mauris metus. Maecenas fermentum, sem in pharetra pellentesque, velit turpis volutpat ante, in pharetra metus odio a lectus. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum fermentum tortor id mi. <br>  <br>
+         Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Praesent vitae arcu tempor neque lacinia pretium. Suspendisse nisl. Nam sed tellus id magna elementum tincidunt. Donec ipsum massa, ullamcorper in, auctor et, scelerisque sed, est. Proin mattis lacinia justo. Praesent dapibus. Mauris metus. Maecenas fermentum, sem in pharetra pellentesque, velit turpis volutpat ante, in pharetra metus odio a lectus. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum fermentum tortor id mi.
 
         </p>
     </div>
