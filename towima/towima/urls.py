@@ -18,15 +18,11 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from towima import views
-from django.conf import settings
-from django.conf.urls.static import static
 
 urlpatterns = [
     path('', views.home, name='home'),                              # The url for the homepage is empty
     path('admin/', admin.site.urls, name='admin'),                  # The url for the admin page
-    path('signup/', views.signup, name='signup'),                   # The url for the signup page
     path('accounts/', include('django.contrib.auth.urls')),         # The url where the accounts app runs
+    path('accounts/', include('accounts.urls')),                    # This url pattern will be visitid for the signup and profile functionality
 ]
 
-if settings.DEBUG:
-    urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
