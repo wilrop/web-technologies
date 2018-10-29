@@ -1,8 +1,5 @@
 from django.contrib import admin
-from towima.models import Profile, Category, Product
-
-# Register the Profile model in the admin page.
-admin.site.register(Profile)
+from towima.models import Category, Product
 
 class CategoryAdmin(admin.ModelAdmin):
     # Set list_display to control which fields are displayed on the change list page of the admin.

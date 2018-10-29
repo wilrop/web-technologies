@@ -37,7 +37,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'accounts',                         # The account app
+    'accounts.apps.AccountsConfig',     # The account app
     'towima',                           # Our own app
 ]
 

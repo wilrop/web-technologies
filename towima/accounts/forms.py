@@ -1,7 +1,7 @@
 from django import forms
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
-from towima.models import Profile
+from accounts.models import Profile
 
 # This class will create a signup form, from an existing template provided by django.
 class SignUpForm(UserCreationForm):

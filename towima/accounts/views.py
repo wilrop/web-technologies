@@ -1,6 +1,6 @@
 from django.contrib.auth import login, authenticate
 from django.shortcuts import render, redirect
-from towima.forms import SignUpForm
+from accounts.forms import SignUpForm
 
 # Define a signup view. This will provide the user with a signup page and the correct functionality.
 def signup(request):

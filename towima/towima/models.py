@@ -1,12 +1,4 @@
 from django.db import models
-from django.contrib.auth.models import User
-
-# Create a user profile model. This model will have a OneToOne with User and some extra profile attributes.
-class Profile(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE)
-    phone_number = models.CharField(max_length=12)
-    date_of_birth = models.DateField()
-    address = models.CharField(max_length = 50)
 
 # Definition of the model Category. This class is used to categorise the different products to get a good overview of the products.
 # The used attributes are name for the name of the Category and the slug for the URl.
