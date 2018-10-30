@@ -11,10 +11,12 @@ class SignUpForm(UserCreationForm):
     phone_number = forms.CharField(max_length=12)
     date_of_birth = forms.DateField()
     address = forms.CharField(max_length = 50)
+    user_types = (('Pharmacist', 'Pharmacist'), ('Customer', 'Customer'))
+    user_type = forms.ChoiceField(widget=forms.RadioSelect, choices=user_types)
 
     class Meta:
         model = User
-        fields = ('username', 'first_name', 'last_name', 'date_of_birth', 'phone_number', 'email', 'password1', 'password2', ) # The order of the fields
+        fields = ('username', 'first_name', 'last_name', 'date_of_birth', 'phone_number', 'email', 'password1', 'password2', 'user_type') # The order of the fields
 
     # A custom save function, so that the user data, as well as additional profile data is saved in the database.
     def save(self, commit = True):

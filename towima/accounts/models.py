@@ -7,3 +7,4 @@ class Profile(models.Model):
     phone_number = models.CharField(max_length=12)
     date_of_birth = models.DateField()
     address = models.CharField(max_length = 50)
+    user_type = models.CharField(max_length=126, default='Customer')
