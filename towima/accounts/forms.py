@@ -24,8 +24,9 @@ class SignUpForm(UserCreationForm):
         phone_number = self.cleaned_data['phone_number']
         date_of_birth = self.cleaned_data['date_of_birth']
         address = self.cleaned_data['address']
+        user_type = self.cleaned_data['user_type']
         if commit:
             user.save()
-            profile = Profile(user=user, phone_number=phone_number, date_of_birth=date_of_birth, address=address) # Create a new profile.            
+            profile = Profile(user=user, phone_number=phone_number, date_of_birth=date_of_birth, address=address, user_type=user_type) # Create a new profile.            
             profile.save()  
         return user
