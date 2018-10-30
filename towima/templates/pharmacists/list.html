@@ -5,7 +5,7 @@
 <h2>Available pharmacists</h2>
 <ul>
     {% for pharmacist in pharmacist_list %}
-    <li>{{ pharmacist.user.first_name }} {{ pharmacist.user.last_name }}</li>
+    <li><a href ="{% url 'profile' pk=pharmacist.user.pk%}">{{ pharmacist.user.first_name }} {{ pharmacist.user.last_name }}</a></li>
     {% endfor %}
 </ul>
 {% endblock %}
