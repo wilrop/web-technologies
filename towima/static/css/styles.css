@@ -50,14 +50,53 @@
     width: 100%;
 }
 
-.form_label {
+.form_login_label {
     text-align: left;
-}
-
-.form_field {
+    font-weight: bold;
+    margin-right: -40px;
     
 }
 
+.form_login_field {
+    
+}
+/* PROFILE PAGE */
+.profile_title {
+    font-weight: bolder;
+    font-size: 16pt;
+    text-align: left;
+}
 
+.profile_description {
+    font-size: 16pt;
+    text-align: left;
+}
+
+.profile_left_col {
+    text-align: center;
+    background: url('../../static/media/Profile/background_profile.png') no-repeat;
+    background-size:auto;
+    background-attachment: fixed;
+    border: 1px solid;
+    border-top-left-radius: 25px;
+    border-top-right-radius: 25px;
+    min-width: 350px;
+}
+
+.profile_right_col {
+    border: 1px solid;
+    border-bottom-left-radius: 25px;
+    border-bottom-right-radius: 25px;
+    background-color: white;
+    min-width: 350px;
+}
+
+/* LOGIN PAGE */
+
+.login-block{
+float:left;
+width:100%;
+padding : 50px 0;
+}
 
 
