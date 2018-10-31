@@ -25,5 +25,6 @@ urlpatterns = [
     path('accounts/', include('django.contrib.auth.urls')),         # The url where the accounts app runs
     path('accounts/', include('accounts.urls')),                    # This url pattern will be visitid for the signup and profile functionality
     path('pharmacists/', include('pharmacists.urls')),              # The url where the pharmacists app is
+    path('products/', include('products.urls')), # The url where the products app is
 ]
 
