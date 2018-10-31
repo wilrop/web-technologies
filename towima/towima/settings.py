@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'accounts.apps.AccountsConfig',     # The account app
     'towima',                           # Our own app
+    'products.apps.ProductsConfig', #products App
 ]
 
 MIDDLEWARE = [
