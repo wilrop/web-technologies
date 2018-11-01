@@ -2,10 +2,49 @@
 {% block title %}Login{% endblock %}
 
 {% block content %}
-<h2>Login</h2>
-<form method="post">
-  {% csrf_token %}
-  {{ form.as_p }}
-  <button type="submit">Login</button>
-</form>
+<section id="login_background">
+    <section class="container">
+        <div class="row">
+            <div class="col-md-6 offset-md-3 col-sm-12">
+                <div class="login_card">
+                    <h1> Sign In </h1>
+                    <form method="post">
+                      {% csrf_token %}
+                      {% for field in form %}
+                        <div class="field">
+                          <label for="{{ field.id_for_label }}" class="label">
+                              {{ field.hyml_name }} 
+                          </label>
+                            <div class="row">
+                                <div class="col-lg-4 col-md-12">
+                                    <h4>{{ field.label_tag }}</h4>
+                                </div>
+                                <div class="col-lg-8 col-md-12">
+                                    {{ field }}
+                                </div>
+                            </div>  
+
+                            {% for error in field.errors %}
+                            <p style="color: red">{{ error }}</p>
+                            {% endfor %}
+                        </div>
+                      {% endfor %}
+                        <br>
+                        <button type="submit" class="btn btn-secondary">Sign In</button>
+                    </form>
+                    <hr>
+                    <h1>Don't have an account yet?</h1>
+                    <br>
+                    <a class="btn btn-secondary"
+                            href="{% url 'signup' %}">
+                        Sign up!
+                    </a>
+                </div>
+            </div>
+        </div>
+
+    </section>
+    <br><br><br><br><br><br><br><br><br><br><br><br><br>
+</section>
+
 {% endblock %}

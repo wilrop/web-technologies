@@ -1,54 +1,40 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<div class="container-fluid">
-    <div class="row">
-        <div class="col-lg-5 col-md-5 col-sm-5 col-xs-12 sign_in">
-             <div class="card">
-                <h3 class="card-header">Sign in</h3>
-                <div class="card-body">
-                    <p class="card-text">  Normally you should sign in here</p>
-                    <a href="#" class="btn btn-primary">sign in</a>
+<section id="signup_background">
+    <section class="container">
+        <div class="row">
+            <div class="col-md-6 offset-md-3 col-sm-12">
+                <div class="signup_card">
+                    <h1> Sign Up </h1>
+                    <form method="post">
+                      {% csrf_token %}
+                      {% for field in form %}
+                        <div class="field">
+                          <label for="{{ field.id_for_label }}" class="label">
+                              {{ field.hyml_name }} 
+                          </label>
+                            <div class="row">
+                                <div class="col-lg-5 col-md-12">
+                                    <h4>{{ field.label_tag }}</h4>
+                                </div>
+                                <div class="col-lg-7 col-md-12">
+                                    {{ field }}
+                                </div>
+                            </div>  
+
+                            {% for error in field.errors %}
+                            <p style="color: red">{{ error }}</p>
+                            {% endfor %}
+                        </div>
+                      {% endfor %}
+                        <br>
+                        <button type="submit" class="btn btn-secondary">Sign In</button>
+                    </form>
                 </div>
             </div>
         </div>
-        <div class="col-lg-2 col-md-2 col-sm-2 col-xs-12">
-            <p>OR</p>
-        </div>
-        <div class="col-lg-5 col-md-5 col-sm-5 col-xs-12 signup">
-             <div class="card">
-                  <h3 class="card-header">Create an account</h3>
-                  <div class="card-body">
-                    <form method="post">
-                    {% csrf_token %}
-                    {% for field in form %}
-                    <div class="field">
-                      <label for="{{ field.id_for_label }}" class="label">
-                          {{ field.hyml_name }} 
-                      </label>
-                        <div class="row">
-                            <div class="col-lg-4 col-md-12 col-sm-12 col-xs-12 form_label">
-                                {{ field.label_tag }}
-                            </div>
-                            <div class="col-lg-8 col-md-12 col-sm-12 col-xs-12 form_field">
-                                {{ field }}
-                            </div>
-                        </div>  
-                        
-                        {% for error in field.errors %}
-                        <p style="color: red">{{ error }}</p>
-                        {% endfor %}
-                    </div>
-                    {% endfor %}
-                    <button type="submit">Sign up</button>
-                   </form>
-                  </div>
-            </div>
-              
-        </div>
-        
-        
-            
-    </div>
-</div>
+    </section>
+    <br><br><br><br><br><br><br><br><br><br><br><br><br>
+</section>
 {% endblock %}
