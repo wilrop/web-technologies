@@ -1,4 +1,5 @@
 from django.db import models
+from django.urls import reverse
 
 # Definition of the model Category. This class is used to categorise the different products to get a good overview of the products.
 # The used attributes are name for the name of the Category and the slug for the URl.
@@ -59,7 +60,7 @@ class Product(models.Model):
         return self.name
 
     def get_absolute_url(self):
-       return reverse('products:product_detail', args[self.id, self.slug])
+       return reverse('products:product_detail', args=[self.id, self.slug])
 
 
 # A lot of information in the comments comes from the documentation.
