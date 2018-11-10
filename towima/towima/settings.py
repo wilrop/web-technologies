@@ -41,8 +41,6 @@ INSTALLED_APPS = [
     'towima',                           # Our own app
     'products.apps.ProductsConfig', #products App
     'pharmacists.apps.PharmacistsConfig', #Pharmacists App
-    'bootstrap_datepicker_plus', #Date picker for sign up form
-    
 ]
 
 MIDDLEWARE = [
@@ -137,8 +135,3 @@ MEDIA_ROOT = os.path.join(os.path.dirname(BASE_DIR), "media_cdn")
 # Where to redirect after login and logout
 LOGIN_REDIRECT_URL = '/'
 LOGOUT_REDIRECT_URL = '/'
-
-#For the datepicker JQuery is needed in BOOTSTRAP 
-BOOTSTRAP4 = {
-    'include_jquery': True,
-}
