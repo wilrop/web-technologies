@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'towima',                           # Our own app
     'products.apps.ProductsConfig', #products App
     'pharmacists.apps.PharmacistsConfig', #Pharmacists App
+    'pharmacies.apps.PharmaciesConfig', #Pharmacists App
 ]
 
 MIDDLEWARE = [
