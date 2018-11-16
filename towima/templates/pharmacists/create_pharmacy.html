@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<section id="signup_background">
+    <section class="container">
+        <div class="row">
+            <div class="col-md-6 offset-md-3 col-sm-12">
+                <div class="signup_card">
+                    <h1> Create your pharmacy </h1>
+                    <form method="post">
+                      {% csrf_token %}
+                      {% for field in form %}
+                        <div class="field">
+                          <label for="{{ field.id_for_label }}" class="label">
+                              {{ field.hyml_name }} 
+                          </label>
+                            <div class="row">
+                                <div class="col-lg-5 col-md-12">
+                                    <h4>{{ field.label_tag }}</h4>
+                                </div>
+                                <div class="col-lg-7 col-md-12">
+                                    {{ field }}
+                                </div>
+                            </div>  
+
+                            {% for error in field.errors %}
+                            <p style="color: red">{{ error }}</p>
+                            {% endfor %}
+                        </div>
+                      {% endfor %}
+                        <br>
+                        <button type="submit" class="btn btn-secondary">Create</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+    <br><br><br><br><br><br><br><br><br><br><br><br><br>
+</section>
+{% endblock %}

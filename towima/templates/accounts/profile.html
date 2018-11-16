@@ -5,7 +5,7 @@
 <section id="profile_background">
     <section class="container-fluid">
         <div class="row">
-            <div class="col-md-12 col-sm-12 text-center">
+            <div class="col-md-12 col-sm-12" style="padding-top: 50px;">
                 <img src="../../static/media/Profile/men_avatar.png" 
                      class="img-responsive rounded-circle tm-border"
                      style="margin-top: 20px;">
@@ -15,61 +15,78 @@
             </div>
         </div>
     </section>
+</section>
     <section class="container">
-	<div class="row">
-		<div class="col-md-5 col-sm-12">
-			<div class="profile_card_green ">
-                <p><span class="profile_title">First-name:</span> <br>
-                   <span class="profile_description">{{user.first_name}}</span>
-                </p>
-                <p><span class="profile_title">Last-name: </span><br>
-                    <span class="profile_description">{{user.last_name}}</span>
-                </p>
-			</div>
-		</div>
-		<div class="col-md-7 col-sm-12">
-			<div class="profile_card_skin">
-                <p>
-                    <span class="profile_title">
-                        Address
-                    </span>
-                    <br>
-                    <span class="profile_description">
-                        {{ user.profile.address }}
-                    </span>
-                </p>
-                <p><span class="profile_title">Phone Number:</span> <br>
-                   <span class="profile_description">{{user.profile.phone_number}}</span>
-                </p>
-			</div>
-		</div>
-	</div>
-    <br>
-    <div class="row">
-		<div class="col-md-4 col-sm-12">
-			<div class="profile_card_skin ">
-                <p><span class="profile_title">Extra:</span> <br>
-                </p>
-			</div>
-		</div>
-		<div class="col-md-8 col-sm-12">
-			<div class="profile_card_green">
-                <p>
-                    <span class="profile_title">
-                        Email
-                    </span>
-                    <br>
-                    <span class="profile_description">
-                        {{ user.email }}
-                    </span>
-                </p>
-			</div>
-		</div>
-	</div>
+        <div class="row">
+            <div class="col-md-5 col-sm-12">
+                <div class="profile_card_green ">
+                    <p><span class="profile_title">First-name:</span> <br>
+                       <span class="profile_description">{{user.first_name}}</span>
+                    </p>
+                    <p><span class="profile_title">Last-name: </span><br>
+                        <span class="profile_description">{{user.last_name}}</span>
+                    </p>
+                </div>
+            </div>
+            <div class="col-md-7 col-sm-12">
+                <div class="profile_card_skin">
+                    <p>
+                        <span class="profile_title">
+                            Address
+                        </span>
+                        <br>
+                        <span class="profile_description">
+                            {{ user.profile.address }}
+                        </span>
+                    </p>
+                    <p><span class="profile_title">Phone Number:</span> <br>
+                       <span class="profile_description">{{user.profile.phone_number}}</span>
+                    </p>
+                </div>
+            </div>
+        </div>
+        <br>
+        <div class="row">
+            <div class="col-md-4 col-sm-12">
+                <div class="profile_card_skin ">
+                    <p><span class="profile_title">Extra:</span> <br>
+                    </p>
+                </div>
+            </div>
+            <div class="col-md-8 col-sm-12">
+                <div class="profile_card_green">
+                    <p>
+                        <span class="profile_title">
+                            Email
+                        </span>
+                        <br>
+                        <span class="profile_description">
+                            {{ user.email }}
+                        </span>
+                    </p>
+                </div>
+            </div>
+        </div>
+        {% if user.profile.user_type == "Pharmacist" %}
+            <div class="row">
+                <div class="col-md-7 col-sm-12">
+                    <div class="profile_card_skin">
+                        <p>
+                            <span class="profile_title">
+                                Pharmacy
+                            </span>
+                            <br>
+                            <span class="profile_description">
+                                {{ pharmacys.name }}
+                            </span>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        {%endif%}
     </section>
 
     <br><br><br><br><br><br><br><br><br><br><br><br><br>
 
-</section>
 
 {% endblock %}

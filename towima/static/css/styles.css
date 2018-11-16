@@ -1,70 +1,73 @@
-
 /* Layout for HOMEPAGE */
 #home {
-    background: url('../media/landing_page.jpg') no-repeat center center fixed;
-    display: table;
-    min-height:  400px;
-    position: relative;
-    width: 100%;
+    background: url('../media/frontpage/background.svg') no-repeat center center fixed;
     background-size: cover;
+    padding-bottom: 150px;
 }
 
 .landing-text {
-    display: table-cell;
     text-align: center;
     vertical-align: middle;
     color: white;
+    padding-top: 150px;
+    font-size: 30px;
      
 }
 
-#fixed {
-    background: url(../media/frontpage.jpg) no-repeat center center fixed;
-    display: table;
-    min-height: 300px;
-    position: relative;
-    width: 100%;
-    background-size: cover; 
-}
-
-/* Layout for HOMEPAGE --> three colums and their attributes */
-
-.three-columns {
-    text-align: center;
+/* FOOTER */
+.footer-custom{
+    background-color: lightgray;
     color: white;
+    font-size: 15px;
+    min-height: 50px;
 }
 
-/* Layout for signup & sign in */
 
-#form_sign_in {
+.about_us_img{
+    background: url('../media/about_us.svg') no-repeat center center;
+    background-size: contain;
+    margin-top: -20px;
+}
+
+
+
+.tab1{
+    background: url('../media/order_now_Plan%20de%20travail%201.svg') no-repeat center center fixed;
+    background-size: contain;
+    min-height: 300px
+}
+.tab2 {
+    background: url('../media/talk_to.svg') no-repeat center center fixed;
+    background-size: contain;
+    min-height: 300px
+}
+.tab3 {
+    background: url('../media/find_pharma_Plan%20de%20travail%201.svg') no-repeat center center fixed;
+    background-size: contain;
+    min-height: 300px
+}
+
+.tabs_text {
+    padding-top: 20px;
+    text-align: left;
+    font-size: 30px;
+    
+}
+
+
+/* PROFILE PAGE */
+
+#profile_background{
+    background: url('../media/profile_page_4_Plan%20de%20travail%201.svg') no-repeat center center fixed;
+    background-size: cover;
+    min-height: 550px;
     text-align: center;
 }
 
-.card {
-    margin-top: 25px;
-    margin-bottom: 25px;
-    min-height: 500px;
-}
-
-.card-img-top {
-    height: 250px;
-    width: 100%;
-}
-
-.form_login_label {
-    text-align: left;
-    font-weight: bold;
-    margin-right: -40px;
-    
-}
-
-.form_login_field {
-    
-}
-/* PROFILE PAGE */
 .profile_title {
     font-weight: bold;
     font-size: 25pt;
-    text-align: left;
+    text-align: center;
 }
 
 .profile_description {
@@ -73,7 +76,7 @@
 }
 
 .profile_card_green {
-    background-color: #88d498;
+    background-color: #21db87;
     color: white;
     border-radius: 10px;
     min-height: 250px;
@@ -87,13 +90,6 @@
     margin-top: 15px;
     min-height: 250px;
     padding: 30px;
-}
-
-#profile_background{
-    height: 100%;
-    background: url('../media/Background/profile_background.jpg');
-    background-attachment: fixed;
-    background-size: cover;      
 }
 
 /* LOGIN PAGE */
@@ -129,3 +125,4 @@
     min-height: 250px;
     padding: 30px;
 }
+

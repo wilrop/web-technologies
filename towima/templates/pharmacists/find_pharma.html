@@ -3,12 +3,14 @@
 {% block title %}Find your local pharmacy{% endblock %}
 
 {% block content %}
-    <section class="container-fluid">
+    <section class="container-fluid" style="padding-top: 50px;">
         <div class="row" style="margin-top: 30px;">
             <div class="col-md-4 col-sm-12 text-center">
                <h2>Find your local pharmacy</h2>
             </div>
             <div class="col-md-8 col-sm-12">
+                <script src='https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-directions/v3.1.3/mapbox-gl-directions.js'></script>
+                <link rel='stylesheet' href='https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-directions/v3.1.3/mapbox-gl-directions.css' type='text/css' />
                 <div id='map' style='width: 100%; height: 500px; border-radius: 20px;'></div>
                 <script>
                 mapboxgl.accessToken = 'pk.eyJ1IjoibWF4aW1lYW50b2luZTE5OTciLCJhIjoiY2pubTNmNmlrMWpvdjNxdGFsdGxxaXJlayJ9.0tDqrdUlSYEOqxMSiy7j3g';
@@ -31,33 +33,18 @@
                     },
                     trackUserLocation: true
                 }));
+                    
+                map.addControl(new MapboxDirections({
+                    accessToken: mapboxgl.accessToken}),
+                               'top-left');
+                
+                map.addControl(new MapboxTraffic({
+                    accessToken: mapboxgl.accessToken}));
                 
                 
                 </script>
             </div>
         </div>
+        <br><br><br><br>
     </section>
-    <form method="post">
-                      {% csrf_token %}
-                      {% for field in form %}
-                        <div class="field">
-                          <label for="{{ field.id_for_label }}" class="label">
-                              {{ field.hyml_name }} 
-                          </label>
-                            <div class="row">
-                                <div class="col-lg-5 col-md-12">
-                                    <h4>{{ field.label_tag }}</h4>
-                                </div>
-                                <div class="col-lg-7 col-md-12">
-                                    {{ field }}
-                                </div>
-                            </div>  
-
-                            {% for error in field.errors %}
-                            <p style="color: red">{{ error }}</p>
-                            {% endfor %}
-                        </div>
-                      {% endfor %}
-        <br>
-                        <button type="submit" class="btn btn-secondary">Sign In</button>
 {% endblock %}
