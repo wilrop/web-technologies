@@ -15,14 +15,14 @@ class CategoryAdmin(admin.ModelAdmin):
 admin.site.register(Category, CategoryAdmin)
 
 class ProductAdmin(admin.ModelAdmin):
-    list_display = ['name', 'slug', 'category', 'price', 'stock', 'available', 'created', 'updated']
+    list_display = ['name', 'slug', 'category', 'available', 'created', 'updated']
     
     # Set list_filter to activate filters in the right sidebar of the change list page of the admin.
     list_filter = ['available', 'created', 'updated', 'category']
 
     # Set list_editable to a list of field names on the model which will allow editing on the change list page. 
     # That is, fields listed in list_editable will be displayed as form widgets on the change list page, allowing users to edit and save multiple rows at once.
-    list_editable = ['price', 'stock', 'available']
+    list_editable = ['available']
     prepopulated_fields = {'slug': ('name',)}
 admin.site.register(Product, ProductAdmin)
 

@@ -1,3 +1,3 @@
 from django.contrib import admin
 
-admin.site.site_header = 'PharmaTowima'
+admin.site.site_header = 'PHARMATOWI'
