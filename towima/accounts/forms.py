@@ -16,7 +16,16 @@ class SignUpForm(UserCreationForm):
 
     class Meta:
         model = User
-        fields = ('username', 'first_name', 'last_name', 'date_of_birth', 'user_type', 'phone_number', 'email', 'password1', 'password2') # The order of the fields
+        fields = (              # The order of the fields
+            'username', 
+            'first_name', 
+            'last_name', 
+            'date_of_birth', 
+            'user_type', 
+            'phone_number', 
+            'email', 
+            'password1', 
+            'password2') 
 
     # A custom save function, so that the user data, as well as additional profile data is saved in the database.
     def save(self, commit = True):
@@ -33,13 +42,33 @@ class SignUpForm(UserCreationForm):
 
 
 class EditProfileForm(UserChangeForm):
-    template_name='/something/else'
+    first_name = forms.CharField(max_length=30, required=True)
+    last_name = forms.CharField(max_length=30, required=True)
+    email = forms.EmailField(max_length=254, help_text='Required. Inform a valid email address.')
+    phone_number = forms.CharField(max_length=12)
+    date_of_birth = forms.DateField()
+    address = forms.CharField(max_length = 50)
 
     class Meta:
         model = User
         fields = (
-            'email',
+            'username',
             'first_name',
             'last_name',
+            'date_of_birth',
+            'phone_number',
+            'email',
             'password'
         )
+
+    def save(self, commit=True):
+        user = super().save(commit=False)
+        user.profile.phone_number = self.cleaned_data['phone_number']
+        user.profile.date_of_birth = self.cleaned_data['date_of_birth']
+        user.profile.address = self.cleaned_data['address']
+
+        if commit:
+            user.save()
+            user.profile.save()  
+
+        return user
