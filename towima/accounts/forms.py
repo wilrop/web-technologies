@@ -55,12 +55,6 @@ class EditProfileForm(forms.ModelForm):
         self.fields['date_of_birth'].initial = self.instance.profile.date_of_birth
         self.fields['address'].initial = self.instance.profile.address
 
-    def clean_username(self):
-        username = self.cleaned_data['username']
-        if User.objects.exclude(pk=self.instance.pk).filter(username=username).exists():
-            raise forms.ValidationError(u'Username "%s" is already in use.' % username)
-        return username
-
     class Meta:
         model = User
         fields = (
