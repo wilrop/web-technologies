@@ -5,4 +5,5 @@ urlpatterns = [
     path('signup/', views.signup, name='signup'),                   # The url for the signup page
     path('profile/', views.profile, name='profile'),
     path('profile/edit/', views.edit_profile, name='edit'),
+    path('change-password/', views.change_password, name='change_password'),
 ]

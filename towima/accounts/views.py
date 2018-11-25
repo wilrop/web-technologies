@@ -2,8 +2,9 @@ from django.contrib.auth import login, authenticate
 from django.shortcuts import render, redirect
 from accounts.forms import SignUpForm, EditProfileForm
 from django.contrib.auth.models import User
-from django.contrib.auth.forms import UserChangeForm
+from django.contrib.auth.forms import UserChangeForm, PasswordChangeForm
 from django.urls import reverse
+from django.contrib.auth import update_session_auth_hash
 
 # Define a signup view. This will provide the user with a signup page and the correct functionality.
 def signup(request):
@@ -38,5 +39,20 @@ def edit_profile(request):
             return redirect('profile')
     else:
         form = EditProfileForm(instance=request.user)
-        args = {'form': form}
     return render(request, template, {'form': form})
+
+def change_password(request):
+    template = 'accounts/change_password.html'
+
+    if request.method == 'POST':
+        form = PasswordChangeForm(data=request.POST, user=request.user)
+
+        if form.is_valid():
+            form.save()
+            update_session_auth_hash(request, form.user)
+            return redirect('profile')
+
+    else:
+        form = PasswordChangeForm(user=request.user) 
+    return render(request, template, {'form': form})
+
