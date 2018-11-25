@@ -1,10 +1,8 @@
-from django.contrib.auth import login, authenticate
 from django.shortcuts import render, redirect
-from accounts.forms import SignUpForm, EditProfileForm
-from django.contrib.auth.models import User
-from django.contrib.auth.forms import UserChangeForm, PasswordChangeForm
-from django.urls import reverse
+from django.contrib.auth import login, authenticate
 from django.contrib.auth import update_session_auth_hash
+from django.contrib.auth.forms import PasswordChangeForm
+from accounts.forms import SignUpForm, EditProfileForm
 
 # Define a signup view. This will provide the user with a signup page and the correct functionality.
 def signup(request):
@@ -23,11 +21,13 @@ def signup(request):
         form = SignUpForm()                     # Provide the form to the user.
     return render(request, template, {'form': form})
 
+# When a user wants to view his/her own profile.
 def profile(request):
     template = 'accounts/profile.html'
     args = {'user': request.user}   
     return render(request, template, args)
 
+# When a user wants to edit his/her profile.
 def edit_profile(request):
     template = 'accounts/edit_profile.html'
 
@@ -37,20 +37,23 @@ def edit_profile(request):
         if form.is_valid():
             form.save()
             return redirect('profile')
+        else:
+            return redirect('edit_profile')
     else:
         form = EditProfileForm(instance=request.user)
     return render(request, template, {'form': form})
 
+# When a user wants to change their password.
 def change_password(request):
     template = 'accounts/change_password.html'
 
     if request.method == 'POST':
-        form = PasswordChangeForm(data=request.POST, user=request.user)
+        form = PasswordChangeForm(user=request.user, data=request.POST)  # Use the preexisting PasswordChangeForm.
 
         if form.is_valid():
             form.save()
-            update_session_auth_hash(request, form.user)
-            return redirect('profile')
+            update_session_auth_hash(request, form.user) # Because the user changed their password, we need to update the session.
+            return redirect('home')
 
     else:
         form = PasswordChangeForm(user=request.user) 
