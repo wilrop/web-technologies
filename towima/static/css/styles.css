@@ -1,15 +1,15 @@
 /* Layout for HOMEPAGE */
 #home {
-    background: url('../media/frontpage/background.svg') no-repeat center center fixed;
+    background: url('../media/frontpage/background.svg') no-repeat left center fixed;
     background-size: cover;
-    padding-bottom: 150px;
+    padding-bottom: 180px;
 }
 
 .landing-text {
     text-align: center;
     vertical-align: middle;
     color: white;
-    padding-top: 150px;
+    padding-top: 180px;
     font-size: 30px;
      
 }
