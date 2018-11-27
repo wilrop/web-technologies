@@ -23,10 +23,11 @@
                                     {{ field }}
                                 </div>
                             </div>  
-
-                            {% for error in field.errors %}
-                            <p style="color: red">{{ error }}</p>
-                            {% endfor %}
+                            <div class="row">
+                                {% for error in field.errors %}
+                                    <p style="color: red">{{ error }}</p>
+                                {% endfor %}
+                            </div>
                         </div>
                       {% endfor %}
                         <br>

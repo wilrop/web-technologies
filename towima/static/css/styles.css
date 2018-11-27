@@ -96,7 +96,7 @@
 
 #login_background{
     height: 100%;
-    background: url('../media/Background/login_background.jpg');
+    background: url('../media/Background/login.jpg');
     background-attachment: fixed;
     background-size: cover;      
 }
@@ -125,4 +125,31 @@
     min-height: 250px;
     padding: 30px;
 }
+
+/* EDIT PROFILE PAGE */
+#edit_background {
+    height: 100%;
+    background: url('../media/Background/edit_profile.jpg');
+    background-attachment: fixed;
+    background-size: cover;           
+}
+
+/* MAPBOX */
+
+.marker {
+  background-image: url('../media/mapbox/mapbox-icon.png');
+  background-size: cover;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+
+
+
+
+
+
+
 
