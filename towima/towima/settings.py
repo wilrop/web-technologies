@@ -37,11 +37,12 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'accounts.apps.AccountsConfig',     # The account app
-    'towima',                           # Our own app
-    'products.apps.ProductsConfig', #products App
-    'pharmacists.apps.PharmacistsConfig', #Pharmacists App
-    'pharmacies.apps.PharmaciesConfig', #Pharmacists App
+    'accounts.apps.AccountsConfig',         # The account app
+    'towima',                               # Our own app
+    'products.apps.ProductsConfig',         #products App
+    'pharmacists.apps.PharmacistsConfig',   #Pharmacists App
+    'pharmacies.apps.PharmaciesConfig',     #Pharmacy App
+    'orders.apps.OrdersConfig',             #Orders App
 ]
 
 MIDDLEWARE = [

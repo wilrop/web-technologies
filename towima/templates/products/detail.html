@@ -7,9 +7,12 @@
     <h1> {{product.name}} </h1>
     <h4> {{product.category}} </h4>
     <img src= "{{ product.image }}">
-    <li> Price: &euro; {{product.price}} </li>
-    <li> Stock: {{product.stock}} </li>
     <li> Available: {{product.available}} </li>
     <li> Description: {{product.description}} </li>
+    {% for entry in entries %}
+    <h4> {{entry.pharmacy}} </h4>
+    <li> Stock: {{entry.product_stock}}</li>
+    <li> Price: &euro; {{entry.product_price}}</li>
+    {% endfor %}
 </ul>
 {% endblock %}
