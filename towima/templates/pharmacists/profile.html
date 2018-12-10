@@ -2,10 +2,24 @@
 {% block title %}Pharmacist Profile{% endblock %}
 
 {% block content %}
-<h2>Profile</h2>
+<h2 style="padding-top: 100px;">Profile</h2>
 <p>First name: {{ pharmacist.first_name }}</p>
 <p>Last name: {{ pharmacist.last_name }}</p>
 <p>Email: {{ pharmacist.email }}</p>
 <p>Phone number: {{ pharmacist.profile.phone_number }}</p>
 <p>Address: {{ pharmacist.profile.address }}</p>
+
+
+<hr>
+<a class="btn btn-default" href="{% url 'add_comment_to_profile' pk=pharmacist.pk %}">Add comment</a>
+
+{% for comment in pharmacist.profile.comments.all %}
+    <div class="comment">
+        <div class="date">{{ comment.created_date }}</div>
+        <strong>{{ comment.author }}</strong>
+        <p>{{ comment.text|linebreaks }}</p>
+    </div>
+{% empty %}
+    <p>No comments here yet :(</p>
+{% endfor %}
 {% endblock %}

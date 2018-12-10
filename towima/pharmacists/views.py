@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect
 from accounts.models import Profile
 from django.contrib.auth.models import User
 from mapbox import Directions
+from pharmacists.forms import CommentForm
 
 
 def pharmacists_list(request):
@@ -32,6 +33,17 @@ def find_pharma(request):
         response = service.directions([origin, destination], 'mapbox/driving')
         
     return render(request, 'pharmacists/find_pharma.html', {'mapbox_access_token': mapbox_access_token})
+
+def add_comment_to_profile(request, pk):
+    if request.method == "POST":
+        form = CommentForm(request.POST)
+        if form.is_valid():
+            user = request.user
+            form.save(pk, user)
+            return redirect('profile', pk=pk)
+    else:
+        form = CommentForm()
+    return render(request, 'pharmacists/add_comment_to_profile.html', {'form': form})
 
 
     

@@ -2,7 +2,7 @@
 {% block title %}Pharmacists{% endblock %}
 
 {% block content %}
-<h2>Available pharmacists</h2>
+<h2 style="padding-top: 100px;">Available pharmacists</h2>
 <ul>
     {% for pharmacist in pharmacist_list %}
     <li><a href ="{% url 'profile' pk=pharmacist.user.pk%}">{{ pharmacist.user.first_name }} {{ pharmacist.user.last_name }}</a></li>
