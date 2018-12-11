@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% block title %}Pharmacy Profile{% endblock %}
+
+{% block content %}
+
+<h2 style="padding-top: 100px;">{{ pharmacy.name }}</h2>
+<p>Email: {{ pharmacy.email }}</p>
+<p>Phone number: {{ pharmacy.phone_number }}</p>
+<p>Address: {{ pharmacy.address }}</p>
+<h4>Employees</h4>
+{% for entry in entries %}
+    <li>{{entry.pharmacist}}</li>
+{% endfor %}
+
+{% endblock %}
