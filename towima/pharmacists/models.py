@@ -1,5 +1,6 @@
 from django.db import models
 from django.utils import timezone
+from django.contrib.auth.models import User
 
 # Create your models here.
 class Pharmacy(models.Model):
@@ -17,7 +18,7 @@ class Comments(models.Model):
         return self.text
 
 class Rating(models.Model):
-    user = models.ForeignKey('accounts.Profile', on_delete=models.CASCADE, related_name='rating_user')
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='rating_user')
     pharmacist = models.ForeignKey('accounts.Profile', on_delete=models.CASCADE, related_name='rated_user')
     rating = models.IntegerField()
 

@@ -1,5 +1,5 @@
 from django.contrib import admin
-from pharmacists.models import Pharmacy, Comments
+from pharmacists.models import Pharmacy, Comments, Rating
 
 class PharmacyAdmin(admin.ModelAdmin):
     list_display = ['name', 'phone_number', 'address']
@@ -8,3 +8,4 @@ class PharmacyAdmin(admin.ModelAdmin):
 admin.site.register(Pharmacy, PharmacyAdmin)
 
 admin.site.register(Comments)
+admin.site.register(Rating)

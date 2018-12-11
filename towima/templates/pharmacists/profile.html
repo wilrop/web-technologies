@@ -22,16 +22,16 @@
 <div class="rating">
     {% if rating %}
         {% for i in "12345" %}
-            {% if rating >= i %}
-                <a href="{% url 'profile' pk=pharmacist.pk%}"><span class="fa fa-star checked"></span></a>
+            {% if rating >= forloop.counter %}
+                <a href="{% url 'add_rating_to_profile' pk=pharmacist.pk new_rating=forloop.counter %}"><span class="fa fa-star checked"></span></a>
             {% else %}
-                <a href="{% url 'profile' pk=pharmacist.pk%}"><span class="fa fa-star"></span></a>
+                <a href="{% url 'add_rating_to_profile' pk=pharmacist.pk new_rating=forloop.counter %}"><span class="fa fa-star"></span></a>
             {% endif %}
         {% endfor %}  
     {% else %}
         <strong>This pharmacist has not been rated yet. Be the first to rate them!</strong><br>
         {% for i in "12345" %}
-            <a href="{% url 'profile' pk=pharmacist.pk%}"><span class="fa fa-star"></span></a>
+            <a href="{% url 'add_rating_to_profile' pk=pharmacist.pk new_rating=forloop.counter %}"><span class="fa fa-star"></span></a>
         {% endfor %}  
     {% endif %}
 </div>

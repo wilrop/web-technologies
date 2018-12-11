@@ -21,7 +21,6 @@ def pharmacists_profile(request, pk):
         rating = int(round(acc_rating / len(rated_list)))
     else:
         rating = None
-
     args = {'pharmacist': pharmacist, 'rating': rating}
     return render(request, 'pharmacists/profile.html', args)
 
@@ -56,5 +55,15 @@ def add_comment_to_profile(request, pk):
         form = CommentForm()
     return render(request, 'pharmacists/add_comment_to_profile.html', {'form': form})
 
+def add_rating_to_profile(request, pk, new_rating):
+    user = request.user
+    pharmacist = User.objects.get(pk=pk) 
+    try:
+        rating = Rating.objects.get(pharmacist = pharmacist.profile, user=user)
+        rating.rating = new_rating
+    except Rating.DoesNotExist:
+        rating = Rating(user=user, pharmacist=pharmacist.profile, rating=new_rating)
+    rating.save()
 
+    return redirect('profile', pk=pk)
     
