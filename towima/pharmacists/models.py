@@ -15,3 +15,9 @@ class Comments(models.Model):
 
     def __str__(self):
         return self.text
+
+class Rating(models.Model):
+    user = models.ForeignKey('accounts.Profile', on_delete=models.CASCADE, related_name='rating_user')
+    pharmacist = models.ForeignKey('accounts.Profile', on_delete=models.CASCADE, related_name='rated_user')
+    rating = models.IntegerField()
+
