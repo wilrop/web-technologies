@@ -3,6 +3,7 @@ from django.contrib.auth import login, authenticate
 from django.contrib.auth import update_session_auth_hash
 from django.contrib.auth.forms import PasswordChangeForm
 from accounts.forms import SignUpForm, EditProfileForm
+from django.core.mail import send_mail
 
 # Define a signup view. This will provide the user with a signup page and the correct functionality.
 def signup(request):
@@ -16,6 +17,7 @@ def signup(request):
             raw_password = form.cleaned_data.get('password1')
             user = authenticate(username=username, password=raw_password)
             login(request, user)
+            send_mail('Welcome to PharmaTowi', 'Welcome to our website you just made an account on our website!', 'pharmatowi@gmail.com', ['example@example.com'], fail_silently=False,)
             return redirect('home')         
     else:                                       # When we GET the form.
         form = SignUpForm()                     # Provide the form to the user.

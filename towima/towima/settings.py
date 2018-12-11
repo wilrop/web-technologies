@@ -137,3 +137,13 @@ MEDIA_ROOT = os.path.join(os.path.dirname(BASE_DIR), "media_cdn")
 # Where to redirect after login and logout
 LOGIN_REDIRECT_URL = '/'
 LOGOUT_REDIRECT_URL = '/'
+
+# Email configuration.
+
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_HOST_USER = 'pharmatowi@gmail.com'
+EMAIL_HOST_PASSWORD = 'test@1234'
+EMAIL_USE_TLS = True
+DEFAULT_FROM_EMAIL = 'pharmatowi@gmail.com'
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
