@@ -2,12 +2,6 @@ from django.db import models
 from django.utils import timezone
 from django.contrib.auth.models import User
 
-# Create your models here.
-class Pharmacy(models.Model):
-    name = models.CharField(max_length = 70)
-    phone_number = models.CharField(max_length=12)
-    address = models.CharField(max_length = 50)
-
 class Comments(models.Model):
     pharmacist = models.ForeignKey('accounts.Profile', on_delete=models.CASCADE, related_name='comments')
     author = models.CharField(max_length=200)

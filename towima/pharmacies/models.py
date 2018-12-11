@@ -8,6 +8,7 @@ class Pharmacy(models.Model):
     slug = models.SlugField(max_length=200, db_index=True)
     address = models.CharField(max_length = 50)
     phone_number = models.CharField(max_length=12)
+    email = models.EmailField(default='example@example.com')
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
     products = models.ManyToManyField(Product, through='Stock', related_name="products+")
@@ -21,7 +22,7 @@ class Pharmacy(models.Model):
         return self.name
 
     def get_absolute_url(self):
-       return reverse('pharmacies:pharmacies_detail', args=[self.id, self.slug])
+       return reverse('pharmacies:pharmacy_detail', args=[self.id, self.slug])
 
 class Employee(models.Model):
     pharmacist = models.ForeignKey(User, on_delete=models.CASCADE)

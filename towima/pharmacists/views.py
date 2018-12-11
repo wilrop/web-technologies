@@ -2,9 +2,7 @@ from django.shortcuts import render, redirect
 from accounts.models import Profile
 from pharmacists.models import Rating
 from django.contrib.auth.models import User
-from mapbox import Directions
 from pharmacists.forms import CommentForm
-
 
 def pharmacists_list(request):
     args = {'pharmacist_list': Profile.objects.filter(user_type='Pharmacist')}
