@@ -8,3 +8,4 @@ class Profile(models.Model):
     date_of_birth = models.DateField()
     address = models.CharField(max_length = 50)
     user_type = models.CharField(max_length=126, default='Customer')
+    verified = models.BooleanField(default=False)

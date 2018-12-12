@@ -1,8 +1,14 @@
 from django.shortcuts import render, redirect
-from django.contrib.auth import login, authenticate
-from django.contrib.auth import update_session_auth_hash
-from django.contrib.auth.forms import PasswordChangeForm
+from django.contrib.auth import login, authenticate, update_session_auth_hash
+from django.contrib.auth.forms import PasswordChangeForm, AuthenticationForm
+from django.contrib.auth.models import User
 from accounts.forms import SignUpForm, EditProfileForm
+from accounts.models import Profile
+from authy.api import AuthyApiClient
+from .forms import TokenForm
+
+
+authy_api = AuthyApiClient('jqr27nutYbPgCmIilN0ByqTTe1xBu6Wp')
 
 # Define a signup view. This will provide the user with a signup page and the correct functionality.
 def signup(request):
@@ -12,14 +18,42 @@ def signup(request):
         form = SignUpForm(request.POST)
         if form.is_valid():                     # Check if the form is valid.
             form.save()
-            username = form.cleaned_data.get('username')
-            raw_password = form.cleaned_data.get('password1')
-            user = authenticate(username=username, password=raw_password)
-            login(request, user)
-            return redirect('home')         
+            request.session['username'] = form.cleaned_data['username']
+            request.session['phone_number'] = form.cleaned_data['phone_number'][1:]
+            request.session['country_code'] = 32
+            authy_api.phones.verification_start(
+                phone_number=form.cleaned_data['phone_number'][1:], # Drop the zero
+                country_code=32,                                     # Only Belgium
+                via='sms'
+            )
+            return redirect('verify')
     else:                                       # When we GET the form.
         form = SignUpForm()                     # Provide the form to the user.
     return render(request, template, {'form': form})
+
+
+# Verify the phonenumber
+def verify(request):
+    if request.method == 'POST':
+        form = TokenForm(request.POST)
+        if form.is_valid():
+            verification = authy_api.phones.verification_check(
+                request.session['phone_number'],
+                request.session['country_code'],
+                form.cleaned_data['token']
+            )
+            if verification.ok():
+                user = User.objects.get(username=request.session['username'])
+                profile = Profile.objects.get(user=user)
+                profile.verified = True
+                profile.save()
+                return redirect('login')
+            else:
+                for error_msg in verification.errors().values():
+                    form.add_error(None, error_msg)
+    else:
+        form = TokenForm()
+    return render(request, 'accounts/token_validation.html', {'form': form})
 
 # When a user wants to view his/her own profile.
 def profile(request):
@@ -57,5 +91,37 @@ def change_password(request):
 
     else:
         form = PasswordChangeForm(user=request.user) 
+    return render(request, template, {'form': form})
+
+def login_view(request):
+    template = 'accounts/login.html'
+
+    if request.method == 'POST':
+        form = AuthenticationForm(request=request, data=request.POST)  # Use the preexisting PasswordChangeForm.
+
+        if form.is_valid():
+            user = User.objects.get(username=form.cleaned_data['username'])
+            profile = Profile.objects.get(user=user)
+            request.session['username'] = form.cleaned_data.get('username')
+            if profile.verified:
+                username = form.cleaned_data.get('username')
+                raw_password = form.cleaned_data.get('password')
+                user = authenticate(username=username, password=raw_password)
+                login(request, user)
+                return redirect('home')
+
+            else:
+                request.session['phone_number'] = profile.phone_number[1:]
+                request.session['country_code'] = 32
+                authy_api.phones.verification_start(
+                phone_number=profile.phone_number[1:], # Drop the zero
+                country_code=32,                                     # Only Belgium
+                via='sms'
+                )
+                return redirect('verify')
+
+    else:
+        form = AuthenticationForm() 
+
     return render(request, template, {'form': form})
 

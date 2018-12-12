@@ -87,3 +87,6 @@ class EditProfileForm(forms.ModelForm):
             user.profile.save()
 
         return user
+
+class TokenForm(forms.Form):
+    token = forms.CharField(max_length=6)

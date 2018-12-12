@@ -22,8 +22,8 @@ from towima import views
 urlpatterns = [
     path('', views.home, name='home'),                                  # The url for the homepage is empty
     path('admin/', admin.site.urls, name='admin'),                      # The url for the admin page
-    path('accounts/', include('django.contrib.auth.urls')),             # The url where the accounts app runs
     path('accounts/', include('accounts.urls')),                        # This url pattern will be visitid for the signup and profile functionality
+    path('accounts/', include('django.contrib.auth.urls')),             # The url where the accounts app runs
     path('pharmacists/', include('pharmacists.urls')),                  # The url where the pharmacists app is
     path('pharmacies/', include('pharmacies.urls')),
     path('products/', include('products.urls', namespace='products')),  # The url where the products app is
