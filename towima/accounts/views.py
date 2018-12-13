@@ -6,7 +6,7 @@ from accounts.forms import SignUpForm, EditProfileForm
 from django.core.mail import send_mail
 from accounts.models import Profile
 from authy.api import AuthyApiClient
-from .forms import TokenForm
+from .forms import TokenForm, VerificationForm
 
 authy_api = AuthyApiClient('jqr27nutYbPgCmIilN0ByqTTe1xBu6Wp')
 
@@ -20,18 +20,33 @@ def signup(request):
         if form.is_valid():                     # Check if the form is valid.
             form.save()
             request.session['username'] = form.cleaned_data['username']
-            request.session['phone_number'] = form.cleaned_data['phone_number'][1:]
+            '''request.session['phone_number'] = form.cleaned_data['phone_number'][1:]
             request.session['country_code'] = 32
             authy_api.phones.verification_start(
                 phone_number=form.cleaned_data['phone_number'][1:], # Drop the zero
                 country_code=32,                                     # Only Belgium
                 via='sms'
-            )
-            return redirect('verify')
+            )'''
+            return redirect('phone_verification')
     else:                                       # When we GET the form.
         form = SignUpForm()                     # Provide the form to the user.
     return render(request, template, {'form': form})
 
+def phone_verification(request):
+    if request.method == 'POST':
+        form = VerificationForm(request.POST)
+        if form.is_valid():
+            request.session['phone_number'] = form.cleaned_data['phone_number']
+            request.session['country_code'] = form.cleaned_data['country_code']
+            authy_api.phones.verification_start(
+                form.cleaned_data['phone_number'],
+                form.cleaned_data['country_code'],
+                via='sms'
+            )
+            return redirect('verify')
+    else:
+        form = VerificationForm()
+    return render(request, 'accounts/phone_verification.html', {'form': form})
 
 # Verify the phonenumber
 def verify(request):
@@ -46,6 +61,7 @@ def verify(request):
             if verification.ok():
                 user = User.objects.get(username=request.session['username'])
                 profile = Profile.objects.get(user=user)
+                profile.phone_number = request.session['phone_number']
                 profile.verified = True
                 send_mail('Welcome to PharmaTowi', 'Welcome to our website! Your account has been verified!', 'pharmatowi@gmail.com', ['example@example.com'], fail_silently=False,)
                 profile.save()
@@ -113,14 +129,7 @@ def login_view(request):
                 return redirect('home')
 
             else:
-                request.session['phone_number'] = profile.phone_number[1:]
-                request.session['country_code'] = 32
-                authy_api.phones.verification_start(
-                phone_number=profile.phone_number[1:], # Drop the zero
-                country_code=32,                                     # Only Belgium
-                via='sms'
-                )
-                return redirect('verify')
+                return redirect('phone_verification')
 
     else:
         form = AuthenticationForm() 
