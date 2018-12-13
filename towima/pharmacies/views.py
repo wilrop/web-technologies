@@ -3,8 +3,8 @@ from pharmacies.models import Pharmacy, Employee
 from pharmacies.forms import PharmacyForm
 from django.db.models import Q
 
-def pharmacy_detail(request, pharmacy_id, slug):
-    pharmacy = get_object_or_404(Pharmacy, id=pharmacy_id, slug=slug)
+def pharmacy(request, pk):
+    pharmacy = get_object_or_404(Pharmacy, pk=pk)
     entries = Employee.objects.filter(pharmacy=pharmacy.id)
     args = {'pharmacy': pharmacy, 'entries': entries}
     return render(request, 'pharmacies/pharmacy_profile.html', args)
@@ -28,7 +28,7 @@ def search(request):
 
     if query:
         results = Pharmacy.objects.filter(Q(name__icontains=query) | Q(address__icontains=query))
-        args = {'results': results}
+        args = {'results': results, 'query': query}
     
     return render(request, 'pharmacies/search.html', args)
 
