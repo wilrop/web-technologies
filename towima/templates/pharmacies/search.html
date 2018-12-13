@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+{% block title %}Search results{% endblock %}
+
+{% block content %}
+<h2 style="padding-top: 100px;">Results for your search</h2>
+<ul>
+    {% for result in results %}
+    <li>result</li>
+    {% endfor %}
+</ul>
+{% endblock %}

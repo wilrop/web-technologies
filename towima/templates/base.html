@@ -34,6 +34,9 @@
                 {% if user.is_authenticated %}
                 <!-- remove later -->
                     {% if user.profile.user_type == "Pharmacist" %}
+                    <form id="searchform" action="{% url 'pharmacies:search' %}" method="get" accept-charset="utf-8">
+                      <input class="searchfield" id="searchbox" name="q" type="text" placeholder="Search">
+                    </form>
                     <li class="nav-item"><a  class="nav-link" 
                         href="{% url 'pharmacies:create_pharma' %}">Create Pharmacy</a></li>
                     {% endif %}
