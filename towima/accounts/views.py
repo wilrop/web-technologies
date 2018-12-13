@@ -3,12 +3,13 @@ from django.contrib.auth import login, authenticate, update_session_auth_hash
 from django.contrib.auth.forms import PasswordChangeForm, AuthenticationForm
 from django.contrib.auth.models import User
 from accounts.forms import SignUpForm, EditProfileForm
+from django.core.mail import send_mail
 from accounts.models import Profile
 from authy.api import AuthyApiClient
 from .forms import TokenForm
 
-
 authy_api = AuthyApiClient('jqr27nutYbPgCmIilN0ByqTTe1xBu6Wp')
+
 
 # Define a signup view. This will provide the user with a signup page and the correct functionality.
 def signup(request):
@@ -46,6 +47,7 @@ def verify(request):
                 user = User.objects.get(username=request.session['username'])
                 profile = Profile.objects.get(user=user)
                 profile.verified = True
+                send_mail('Welcome to PharmaTowi', 'Welcome to our website! Your account has been verified!', 'pharmatowi@gmail.com', ['example@example.com'], fail_silently=False,)
                 profile.save()
                 return redirect('login')
             else:
