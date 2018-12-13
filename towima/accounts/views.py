@@ -63,7 +63,7 @@ def verify(request):
                 profile = Profile.objects.get(user=user)
                 profile.phone_number = request.session['phone_number']
                 profile.verified = True
-                send_mail('Welcome to PharmaTowi', 'Welcome to our website! Your account has been verified!', 'pharmatowi@gmail.com', ['example@example.com'], fail_silently=False,)
+                send_mail('Welcome to PharmaTowi', 'Welcome to our website, Your account has been verified!', 'pharmatowi@gmail.com', [getattr(user, 'email')], fail_silently=False,)
                 profile.save()
                 return redirect('login')
             else:
