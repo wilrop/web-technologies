@@ -1,7 +1,10 @@
 # Imports
+import phonenumbers
+
 from django import forms
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
+from phonenumbers import NumberParseException
 from accounts.models import Profile
 
 # This class will create a signup form, from an existing template provided by django.
@@ -11,7 +14,7 @@ class SignUpForm(UserCreationForm):
     first_name = forms.CharField(max_length=30, required=True)
     last_name = forms.CharField(max_length=30, required=True)
     email = forms.EmailField(max_length=254, help_text='Required. Inform a valid email address.')
-    phone_number = forms.CharField(max_length=12)
+    #phone_number = forms.CharField(max_length=12)
     date_of_birth = forms.DateField()
     address = forms.CharField(max_length = 50)
     user_types = (('Pharmacist', 'Pharmacist'), ('Customer', 'Customer'))
@@ -26,7 +29,7 @@ class SignUpForm(UserCreationForm):
             'last_name', 
             'email',
             'address',
-            'phone_number', 
+            #'phone_number', 
             'date_of_birth', 
             'user_type', 
             'password1', 
@@ -36,13 +39,14 @@ class SignUpForm(UserCreationForm):
     # A custom save function, so that the user data, as well as additional profile data is saved in the database.
     def save(self, commit = True):
         user = super().save(commit=False)
-        phone_number = self.cleaned_data['phone_number']
+        #phone_number = self.cleaned_data['phone_number']
         date_of_birth = self.cleaned_data['date_of_birth']
         address = self.cleaned_data['address']
         user_type = self.cleaned_data['user_type']
         if commit:
             user.save()
-            profile = Profile(user=user, phone_number=phone_number, date_of_birth=date_of_birth, address=address, user_type=user_type) # Create a new profile.            
+            #profile = Profile(user=user, phone_number=phone_number, date_of_birth=date_of_birth, address=address, user_type=user_type) # Create a new profile.            
+            profile = Profile(user=user, date_of_birth=date_of_birth, address=address, user_type=user_type)
             profile.save()  
         return user
 
@@ -87,6 +91,27 @@ class EditProfileForm(forms.ModelForm):
             user.profile.save()
 
         return user
+
+class VerificationForm(forms.Form):
+    country_code = forms.CharField(max_length=3)
+    phone_number = forms.CharField(max_length=20)
+
+    def clean_country_code(self):
+        country_code = self.cleaned_data['country_code']
+        if not country_code.startswith('+'):
+            country_code = '+' + country_code
+        return country_code
+
+    def clean(self):
+        data = self.cleaned_data
+        phone_number = data['country_code'] + data['phone_number']
+        try:
+            phone_number = phonenumbers.parse(phone_number, None)
+            if not phonenumbers.is_valid_number(phone_number):
+                self.add_error('phone_number', 'Invalid phone number')
+        except NumberParseException as e:
+            self.add_error('phone_number', e)
+
 
 class TokenForm(forms.Form):
     token = forms.CharField(max_length=6)

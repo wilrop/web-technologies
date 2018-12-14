@@ -1,11 +1,20 @@
 from django.shortcuts import render, redirect, get_list_or_404, get_object_or_404
-from pharmacies.models import Pharmacy, Employee
-from pharmacies.forms import PharmacyForm
+from pharmacies.models import Pharmacy, Employee, Rating
+from pharmacies.forms import PharmacyForm, CommentForm
+from django.db.models import Q
 
-def pharmacy_detail(request, pharmacy_id, slug):
-    pharmacy = get_object_or_404(Pharmacy, id=pharmacy_id, slug=slug)
-    entries = Employee.objects.filter(pharmacy=pharmacy.id)
-    args = {'pharmacy': pharmacy, 'entries': entries}
+def pharmacy(request, pk):
+    pharmacy = Pharmacy.objects.get(pk=pk)
+    rated_list = Rating.objects.filter(pharmacy = pharmacy)
+
+    if rated_list:
+        acc_rating = 0
+        for rating in rated_list:
+            acc_rating += rating.rating 
+        rating = int(round(acc_rating / len(rated_list)))
+    else:
+        rating = None
+    args = {'pharmacy': pharmacy, 'rating': rating}
     return render(request, 'pharmacies/pharmacy_profile.html', args)
 
 def create_pharma(request):
@@ -21,3 +30,35 @@ def create_pharma(request):
     else:                                       
         form = PharmacyForm() 
     return render(request, 'pharmacies/create_pharmacy.html', {'form': form})
+
+def add_comment_to_pharmacy(request, pk):
+    if request.method == "POST":
+        form = CommentForm(request.POST)
+        if form.is_valid():
+            user = request.user
+            form.save(pk, user)
+            return redirect('pharmacies:pharmacy', pk=pk)
+    else:
+        form = CommentForm()
+    return render(request, 'pharmacies/add_comment_to_pharmacy.html', {'form': form})
+
+def add_rating_to_pharmacy(request, pk, new_rating):
+    user = request.user
+    pharmacy = Pharmacy.objects.get(pk=pk) 
+    try:
+        rating = Rating.objects.get(pharmacy = pharmacy, user=user)
+        rating.rating = new_rating
+    except Rating.DoesNotExist:
+        rating = Rating(user=user, pharmacy=pharmacy, rating=new_rating)
+    rating.save()
+
+    return redirect('pharmacies:pharmacy', pk=pk)
+
+def search(request):
+    query = request.GET.get('q')
+
+    if query:
+        results = Pharmacy.objects.filter(Q(name__icontains=query) | Q(address__icontains=query))
+        args = {'results': results, 'query': query}
+    
+    return render(request, 'pharmacies/search.html', args)

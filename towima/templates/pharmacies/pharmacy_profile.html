@@ -1,3 +1,9 @@
+<style>
+.checked {
+  color: orange;
+}
+</style>
+
 {% extends 'base.html' %}
 {% block title %}Pharmacy Profile{% endblock %}
 
@@ -8,8 +14,37 @@
 <p>Phone number: {{ pharmacy.phone_number }}</p>
 <p>Address: {{ pharmacy.address }}</p>
 <h4>Employees</h4>
-{% for entry in entries %}
-    <li>{{entry.pharmacist}}</li>
+
+<hr>
+
+<div class="rating">
+    {% if rating %}
+        {% for i in "12345" %}
+            {% if rating >= forloop.counter %}
+                <a href="{% url 'pharmacies:add_rating_to_pharmacy' pk=pharmacy.pk new_rating=forloop.counter %}"><span class="fa fa-star checked"></span></a>
+            {% else %}
+                <a href="{% url 'pharmacies:add_rating_to_pharmacy' pk=pharmacy.pk new_rating=forloop.counter %}"><span class="fa fa-star"></span></a>
+            {% endif %}
+        {% endfor %}  
+    {% else %}
+        <strong>This pharmacy has not been rated yet. Be the first to rate them!</strong><br>
+        {% for i in "12345" %}
+            <a href="{% url 'pharmacies:add_rating_to_pharmacy' pk=pharmacy.pk new_rating=forloop.counter %}"><span class="fa fa-star"></span></a>
+        {% endfor %}  
+    {% endif %}
+</div>
+
+<hr>
+<a class="btn btn-default" href="{% url 'pharmacies:add_comment_to_pharmacy' pk=pharmacy.pk %}">Add comment</a>
+
+{% for comment in pharmacy.comments.all %}
+    <div class="comment">
+        <div class="date">{{ comment.created_date }}</div>
+        <strong>{{ comment.author }}</strong>
+        <p>{{ comment.text|linebreaks }}</p>
+    </div>
+{% empty %}
+    <p>No comments here yet :(</p>
 {% endfor %}
 
 {% endblock %}
