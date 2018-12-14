@@ -2,7 +2,13 @@
 {% block title %}Search results{% endblock %}
 
 {% block content %}
-<h2 style="padding-top: 100px;">Results for {{query}}</h2>
+<h2 style="padding-top: 100px;">
+    {% if num_results == 1 %}
+    1 result for {{ query }} in {{ time }} seconds.
+    {% else %}
+    {{ num_results }} results for {{ query }} in {{ time }} seconds.
+    {% endif %}
+</h2>
 <ul>
     {% for pharmacy in results %}
     <li><a href= "{% url 'pharmacies:pharmacy' pk=pharmacy.pk %}">{{pharmacy.name}} at {{pharmacy.address}}</a></li>

@@ -1,3 +1,5 @@
+import time
+
 from django.shortcuts import render, redirect, get_list_or_404, get_object_or_404
 from pharmacies.models import Pharmacy, Employee, Rating
 from pharmacies.forms import PharmacyForm, CommentForm
@@ -55,10 +57,14 @@ def add_rating_to_pharmacy(request, pk, new_rating):
     return redirect('pharmacies:pharmacy', pk=pk)
 
 def search(request):
+    start = time.time()
     query = request.GET.get('q')
-
+    results = []
     if query:
         results = Pharmacy.objects.filter(Q(name__icontains=query) | Q(address__icontains=query))
-        args = {'results': results, 'query': query}
     
+    end = time.time()
+    processing_time = format((end - start), '.4f')
+    num_results = len(results)
+    args = {'results': results, 'query': query, 'time': processing_time, 'num_results': num_results}
     return render(request, 'pharmacies/search.html', args)
