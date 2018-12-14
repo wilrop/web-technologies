@@ -9,7 +9,6 @@ class PharmacyAdmin(admin.ModelAdmin):
 admin.site.register(Pharmacy, PharmacyAdmin)
 
 
-
 admin.site.register(Comments)
 admin.site.register(Rating)
 admin.site.register(Stock)

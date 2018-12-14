@@ -23,7 +23,7 @@ class Pharmacy(models.Model):
         return self.name
 
     def get_absolute_url(self):
-       return reverse('pharmacies:pharmacy_detail', args=[self.id, self.slug])
+       return reverse('pharmacies:pharmacy', args=[self.pk])
 
 class Employee(models.Model):
     pharmacist = models.ForeignKey(User, on_delete=models.CASCADE)
