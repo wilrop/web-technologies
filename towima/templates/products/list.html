@@ -12,6 +12,7 @@
     <li> Stock: {{product.stock}} </li>
     <li> Available: {{product.available}} </li>
     <li> Description: {{product.description}} </li>
+    <a href="{{ product.get_absolute_url }}" class="btn btn-secondary btn-lg active" role="button" aria-pressed="true">details</a>
     {% endfor %}
 </ul>
 {% endblock %}

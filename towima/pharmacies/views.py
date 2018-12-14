@@ -62,4 +62,3 @@ def search(request):
         args = {'results': results, 'query': query}
     
     return render(request, 'pharmacies/search.html', args)
-
