@@ -28,5 +28,6 @@ urlpatterns = [
     path('pharmacies/', include('pharmacies.urls')),
     path('products/', include('products.urls', namespace='products')),  # The url where the products app is
     path('orders/', include('orders.urls', namespace='orders')),        # The url where the products app is
+    path('api/', include('api.urls', namespace='urls')),   
 ]
 

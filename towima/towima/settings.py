@@ -43,6 +43,8 @@ INSTALLED_APPS = [
     'pharmacists.apps.PharmacistsConfig',   #Pharmacists App
     'pharmacies.apps.PharmaciesConfig',     #Pharmacy App
     'orders.apps.OrdersConfig',             #Orders App
+    'rest_framework',
+    'api',
 ]
 
 MIDDLEWARE = [
@@ -147,3 +149,8 @@ EMAIL_HOST_PASSWORD = 'test@1234'
 EMAIL_USE_TLS = True
 DEFAULT_FROM_EMAIL = 'pharmatowi@gmail.com'
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+
+REST_FRAMEWORK = {
+    'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
+    'PAGE_SIZE': 10
+}
