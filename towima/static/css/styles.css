@@ -1,18 +1,152 @@
 /* Layout for HOMEPAGE */
-#home {
-    background: url('../media/frontpage/background.svg') no-repeat left center fixed;
-    background-size: cover;
-    padding-bottom: 180px;
+@media screen and (max-width: 450px){
+    h1 {font-size: 20px;}
+    p {font-size: 14px;}
+    #home {
+        background: url('../media/frontpage/background.svg') no-repeat left center ;
+        min-height: 350px;
+        padding-top: 90px;
+        background-size: cover;
+        color: white;
+        text-align: center;
+        }
+    #home h1 {font-size: 7vw;}
+    #home h3 {font-size: 4vw;}
+    
+    .mission{
+        margin-top: -100px;  
+    }
+    .about_us_img{
+        text-align: center;
+        background: url('../media/about_us.svg') no-repeat center center;
+        background-size: contain;
+        margin-top: -20px;
+    }
+    
+    
+    .tab1 {
+        background: url('../media/order_now_Plan%20de%20travail%201.svg') no-repeat center center fixed;
+        min-height: 200px;
+    }
+    .tab2 {
+        background: url('../media/talk_to.svg') no-repeat center center fixed;
+        background-size: contain;
+        min-height: 200px
+    }
+    .tab3 {
+        background: url('../media/find_pharma_Plan%20de%20travail%201.svg') no-repeat center center fixed;
+        background-size: contain;
+        min-height: 200px
+    }
+    .tabs_text {
+        padding-top: 20px;
+        text-align: center;
+        }
+    .tabs_text h2 {font-size: 20px; text-align: center;}
+    
+    
+    .wannajoin{
+        background: url('../media/wannajoin.svg') no-repeat left center;
+        background-size: 100% 100%;
+        text-align: center;
+        min-height: 200px;
+        color: mediumaquamarine;
+    }
+    .join_text{
+        padding-top: 40px;
+        color: white;
+    }
+    .join_text h1{font-size: 20px;}
+    .join_text h3{font-size: 14px;}
+    .supplement{
+        background: url('../media/supplement.svg') no-repeat center center;
+        background-size: 80% 80%;
+    }
+    .btn1 {
+        border-radius: 15px;
+        font-size: 14px;
+        background-color: white;
+        padding: 5px 15px 5px 15px
+    }
+    
+    
 }
 
-.landing-text {
-    text-align: center;
-    vertical-align: middle;
-    color: white;
-    padding-top: 180px;
-    font-size: 30px;
-     
+
+
+
+
+@media screen and (min-width: 450px){
+    #home {
+        background: url('../media/frontpage/background.svg') no-repeat left center ;
+        background-size:cover;
+        padding-bottom: 200px;
+        padding-top: 100px;
+        background-size: none 100%;
+        color: white;
+        text-align: center;
+        }
+    #home h1 {font-size: 6vw;}
+    #home h3 {font-size: 3.2vw;}
+    
+    .mission{
+        font-size: 20px;   
+        }
+    .about_us_img{
+        background: url('../media/about_us.svg') no-repeat center center;
+        background-size: contain;
+        margin-top: -20px;
+    }
+    
+    .tab1{
+        background: url('../media/order_now_Plan%20de%20travail%201.svg') no-repeat center center fixed;
+        background-size: contain;
+        min-height: 300px
+        }
+    .tab2 {
+        background: url('../media/talk_to.svg') no-repeat center center fixed;
+        background-size: contain;
+        min-height: 300px
+            }
+    .tab3 {
+        background: url('../media/find_pharma_Plan%20de%20travail%201.svg') no-repeat center center fixed;
+        background-size: contain;
+        min-height: 300px
+    }
+    .tabs_text {
+        padding-top: 20px;
+        text-align: center;
+        font-size: 3vw;
+        }
+    .tabs_text h2 {font-size: 4vw; text-align: center;}
+    
+    .wannajoin{
+        background: url('../media/wannajoin.svg') no-repeat left center;
+        background-size: 100% 100%;
+        text-align: center;
+        min-height: 400px;
+        color: mediumaquamarine;
+    }
+    .join_text{
+        padding-top: 50px;
+        color: white;
+    }
+    
+    .supplement{
+        background: url('../media/supplement.svg') no-repeat left center;
+        background-size: 100% 100%;
+    }
+    .btn1 {
+        border-radius: 15px;
+        font-size: 40px;
+        background-color: white;
+        padding: 10px 20px 10px 20px
+    }
+    
 }
+
+     
+    
 
 /* FOOTER */
 .footer-custom{
@@ -22,37 +156,6 @@
     min-height: 50px;
 }
 
-
-.about_us_img{
-    background: url('../media/about_us.svg') no-repeat center center;
-    background-size: contain;
-    margin-top: -20px;
-}
-
-
-
-.tab1{
-    background: url('../media/order_now_Plan%20de%20travail%201.svg') no-repeat center center fixed;
-    background-size: contain;
-    min-height: 300px
-}
-.tab2 {
-    background: url('../media/talk_to.svg') no-repeat center center fixed;
-    background-size: contain;
-    min-height: 300px
-}
-.tab3 {
-    background: url('../media/find_pharma_Plan%20de%20travail%201.svg') no-repeat center center fixed;
-    background-size: contain;
-    min-height: 300px
-}
-
-.tabs_text {
-    padding-top: 20px;
-    text-align: left;
-    font-size: 30px;
-    
-}
 
 
 /* PROFILE PAGE */
@@ -144,6 +247,9 @@
   border-radius: 50%;
   cursor: pointer;
 }
+
+
+    
 
 
 

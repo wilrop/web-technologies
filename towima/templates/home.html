@@ -3,56 +3,17 @@
 {% block content %}
     <div id="home">
             <div class="landing-text">
-                <h1 style="font-size: 80px;">PHARMATOWI</h1>
-                <h3 style="font-size: 35px;">An online platform to order and connect with your local pharmacies</h3>
+                <h1>PHARMATOWI</h1>
+                <h3>An online platform to order and connect with your local pharmacies</h3>
                 <a href="{% url 'signup' %}" class="btn btn-dark">Sign Up Now</a>
             </div>
     </div>
 
-    <!-- Three responsive columns divided equally over the entire width. 
-         It always has to add up to 12
-        Each column is a card with everytime a picture, the title of the card and a description. There is also a button to take the user to the desired page -->
-<!--
-        <div class="container-fluid">
-            <div class="row">
-                    <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 localpharmacy">
-                        <div class="card">
-                          <img class="card-img-top" src="../static/media/find.jpg">
-                          <div class="card-body">
-                            <h5 class="card-title">Find your local pharmacy</h5>
-                            <p class="card-text">  Find your local pharmacy and their information, reviews and many more.</p>
-                            <a href="{% url 'findpharma' %}" class="btn btn-dark">Find now</a>
-                          </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 localpharmacy1">
-                        <div class="card">
-                          <img class="card-img-top" src="../static/media/order.jpg">
-                          <div class="card-body">
-                            <h5 class="card-title">Order your medicines</h5>
-                            <p class="card-text">Order from home and come pick it up when it's ready. No need to wait anymore!</p>
-                            <a href="#" class="btn btn-dark">Order now</a>
-                          </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 localpharmacy2">
-                        <div class="card">
-                          <img class="card-img-top" src="../static/media/talk.jpg">
-                          <div class="card-body">
-                            <h5 class="card-title">Talk to your pharmacist</h5>
-                            <p class="card-text">Have a question? Talk to your pharmacist to get a fast and professional answer.</p>
-                            <a href="#" class="btn btn-dark">Talk now</a>
-                          </div>
-                        </div>
-                    </div>
-            </div>
-        </div>
--->
-<div class="container-fluid" style="padding-top: 20px; min-height: 400px;">
+<div class="container-fluid mission" style="padding-top: 20px; min-height: 300px;">
     <h1 style="font-weight: bold">Our Mission</h1>
     <div class="row">
         <div class="col-8">
-            <p style="font-size: 20px;">Our goal is to close the gap between customers and their pharmacists. We try to achieve this by speeding up the process of ordering and communicating between one another. By doing this, customers don't have to wait at the pharmacy anymore and pharmacists can speed up their workflow.  </p>
+            <p>Our goal is to close the gap between customers and their pharmacists. We try to achieve this by speeding up the process of ordering and communicating between one another. By doing this, customers don't have to wait at the pharmacy anymore and pharmacists can speed up their workflow.  </p>
         </div>
         <div class="col-4 about_us_img">
         </div>
@@ -69,7 +30,6 @@
         <div class="col tabs_text">
             <h2>Order</h2>
             <p>Place your order online and get notified when it's ready!</p>
-            <a href="{% url 'findpharma' %}" class="btn btn-dark">Order now</a>
         </div> 
     </div> 
 </div>
@@ -82,7 +42,6 @@
         <div class="col tabs_text">
             <h2>Talk</h2>
             <p>Talk to your pharmacist and get some advice.</p>
-            <a href="{% url 'findpharma' %}" class="btn btn-dark">Talk now</a>
         </div> 
     </div>
 </div>
@@ -95,11 +54,28 @@
         <div class="col tabs_text">
             <h2>Find your local pharmacy</h2>
             <p>Know where your nearest pharamcy is</p>
-            <a href="{% url 'findpharma' %}" class="btn btn-dark">Find now</a>
         </div> 
     </div>
 </div>
-<br><br><br><br><br><br><br><br>
+<br><br>
+<div class="container">
+    <div class="row">
+        <div class="col-6 supplement"> 
+        </div>
+        <div class="col-6 wannajoin">
+            <div class="join_text">
+                <h1>Get Started</h1>
+                <h3>Sign up now and get access to hundreds of pharmacies!</h3>
+            </div>
+            <a class="btn1" href="{% url 'signup' %}">Sign Up</a>
+        </div>
+    </div>
+
+</div>
+
+
+
+<br><br><br><br><br><br>
 
 
 {% endblock %}
