@@ -18,6 +18,7 @@
             },
             dataType: 'json',
             success: function (data) {
+                $("#strong").remove();
                 var rating = data.old_rating;
                 var new_rating = data.new_rating;
                 var difference = new_rating - rating;
@@ -58,7 +59,7 @@
     {% endif %}
     {% endfor %}
     {% else %}
-    <strong>This pharmacy has not been rated yet. Be the first to rate them!</strong><br>
+    <div id="strong"><strong>This pharmacy has not been rated yet. Be the first to rate them!</strong><br></div>
     {% for i in "12345" %}
     <span onclick="add_rating({{ forloop.counter }})" class="fa fa-star"></span>
     {% endfor %}

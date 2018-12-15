@@ -47,32 +47,33 @@ def add_comment_to_pharmacy(request, pk):
 
 def add_rating_to_pharmacy(request):
     pk = request.GET.get('pk', None)
-    new_rating = request.GET.get('new_rating', None)
+    new_rating = int(request.GET.get('new_rating', None))
     pharmacy = Pharmacy.objects.get(pk=pk)
     user = request.user
 
-    try:
-        rating = Rating.objects.get(pharmacy = pharmacy, user=user)
-        old_rating = rating.rating
-        rating.rating = new_rating
-    except Rating.DoesNotExist:
-        rating = Rating(user=user, pharmacy=pharmacy, rating=new_rating)
-        old_rating = 0
-    rating.save()
-
     rated_list = Rating.objects.filter(pharmacy = pharmacy)
+    acc_rating = 0
 
-    if rated_list:
-        acc_rating = 0
+    if rated_list:      
         for rating in rated_list:
             acc_rating += rating.rating 
-        rating = int(round(acc_rating / len(rated_list)))
+        old_rating = int(round(acc_rating / len(rated_list)))
     else:
-        rating = None
+        old_rating = 1
+
+    try:
+        rating = Rating.objects.get(pharmacy = pharmacy, user=user)
+        previous_rating = rating.rating
+        rating.rating = new_rating
+        new_rating = int(round((acc_rating - previous_rating + new_rating)/len(rated_list)))
+    except Rating.DoesNotExist:
+        rating = Rating(user=user, pharmacy=pharmacy, rating=new_rating)
+        new_rating = int(round((acc_rating + new_rating)/(len(rated_list) + 1)))
+    rating.save()
 
     data = {
         'old_rating': old_rating ,
-        'new_rating': rating
+        'new_rating': new_rating
     }
     return JsonResponse(data)
 
