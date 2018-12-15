@@ -37,7 +37,7 @@ class Category(models.Model):
             # Newly created object, so set slug
             self.slug = slugify(self.name)
 
-        super(Product, self).save(*args, **kwargs)
+        super(Category, self).save(*args, **kwargs)
 
 
 # Definition of the model Product. This class is used to put the different products in the database.
