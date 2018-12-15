@@ -32,6 +32,13 @@ class Category(models.Model):
     def get_absolute_url(self):
         return reverse('products:product_list_by_category', args=[self.slug])
 
+    def save(self, *args, **kwargs):
+        if not self.id:
+            # Newly created object, so set slug
+            self.slug = slugify(self.name)
+
+        super(Product, self).save(*args, **kwargs)
+
 
 # Definition of the model Product. This class is used to put the different products in the database.
 # The used attributes are catergory for the used Category, name for the name of the product,

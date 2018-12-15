@@ -13,6 +13,7 @@ class Order(models.Model):
     pharmacy = models.ForeignKey(Pharmacy, on_delete=models.CASCADE, default=True)
     price = models.DecimalField(max_digits=10, decimal_places=0, default=0)
     quantity = models.PositiveIntegerField(default=1)
+    filled = models.BooleanField(default=False)
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
 
