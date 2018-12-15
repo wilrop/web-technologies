@@ -22,14 +22,10 @@ def signup(request):
         if form.is_valid():                     # Check if the form is valid.
             form.save()
             request.session['username'] = form.cleaned_data['username']
-            '''request.session['phone_number'] = form.cleaned_data['phone_number'][1:]
-            request.session['country_code'] = 32
-            authy_api.phones.verification_start(
-                phone_number=form.cleaned_data['phone_number'][1:], # Drop the zero
-                country_code=32,                                     # Only Belgium
-                via='sms'
-            )'''
-            return redirect('phone_verification')
+            if form.cleaned_data['user_type'] == "Pharmacist":
+                return redirect('pharmacies:create_pharma')
+            else:
+                return redirect('phone_verification')
     else:                                       # When we GET the form.
         form = SignUpForm()                     # Provide the form to the user.
     return render(request, template, {'form': form})

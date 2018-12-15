@@ -28,7 +28,7 @@ def create_pharma(request):
             slug = form.cleaned_data.get('name')
             address = form.cleaned_data.get('address')
             phone_number = form.cleaned_data.get('phone_number')
-            return redirect ('home') 
+            return redirect('phone_verification') 
     else:                                       
         form = PharmacyForm() 
     return render(request, 'pharmacies/create_pharmacy.html', {'form': form})
