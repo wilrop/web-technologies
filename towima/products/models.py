@@ -1,5 +1,6 @@
 from django.db import models
 from django.urls import reverse
+from django.template.defaultfilters import slugify
 
 # Definition of the model Category. This class is used to categorise the different products to get a good overview of the products.
 # The used attributes are name for the name of the Category and the slug for the URl.
@@ -59,6 +60,13 @@ class Product(models.Model):
 
     def get_absolute_url(self):
        return reverse('products:product_detail', args=[self.id, self.slug])
+
+    def save(self, *args, **kwargs):
+        if not self.id:
+            # Newly created object, so set slug
+            self.slug = slugify(self.name)
+
+        super(Product, self).save(*args, **kwargs)
 
 
 # A lot of information in the comments comes from the documentation.
