@@ -8,6 +8,7 @@ def create_order(request):
         form = OrderForm(request.POST)
         if form.is_valid():
             form.save()
+            user = request.user
             first_name = form.cleaned_data.get('first_name')
             last_name = form.cleaned_data.get('last_name')
             product = form.cleaned_data.get('product')

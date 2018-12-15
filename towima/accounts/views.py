@@ -8,6 +8,7 @@ from django.core.mail import send_mail
 from accounts.models import Profile
 from authy.api import AuthyApiClient
 from .forms import TokenForm, VerificationForm
+from orders.models import Order
 
 authy_api = AuthyApiClient('jqr27nutYbPgCmIilN0ByqTTe1xBu6Wp')
 
@@ -149,4 +150,10 @@ def edit_home(request):
     context={}
     return render(request, template, context)
 
+def orders(request):
+    template = 'accounts/orders.html'
+    user = request.user
+    orders = Order.objects.filter(user=user)
+    args = {'user': user, 'orders':orders}   
+    return render(request, template, args)
 
