@@ -80,6 +80,8 @@
         background-color: white;
         padding: 10px 20px 10px 20px;
     }
+    /*--------------------------------------------*/
+    /* EDIT PAGES*/
     
     
 }
@@ -156,28 +158,51 @@
         padding: 15px 50px 15px 50px;
     }
     .btn1:hover {
-        color: black;
-        border-radius: 15px;
-        border-color: black;
-        border: 3px solid;
+        color: white;
         text-decoration: none;
-        font-size: 40px;
-        background-color: white;
-        padding: 15px 50px 15px 50px;
+        background-color: lightslategray;
     }
     
-}
-
-     
+    /*--------------------------------------------*/
+    /* EDIT PAGES*/
     
-
-/* FOOTER */
-.footer-custom{
-    background-color: lightgray;
-    color: white;
-    font-size: 15px;
-    min-height: 50px;
+    .edit_home{
+        text-align: center;
+        margin-top: 20vh;
+        background: url('../media/Background/edit_home.svg') center center no-repeat;
+        min-height: 80vh;
+        color: black;
+    }
+    .eh_block{
+        min-height: 50vh;
+        background-color: white;
+        border: 2px solid;
+        border-color: lightslategray;
+        border-radius: 15px;
+        text-decoration: none;
+    }
+    .eh_block:hover{
+        background-color: lightslategray;
+    }
+    .eh_text{color: black;}
+    .eh_text:hover{
+        color: white;
+        text-decoration: none !important;
+    }
+    .eh_lock{
+        background: url('../media/accounts/edit%2520home/lock.svg') center center no-repeat;
+        background-size: 80% 80%;
+        min-height: 50vh; 
+    }
+    .eh_user{
+        background: url('../media/accounts/edit%2520home/user.svg') center center no-repeat;
+        background-size: 80% 80%;
+        min-height: 50vh; 
+    }
 }
+
+
+
 
 
 
