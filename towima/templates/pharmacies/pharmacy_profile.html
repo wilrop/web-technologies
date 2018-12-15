@@ -36,6 +36,31 @@
       });
 
     };
+
+    $( "#commentSubmit" ).click(function( event ) {
+        event.preventDefault();
+        $.ajax({
+            url: "{% url 'pharmacies:add_comment_to_pharmacy' %}",
+            type: 'post',
+            dataType: 'json',
+            data: {
+                'csrfmiddlewaretoken': "{{ csrf_token }}",
+                'pharmacy': "{{ pharmacy.pk }}",
+                'text': $('#id_text').val(),
+            },
+            success: function(data) {
+                if (data.valid){
+                    console.log(data);
+                }else{
+                    alert("The form was invalid. Try again!");
+                }
+            },
+            error:function(error){
+                alert("Something went wrong. Try again!");
+            }
+        });
+    });
+
 </script>
 {% endblock %}
 
@@ -67,16 +92,26 @@
 </div>
 
 <hr>
-<a class="btn btn-default" href="{% url 'pharmacies:add_comment_to_pharmacy' pk=pharmacy.pk %}">Add comment</a>
+<a class="btn btn-primary" data-toggle="collapse" href="#commentCollapse" role="button" aria-expanded="false" aria-controls="commentCollapse">Add comment</a>
+<div class="collapse multi-collapse" id="commentCollapse">
+    <div class="card card-body">
+        <form method="POST" class="post-form">{% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit" class="save btn btn-default" id="commentSubmit">Send</button>
+        </form>
+    </div>
+</div>
 
+
+<div class="comments">
 {% for comment in pharmacy.comments.all %}
 <div class="comment">
     <div class="date">{{ comment.created_date }}</div>
     <strong>{{ comment.author }}</strong>
     <p>{{ comment.text|linebreaks }}</p>
 </div>
-{% empty %}
-<p>No comments here yet :(</p>
 {% endfor %}
+</div>
+
 
 {% endblock %}

@@ -17,7 +17,9 @@ def pharmacy(request, pk):
         rating = int(round(acc_rating / len(rated_list)))
     else:
         rating = None
-    args = {'pharmacy': pharmacy, 'rating': rating}
+
+    form = CommentForm
+    args = {'pharmacy': pharmacy, 'rating': rating, 'form': form}
     return render(request, 'pharmacies/pharmacy_profile.html', args)
 
 def create_pharma(request):
@@ -34,16 +36,25 @@ def create_pharma(request):
         form = PharmacyForm() 
     return render(request, 'pharmacies/create_pharmacy.html', {'form': form})
 
-def add_comment_to_pharmacy(request, pk):
-    if request.method == "POST":
-        form = CommentForm(request.POST)
-        if form.is_valid():
-            user = request.user
-            form.save(pk, user)
-            return redirect('pharmacies:pharmacy', pk=pk)
+def add_comment_to_pharmacy(request):
+    user = request.user
+    author = user.username
+    pharmacy = request.POST.get('pharmacy', None)
+    text = request.POST.get('text', None)
+
+    form = CommentForm({'text': text})
+    if form.is_valid():
+        valid = True
+        form.save(pharmacy, user)
     else:
-        form = CommentForm()
-    return render(request, 'pharmacies/add_comment_to_pharmacy.html', {'form': form})
+        valid = False
+
+    data = {
+        'valid': valid,
+        'author': author,
+        'text': text,
+    }
+    return JsonResponse(data)
 
 def add_rating_to_pharmacy(request):
     pk = request.GET.get('pk', None)
