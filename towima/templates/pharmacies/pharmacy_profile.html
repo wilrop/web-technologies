@@ -1,11 +1,42 @@
 <style>
-.checked {
-  color: orange;
-}
+    .checked {
+        color: orange;
+    }
 </style>
 
 {% extends 'base.html' %}
 {% block title %}Pharmacy Profile{% endblock %}
+
+{% block javascript %}
+<script>
+    function add_rating(new_rating) {
+        $.ajax({
+            url: "{% url 'pharmacies:add_rating_to_pharmacy' %}",
+            data: {
+                'pk': "{{ pharmacy.pk }}",
+                'new_rating': new_rating
+            },
+            dataType: 'json',
+            success: function (data) {
+                var rating = data.old_rating;
+                var new_rating = data.new_rating;
+                var difference = new_rating - rating;
+                if (difference > 0){
+                    for(var i = new_rating; i >= rating; i--){
+                        $('.rating span:eq(' + (i-1) + ')').replaceWith('<span onclick="add_rating(' + i + ')" class="fa fa-star checked"></span>');
+                    }
+                }else if (difference < 0){
+                    for(var i = rating; i > new_rating; i--){
+                        $('.rating span:eq(' + (i-1) + ')').replaceWith('<span onclick="add_rating(' + i + ')" class="fa fa-star"></span>');
+                    }
+                }
+                
+            }
+      });
+
+    };
+</script>
+{% endblock %}
 
 {% block content %}
 
@@ -19,18 +50,18 @@
 
 <div class="rating">
     {% if rating %}
-        {% for i in "12345" %}
-            {% if rating >= forloop.counter %}
-                <a href="{% url 'pharmacies:add_rating_to_pharmacy' pk=pharmacy.pk new_rating=forloop.counter %}"><span class="fa fa-star checked"></span></a>
-            {% else %}
-                <a href="{% url 'pharmacies:add_rating_to_pharmacy' pk=pharmacy.pk new_rating=forloop.counter %}"><span class="fa fa-star"></span></a>
-            {% endif %}
-        {% endfor %}  
+    {% for i in "12345" %}
+    {% if rating >= forloop.counter %}
+    <span onclick="add_rating({{ forloop.counter }})" class="fa fa-star checked"></span>
     {% else %}
-        <strong>This pharmacy has not been rated yet. Be the first to rate them!</strong><br>
-        {% for i in "12345" %}
-            <a href="{% url 'pharmacies:add_rating_to_pharmacy' pk=pharmacy.pk new_rating=forloop.counter %}"><span class="fa fa-star"></span></a>
-        {% endfor %}  
+    <span onclick="add_rating({{ forloop.counter }})" class="fa fa-star"></span>
+    {% endif %}
+    {% endfor %}
+    {% else %}
+    <strong>This pharmacy has not been rated yet. Be the first to rate them!</strong><br>
+    {% for i in "12345" %}
+    <span onclick="add_rating({{ forloop.counter }})" class="fa fa-star"></span>
+    {% endfor %}
     {% endif %}
 </div>
 
@@ -38,13 +69,13 @@
 <a class="btn btn-default" href="{% url 'pharmacies:add_comment_to_pharmacy' pk=pharmacy.pk %}">Add comment</a>
 
 {% for comment in pharmacy.comments.all %}
-    <div class="comment">
-        <div class="date">{{ comment.created_date }}</div>
-        <strong>{{ comment.author }}</strong>
-        <p>{{ comment.text|linebreaks }}</p>
-    </div>
+<div class="comment">
+    <div class="date">{{ comment.created_date }}</div>
+    <strong>{{ comment.author }}</strong>
+    <p>{{ comment.text|linebreaks }}</p>
+</div>
 {% empty %}
-    <p>No comments here yet :(</p>
+<p>No comments here yet :(</p>
 {% endfor %}
 
 {% endblock %}

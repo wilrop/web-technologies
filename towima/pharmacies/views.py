@@ -1,6 +1,7 @@
 import time
 
 from django.shortcuts import render, redirect, get_list_or_404, get_object_or_404
+from django.http import JsonResponse
 from pharmacies.models import Pharmacy, Employee, Rating
 from pharmacies.forms import PharmacyForm, CommentForm
 from django.db.models import Q
@@ -44,17 +45,37 @@ def add_comment_to_pharmacy(request, pk):
         form = CommentForm()
     return render(request, 'pharmacies/add_comment_to_pharmacy.html', {'form': form})
 
-def add_rating_to_pharmacy(request, pk, new_rating):
+def add_rating_to_pharmacy(request):
+    pk = request.GET.get('pk', None)
+    new_rating = request.GET.get('new_rating', None)
+    pharmacy = Pharmacy.objects.get(pk=pk)
     user = request.user
-    pharmacy = Pharmacy.objects.get(pk=pk) 
+
     try:
         rating = Rating.objects.get(pharmacy = pharmacy, user=user)
+        old_rating = rating.rating
         rating.rating = new_rating
     except Rating.DoesNotExist:
         rating = Rating(user=user, pharmacy=pharmacy, rating=new_rating)
+        old_rating = 0
     rating.save()
 
-    return redirect('pharmacies:pharmacy', pk=pk)
+    rated_list = Rating.objects.filter(pharmacy = pharmacy)
+
+    if rated_list:
+        acc_rating = 0
+        for rating in rated_list:
+            acc_rating += rating.rating 
+        rating = int(round(acc_rating / len(rated_list)))
+    else:
+        rating = None
+
+    data = {
+        'old_rating': old_rating ,
+        'new_rating': rating
+    }
+    return JsonResponse(data)
+
 
 def search(request):
     start = time.time()

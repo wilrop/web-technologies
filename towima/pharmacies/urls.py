@@ -8,5 +8,5 @@ urlpatterns = [
     path('search/', views.search, name='search'),
     url(r'^pharmacy/(?P<pk>\d+)/$', views.pharmacy, name='pharmacy'),
     url(r'^pharmacy/(?P<pk>\d+)/comment/$', views.add_comment_to_pharmacy, name='add_comment_to_pharmacy'),
-    url(r'^pharmacy/(?P<pk>\d+)/rating/(?P<new_rating>\d+)/$', views.add_rating_to_pharmacy, name='add_rating_to_pharmacy'),
+    path('add_rating_to_pharmacy/', views.add_rating_to_pharmacy, name='add_rating_to_pharmacy'),
 ]
