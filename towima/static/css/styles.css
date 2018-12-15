@@ -1,4 +1,5 @@
-/* Layout for HOMEPAGE */
+/* FOR MOBILE SCREENS*/
+
 @media screen and (max-width: 450px){
     h1 {font-size: 20px;}
     p {font-size: 14px;}
@@ -48,32 +49,43 @@
     .wannajoin{
         background: url('../media/wannajoin.svg') no-repeat left center;
         background-size: 100% 100%;
-        text-align: center;
         min-height: 200px;
-        color: mediumaquamarine;
+        text-align: center;
     }
     .join_text{
+        text-align: center;
         padding-top: 40px;
         color: white;
     }
-    .join_text h1{font-size: 20px;}
-    .join_text h3{font-size: 14px;}
+    .join_text h1{font-size: 3vh;}
+    .join_text h3{font-size: 1.5vh;}
     .supplement{
         background: url('../media/supplement.svg') no-repeat center center;
         background-size: 80% 80%;
     }
     .btn1 {
+        color: mediumaquamarine;
         border-radius: 15px;
+        font-size: 18px;
+        background-color: white;
+        padding: 8px 20px 8px 20px
+    }
+    .btn1:hover {
+        color: black;
+        border-radius: 15px;
+        border-color: black;
+        border: 2px solid;
+        text-decoration: none;
         font-size: 14px;
         background-color: white;
-        padding: 5px 15px 5px 15px
+        padding: 10px 20px 10px 20px;
     }
     
     
 }
 
-
-
+/*-------------------------------------------------------------------------------------------------*/
+/* FOR COMPUTER SCREENS*/
 
 
 @media screen and (min-width: 450px){
@@ -101,17 +113,17 @@
     .tab1{
         background: url('../media/order_now_Plan%20de%20travail%201.svg') no-repeat center center fixed;
         background-size: contain;
-        min-height: 300px
+        min-height: 45vh
         }
     .tab2 {
         background: url('../media/talk_to.svg') no-repeat center center fixed;
         background-size: contain;
-        min-height: 300px
+        min-height: 45vh
             }
     .tab3 {
         background: url('../media/find_pharma_Plan%20de%20travail%201.svg') no-repeat center center fixed;
         background-size: contain;
-        min-height: 300px
+        min-height: 45vh
     }
     .tabs_text {
         padding-top: 20px;
@@ -124,12 +136,12 @@
         background: url('../media/wannajoin.svg') no-repeat left center;
         background-size: 100% 100%;
         text-align: center;
-        min-height: 400px;
-        color: mediumaquamarine;
+        min-height: 400px;   
     }
     .join_text{
         padding-top: 50px;
         color: white;
+        margin-bottom: 30px;
     }
     
     .supplement{
@@ -137,10 +149,21 @@
         background-size: 100% 100%;
     }
     .btn1 {
+        color: mediumaquamarine;
         border-radius: 15px;
         font-size: 40px;
         background-color: white;
-        padding: 10px 20px 10px 20px
+        padding: 15px 50px 15px 50px;
+    }
+    .btn1:hover {
+        color: black;
+        border-radius: 15px;
+        border-color: black;
+        border: 3px solid;
+        text-decoration: none;
+        font-size: 40px;
+        background-color: white;
+        padding: 15px 50px 15px 50px;
     }
     
 }
