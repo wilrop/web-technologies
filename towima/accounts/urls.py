@@ -4,6 +4,7 @@ from accounts import views
 urlpatterns = [ 
     path('login/', views.login_view, name='login'),
     path('signup/', views.signup, name='signup'),                               # The url for the signup page. 
+    path('validate_username/', views.validate_username, name='validate_username'),
     path('phone_verification', views.phone_verification, name='phone_verification'),
     path('verify/', views.verify, name='verify'),                               # The url for the verify page.                            
     path('profile/', views.profile, name='profile'),                            # The url for the profile page.                           
