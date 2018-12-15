@@ -20,7 +20,7 @@
     .about_us_img{
         text-align: center;
         background: url('../media/about_us.svg') no-repeat center center;
-        background-size: contain;
+        background-size: 80% 80%;
         margin-top: -20px;
     }
     
@@ -80,10 +80,44 @@
         background-color: white;
         padding: 10px 20px 10px 20px;
     }
-    /*--------------------------------------------*/
+     /*--------------------------------------------*/
     /* EDIT PAGES*/
     
-    
+    .edit_home{
+        text-align: center;
+        margin-top: 5vh;
+        background: url('../media/Background/mobile/eh_mobile.svg') left center no-repeat;
+        min-height: 100vh;
+        color: black;
+    }
+    .eh_block{
+        margin-top: 5vh;
+        min-height: 30vh;
+        background-color: white;
+        border: 2px solid;
+        border-color: lightslategray;
+        border-radius: 15px;
+        text-decoration: none;
+    }
+    .eh_block:hover{
+        background-color: lightslategray;
+    }
+    .eh_text{color: black;}
+    .eh_text:hover{
+        color: white;
+        text-decoration: none !important;
+    }
+    .eh_lock{
+        background: url('../media/accounts/edit%2520home/lock.svg') center center no-repeat;
+        background-size: 60% 60%;
+        min-height: 20vh; 
+    }
+    .eh_user{
+        background: url('../media/accounts/edit%2520home/user.svg') center center no-repeat;
+        background-size: 60% 60%;
+        min-height: 20vh; 
+    }
+    .eh_sm_separator{min-height: 5vh;}
 }
 
 /*-------------------------------------------------------------------------------------------------*/
