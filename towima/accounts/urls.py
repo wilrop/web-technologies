@@ -9,4 +9,5 @@ urlpatterns = [
     path('profile/', views.profile, name='profile'),                            # The url for the profile page.                           
     path('profile/edit/', views.edit_profile, name='edit'),                     # The url for the edit profile page.                      
     path('change-password/', views.change_password, name='change-password'),    # The url for the change password page.
+    path('edit_home/', views.edit_home, name='edit_home'),                      # The url for the edit_home page.
 ]

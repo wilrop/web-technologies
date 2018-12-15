@@ -1,4 +1,5 @@
-/* Layout for HOMEPAGE */
+/* FOR MOBILE SCREENS*/
+
 @media screen and (max-width: 450px){
     h1 {font-size: 20px;}
     p {font-size: 14px;}
@@ -19,7 +20,7 @@
     .about_us_img{
         text-align: center;
         background: url('../media/about_us.svg') no-repeat center center;
-        background-size: contain;
+        background-size: 80% 80%;
         margin-top: -20px;
     }
     
@@ -48,32 +49,79 @@
     .wannajoin{
         background: url('../media/wannajoin.svg') no-repeat left center;
         background-size: 100% 100%;
-        text-align: center;
         min-height: 200px;
-        color: mediumaquamarine;
+        text-align: center;
     }
     .join_text{
+        text-align: center;
         padding-top: 40px;
         color: white;
     }
-    .join_text h1{font-size: 20px;}
-    .join_text h3{font-size: 14px;}
+    .join_text h1{font-size: 3vh;}
+    .join_text h3{font-size: 1.5vh;}
     .supplement{
         background: url('../media/supplement.svg') no-repeat center center;
         background-size: 80% 80%;
     }
     .btn1 {
+        color: mediumaquamarine;
         border-radius: 15px;
+        font-size: 18px;
+        background-color: white;
+        padding: 8px 20px 8px 20px
+    }
+    .btn1:hover {
+        color: black;
+        border-radius: 15px;
+        border-color: black;
+        border: 2px solid;
+        text-decoration: none;
         font-size: 14px;
         background-color: white;
-        padding: 5px 15px 5px 15px
+        padding: 10px 20px 10px 20px;
     }
+     /*--------------------------------------------*/
+    /* EDIT PAGES*/
     
-    
+    .edit_home{
+        text-align: center;
+        margin-top: 5vh;
+        background: url('../media/Background/mobile/eh_mobile.svg') left center no-repeat;
+        min-height: 100vh;
+        color: black;
+    }
+    .eh_block{
+        margin-top: 5vh;
+        min-height: 30vh;
+        background-color: white;
+        border: 2px solid;
+        border-color: lightslategray;
+        border-radius: 15px;
+        text-decoration: none;
+    }
+    .eh_block:hover{
+        background-color: lightslategray;
+    }
+    .eh_text{color: black;}
+    .eh_text:hover{
+        color: white;
+        text-decoration: none !important;
+    }
+    .eh_lock{
+        background: url('../media/accounts/edit%2520home/lock.svg') center center no-repeat;
+        background-size: 60% 60%;
+        min-height: 20vh; 
+    }
+    .eh_user{
+        background: url('../media/accounts/edit%2520home/user.svg') center center no-repeat;
+        background-size: 60% 60%;
+        min-height: 20vh; 
+    }
+    .eh_sm_separator{min-height: 5vh;}
 }
 
-
-
+/*-------------------------------------------------------------------------------------------------*/
+/* FOR COMPUTER SCREENS*/
 
 
 @media screen and (min-width: 450px){
@@ -101,17 +149,17 @@
     .tab1{
         background: url('../media/order_now_Plan%20de%20travail%201.svg') no-repeat center center fixed;
         background-size: contain;
-        min-height: 300px
+        min-height: 45vh
         }
     .tab2 {
         background: url('../media/talk_to.svg') no-repeat center center fixed;
         background-size: contain;
-        min-height: 300px
+        min-height: 45vh
             }
     .tab3 {
         background: url('../media/find_pharma_Plan%20de%20travail%201.svg') no-repeat center center fixed;
         background-size: contain;
-        min-height: 300px
+        min-height: 45vh
     }
     .tabs_text {
         padding-top: 20px;
@@ -124,12 +172,12 @@
         background: url('../media/wannajoin.svg') no-repeat left center;
         background-size: 100% 100%;
         text-align: center;
-        min-height: 400px;
-        color: mediumaquamarine;
+        min-height: 400px;   
     }
     .join_text{
         padding-top: 50px;
         color: white;
+        margin-bottom: 30px;
     }
     
     .supplement{
@@ -137,24 +185,58 @@
         background-size: 100% 100%;
     }
     .btn1 {
+        color: mediumaquamarine;
         border-radius: 15px;
         font-size: 40px;
         background-color: white;
-        padding: 10px 20px 10px 20px
+        padding: 15px 50px 15px 50px;
+    }
+    .btn1:hover {
+        color: white;
+        text-decoration: none;
+        background-color: lightslategray;
     }
     
-}
-
-     
+    /*--------------------------------------------*/
+    /* EDIT PAGES*/
     
-
-/* FOOTER */
-.footer-custom{
-    background-color: lightgray;
-    color: white;
-    font-size: 15px;
-    min-height: 50px;
+    .edit_home{
+        text-align: center;
+        margin-top: 20vh;
+        background: url('../media/Background/edit_home.svg') center center no-repeat;
+        min-height: 80vh;
+        color: black;
+    }
+    .eh_block{
+        min-height: 50vh;
+        background-color: white;
+        border: 2px solid;
+        border-color: lightslategray;
+        border-radius: 15px;
+        text-decoration: none;
+    }
+    .eh_block:hover{
+        background-color: lightslategray;
+    }
+    .eh_text{color: black;}
+    .eh_text:hover{
+        color: white;
+        text-decoration: none !important;
+    }
+    .eh_lock{
+        background: url('../media/accounts/edit%2520home/lock.svg') center center no-repeat;
+        background-size: 80% 80%;
+        min-height: 50vh; 
+    }
+    .eh_user{
+        background: url('../media/accounts/edit%2520home/user.svg') center center no-repeat;
+        background-size: 80% 80%;
+        min-height: 50vh; 
+    }
 }
+
+
+
 
 
 

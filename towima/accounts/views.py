@@ -136,3 +136,9 @@ def login_view(request):
 
     return render(request, template, {'form': form})
 
+def edit_home(request):
+    template ='accounts/edit_home.html'
+    context={}
+    return render(request, template, context)
+
+
