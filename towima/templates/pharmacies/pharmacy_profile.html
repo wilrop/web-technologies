@@ -1,11 +1,71 @@
 <style>
-.checked {
-  color: orange;
-}
+    .checked {
+        color: orange;
+    }
 </style>
 
 {% extends 'base.html' %}
 {% block title %}Pharmacy Profile{% endblock %}
+
+{% block javascript %}
+<script>
+    function add_rating(new_rating) {
+        $.ajax({
+            url: "{% url 'pharmacies:add_rating_to_pharmacy' %}",
+            data: {
+                'pk': "{{ pharmacy.pk }}",
+                'new_rating': new_rating
+            },
+            dataType: 'json',
+            success: function (data) {
+                $("#strong").remove();
+                var rating = data.old_rating;
+                var new_rating = data.new_rating;
+                var difference = new_rating - rating;
+                if (difference > 0){
+                    for(var i = new_rating; i >= rating; i--){
+                        $('.rating span:eq(' + (i-1) + ')').replaceWith('<span onclick="add_rating(' + i + ')" class="fa fa-star checked"></span>');
+                    }
+                }else if (difference < 0){
+                    for(var i = rating; i > new_rating; i--){
+                        $('.rating span:eq(' + (i-1) + ')').replaceWith('<span onclick="add_rating(' + i + ')" class="fa fa-star"></span>');
+                    }
+                }
+                
+            }
+      });
+
+    };
+
+    $( "#commentSubmit" ).click(function( event ) {
+        event.preventDefault();
+        $.ajax({
+            url: "{% url 'pharmacies:add_comment_to_pharmacy' %}",
+            type: 'post',
+            dataType: 'json',
+            data: {
+                'csrfmiddlewaretoken': "{{ csrf_token }}",
+                'pharmacy': "{{ pharmacy.pk }}",
+                'text': $('#id_text').val(),
+            },
+            success: function(data) {
+                if (data.valid){
+                    author = data.author;
+                    text = data.text;
+                    date = data.date;
+                    $(".comments").append('<div class="comment"><div class="date">'+ date +'</div><strong>'+ author +'</strong><p>'+ text +'</p></div>');;
+                }else{
+                    alert("The form was invalid. Try again!");
+                }
+            },
+            error:function(error){
+                alert("Something went wrong. Try again!");
+            }
+        });
+    });
+
+</script>
+{% endblock %}
 
 {% block content %}
 
@@ -19,32 +79,42 @@
 
 <div class="rating">
     {% if rating %}
-        {% for i in "12345" %}
-            {% if rating >= forloop.counter %}
-                <a href="{% url 'pharmacies:add_rating_to_pharmacy' pk=pharmacy.pk new_rating=forloop.counter %}"><span class="fa fa-star checked"></span></a>
-            {% else %}
-                <a href="{% url 'pharmacies:add_rating_to_pharmacy' pk=pharmacy.pk new_rating=forloop.counter %}"><span class="fa fa-star"></span></a>
-            {% endif %}
-        {% endfor %}  
+    {% for i in "12345" %}
+    {% if rating >= forloop.counter %}
+    <span onclick="add_rating({{ forloop.counter }})" class="fa fa-star checked"></span>
     {% else %}
-        <strong>This pharmacy has not been rated yet. Be the first to rate them!</strong><br>
-        {% for i in "12345" %}
-            <a href="{% url 'pharmacies:add_rating_to_pharmacy' pk=pharmacy.pk new_rating=forloop.counter %}"><span class="fa fa-star"></span></a>
-        {% endfor %}  
+    <span onclick="add_rating({{ forloop.counter }})" class="fa fa-star"></span>
+    {% endif %}
+    {% endfor %}
+    {% else %}
+    <div id="strong"><strong>This pharmacy has not been rated yet. Be the first to rate them!</strong><br></div>
+    {% for i in "12345" %}
+    <span onclick="add_rating({{ forloop.counter }})" class="fa fa-star"></span>
+    {% endfor %}
     {% endif %}
 </div>
 
 <hr>
-<a class="btn btn-default" href="{% url 'pharmacies:add_comment_to_pharmacy' pk=pharmacy.pk %}">Add comment</a>
-
-{% for comment in pharmacy.comments.all %}
-    <div class="comment">
-        <div class="date">{{ comment.created_date }}</div>
-        <strong>{{ comment.author }}</strong>
-        <p>{{ comment.text|linebreaks }}</p>
+<a class="btn btn-primary" data-toggle="collapse" href="#commentCollapse" role="button" aria-expanded="false" aria-controls="commentCollapse">Add comment</a>
+<div class="collapse multi-collapse" id="commentCollapse">
+    <div class="card card-body">
+        <form method="POST" class="post-form">{% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit" class="save btn btn-default" id="commentSubmit">Send</button>
+        </form>
     </div>
-{% empty %}
-    <p>No comments here yet :(</p>
+</div>
+
+
+<div class="comments">
+{% for comment in pharmacy.comments.all %}
+<div class="comment">
+    <div class="date">{{ comment.created_date }}</div>
+    <strong>{{ comment.author }}</strong>
+    <p>{{ comment.text|linebreaks }}</p>
+</div>
 {% endfor %}
+</div>
+
 
 {% endblock %}
