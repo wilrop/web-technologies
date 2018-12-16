@@ -11,5 +11,8 @@ urlpatterns = [
     path('profile/edit/', views.edit_profile, name='edit'),                     # The url for the edit profile page.                      
     path('change-password/', views.change_password, name='change-password'),    # The url for the change password page.
     path('edit_home/', views.edit_home, name='edit_home'),                      # The url for the edit_home page.
-    path('orders/', views.orders, name='orders'),     
+    path('orders/', views.orders, name='orders'),
+    path('cart/', views.cart, name='cart'),
+    path('item_delete/<pk>', views.item_delete, name='item_delete'),
+    path('place_orders', views.place_orders, name='place_orders'),
 ]

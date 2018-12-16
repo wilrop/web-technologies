@@ -15,8 +15,6 @@ def create_order(request):
             product = form.cleaned_data.get('product')
             pharmacy = form.cleaned_data.get('pharmacy')
             address = form.cleaned_data.get('address')
-            postal_code = form.cleaned_data.get('postal_code')
-            city = form.cleaned_data.get('city')
 
             pharmacy_object = Pharmacy.objects.get(name=pharmacy)
             phone_number = pharmacy_object.phone_number

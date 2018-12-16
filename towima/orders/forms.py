@@ -11,8 +11,6 @@ class OrderForm(forms.ModelForm):
     product = forms.ModelChoiceField(queryset=Product.objects.all())
     pharmacy = forms.ModelChoiceField(queryset=Pharmacy.objects.all())
     address = forms.CharField()
-    postal_code = forms.CharField()
-    city = forms.CharField()
     quantity = forms.IntegerField()
 
     class Meta:
@@ -22,8 +20,6 @@ class OrderForm(forms.ModelForm):
             'last_name', 
             'email',
             'address',
-            'city',
-            'postal_code',
             'product',
             'pharmacy',
             'quantity',

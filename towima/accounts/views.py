@@ -1,14 +1,14 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_list_or_404, get_object_or_404
 from django.http import JsonResponse
 from django.contrib.auth import login, authenticate, update_session_auth_hash
 from django.contrib.auth.forms import PasswordChangeForm, AuthenticationForm
 from django.contrib.auth.models import User
 from accounts.forms import SignUpForm, EditProfileForm
 from django.core.mail import send_mail
-from accounts.models import Profile, Cart
+from accounts.models import Profile, Cart, Item
 from authy.api import AuthyApiClient
 from .forms import TokenForm, VerificationForm
-from orders.models import Order
+from orders.models import Order 
 
 authy_api = AuthyApiClient('jqr27nutYbPgCmIilN0ByqTTe1xBu6Wp')
 
@@ -155,3 +155,32 @@ def orders(request):
     args = {'user': user, 'orders':orders}   
     return render(request, template, args)
 
+def cart(request):
+    template = 'accounts/cart.html'
+    user = request.user
+    cart = Cart.objects.get(user=user)
+    items = Item.objects.filter(cart=cart)
+    args = {'user': user, 'items':items}   
+    return render(request, template, args)
+
+def item_delete(request, pk):
+    item = Item.objects.get(pk=pk) 
+    item.delete()
+    return redirect(request.META['HTTP_REFERER'])
+
+def place_orders(request):
+    user = request.user
+    profile = Profile.objects.get(user=user)
+    cart = Cart.objects.get(user=user)
+    items = Item.objects.filter(cart=cart)
+    for item in items:
+        Order.objects.bulk_create([Order(user=user, first_name=user.first_name, last_name=user.last_name, email=user.email, address=profile.address, product=item.product, pharmacy=item.pharmacy, quantity=item.quantity)])
+        item.delete()
+    all_orders = Order.objects.all()
+    for order in all_orders:
+        order.save()
+    return redirect(request.META['HTTP_REFERER'])
+
+#"{% url accounts:'item_delete' pk=item.pk %}"
+#"{% url 'place_order' items=items %}"
+#path('item_delete/'), views.item_delete, name='delete'),
