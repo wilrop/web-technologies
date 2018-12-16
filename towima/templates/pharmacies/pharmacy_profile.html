@@ -50,6 +50,8 @@
             },
             success: function(data) {
                 if (data.valid){
+                    $('#id_text').val('');
+                    $(".collapse").collapse('hide');
                     author = data.author;
                     text = data.text;
                     date = data.date;
