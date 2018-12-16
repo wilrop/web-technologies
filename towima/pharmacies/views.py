@@ -45,14 +45,17 @@ def add_comment_to_pharmacy(request):
     form = CommentForm({'text': text})
     if form.is_valid():
         valid = True
-        form.save(pharmacy, user)
+        comment = form.save(pharmacy, user)
+        date = comment.created_date
     else:
         valid = False
+        date = None
 
     data = {
         'valid': valid,
         'author': author,
         'text': text,
+        'date': date,
     }
     return JsonResponse(data)
 

@@ -50,7 +50,10 @@
             },
             success: function(data) {
                 if (data.valid){
-                    console.log(data);
+                    author = data.author;
+                    text = data.text;
+                    date = data.date;
+                    $(".comments").append('<div class="comment"><div class="date">'+ date +'</div><strong>'+ author +'</strong><p>'+ text +'</p></div>');;
                 }else{
                     alert("The form was invalid. Try again!");
                 }
