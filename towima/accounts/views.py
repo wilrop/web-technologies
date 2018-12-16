@@ -5,7 +5,7 @@ from django.contrib.auth.forms import PasswordChangeForm, AuthenticationForm
 from django.contrib.auth.models import User
 from accounts.forms import SignUpForm, EditProfileForm
 from django.core.mail import send_mail
-from accounts.models import Profile
+from accounts.models import Profile, Cart
 from authy.api import AuthyApiClient
 from .forms import TokenForm, VerificationForm
 from orders.models import Order
@@ -70,6 +70,8 @@ def verify(request):
                 profile.verified = True
                 send_mail('Welcome to PharmaTowi', 'Welcome to our website, Your account has been verified!', 'pharmatowi@gmail.com', [getattr(user, 'email')], fail_silently=False,)
                 profile.save()
+                cart = Cart.objects.create(user=user)
+                cart.save()
                 return redirect('login')
             else:
                 for error_msg in verification.errors().values():
