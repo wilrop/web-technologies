@@ -13,5 +13,4 @@ urlpatterns = [
     path('product_detail/<pk>/<ppk>', views.product_detail, name='product_detail'),
     path('get_locations/', views.get_locations, name='get_locations'),
     path('pharma_settings/', views.pharma_settings, name='pharma_settings'),
-
 ]
