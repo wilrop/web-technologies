@@ -118,3 +118,9 @@ def get_locations(request):
     with pharma_locations as data_file:    
         data = json.load(data_file)
     return JsonResponse(data)
+
+def pharma_settings(request):
+    template = "pharmacies/pharma_settings.html"
+    context={}
+    return render(request, template, context)
+
