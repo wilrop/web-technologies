@@ -4,7 +4,12 @@ from products.models import Product
 from django.contrib.auth.models import User
 from django.utils import timezone
 
+class Other(models.Model):
+    DEFAULT_PK=1
+    name=models.CharField(max_length=1024)
+
 class Pharmacy(models.Model):
+    owner = models.OneToOneField(User, on_delete=models.CASCADE, default=Other.DEFAULT_PK)
     name = models.CharField(max_length=200, db_index=True)
     slug = models.SlugField(max_length=200, db_index=True)
     address = models.CharField(max_length = 50)

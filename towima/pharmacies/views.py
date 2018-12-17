@@ -8,11 +8,13 @@ from django.http import JsonResponse
 from pharmacies.models import Pharmacy, Employee, Rating
 from products.models import Product
 from pharmacies.models import Stock
-from pharmacies.forms import PharmacyForm, CommentForm
+from pharmacies.forms import PharmacyForm, CommentForm, AddStockForm
 from django.db.models import Q
 from .forms import AddToCartForm
 from accounts.models import Cart, Item
 from mapbox import Geocoder
+from orders.models import Order
+from django.core.mail import send_mail
 
 mapbox_access_token = 'pk.eyJ1IjoibWF4aW1lYW50b2luZTE5OTciLCJhIjoiY2pubTNmNmlrMWpvdjNxdGFsdGxxaXJlayJ9.0tDqrdUlSYEOqxMSiy7j3g'
 
@@ -67,6 +69,7 @@ def create_pharma(request):
             name = form.cleaned_data.get('name')
             address = form.cleaned_data.get('address')
             phone_number = form.cleaned_data.get('phone_number')
+            user = request.session['username']
 
             geocoder = Geocoder(access_token=mapbox_access_token)
             response = geocoder.forward(address)
@@ -88,7 +91,7 @@ def create_pharma(request):
             with pharma_locations as outfile:
                 json.dump(data, outfile)
                 
-            form.save()
+            form.save(user)
             return redirect('phone_verification')
     else:
         form = PharmacyForm()
@@ -186,3 +189,46 @@ def pharma_settings(request):
     template = "pharmacies/pharma_settings.html"
     context = {}
     return render(request, template, context)
+
+def pharmacy_orders(request):
+    template = 'pharmacies/orders.html'
+    user = request.user
+    pharmacy = Pharmacy.objects.get(owner=user)
+    orders = Order.objects.filter(pharmacy=pharmacy)
+    args = {'user': user, 'orders':orders}   
+    return render(request, template, args)
+
+def pharmacy_orders(request):
+    template = 'pharmacies/orders.html'
+    user = request.user
+    pharmacy = Pharmacy.objects.get(owner=user)
+    orders = Order.objects.filter(pharmacy=pharmacy)
+    args = {'user': user, 'orders':orders}   
+    return render(request, template, args)
+
+def order_delete(request, pk):
+    order = Order.objects.get(pk=pk) 
+    order.delete()
+    return redirect(request.META['HTTP_REFERER'])
+
+def confirm_order(request, pk):
+    order = Order.objects.get(pk=pk)
+    order.filled = True
+    order.save()
+    send_mail('Your order is ready!', 'Your order is ready in your local pharmacy!', 'pharmatowi@gmail.com', [getattr(order, 'email')], fail_silently=False,)
+    return redirect(request.META['HTTP_REFERER'])
+
+def add_product(request):
+    user = request.user
+    pharmacy = Pharmacy.objects.get(owner=user)
+    if request.method == 'POST':
+        form = AddToCartForm(request.POST)
+        print("binnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnen")
+        print(form.errors)
+        if form.is_valid():
+            print("vaaaaaaaaaaaaaaaaalid")
+            form.save(pharmacy)
+            return redirect('home')
+    form = AddStockForm()
+    args = {'pharmacy': pharmacy, 'form': form}
+    return render(request, 'pharmacies/add_product.html', args)
