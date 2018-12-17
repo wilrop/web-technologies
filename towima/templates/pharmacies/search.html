@@ -13,7 +13,8 @@
     </p>
     <div class="row">
         {% for pharmacy in results %}
-            <div class="col-2 offset-1 search_card">
+            <div class="col-1"></div>
+            <div class="col-lg-2 col-md-10 search_card">
                 <a id="search_result" href= "{% url 'pharmacies:pharmacy' pk=pharmacy.pk %}">
                     <h4>{{pharmacy.name}}</h4>
                     <div class="row search_row">
@@ -27,8 +28,24 @@
                     </div>
                 </a> 
             </div>
+            <div class="col-1"></div>
          {% endfor %}
     </div>
 </section>
+
+<a href="#anchor1" class="scrollLink">Scroll to anchor 1</a>
+<a href="#anchor2" class="scrollLink">Scroll to anchor 2</a>
+<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+<p id="anchor1"><strong>Anchor 1</strong> - Lorem ipsum dolor sit amet, nonumes voluptatum mel ea.</p>
+<p id="anchor2"><strong>Anchor 2</strong> - Ex ignota epicurei quo, his ex doctus delenit fabellas.</p>
+
+<script>
+    $(document).ready(function(){
+    $( "a.scrollLink" ).click(function( event ) {
+        event.preventDefault();
+        $("html, body").animate({ scrollTop: $($(this).attr("href")).offset().top }, 500);
+    });
+});
+</script>
 
 {% endblock %}

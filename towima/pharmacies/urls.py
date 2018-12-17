@@ -11,4 +11,7 @@ urlpatterns = [
     path('add_comment_to_pharmacy/', views.add_comment_to_pharmacy, name='add_comment_to_pharmacy'),
     path('add_rating_to_pharmacy/', views.add_rating_to_pharmacy, name='add_rating_to_pharmacy'),
     path('product_detail/<pk>/<ppk>', views.product_detail, name='product_detail'),
+    path('get_locations/', views.get_locations, name='get_locations'),
+    path('pharma_settings/', views.pharma_settings, name='pharma_settings'),
+
 ]

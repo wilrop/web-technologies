@@ -118,8 +118,67 @@
         min-height: 20vh; 
     }
     .eh_sm_separator{min-height: 5vh;}
+    
+    
+    /*--------------------------------------------*/
+    /* SEARCH PAGES*/
+    #search_result{
+        color: black;
+        text-align: center;
+        font-size: 20px;
+    }
+    #search_result:hover{
+        text-decoration: none;
+    }
+    .search_card{
+        border: 2px solid;
+        border-color: black;
+        border-radius: 15px;
+        padding-top: 5px;
+        margin-top: 10px;
+        margin-bottom: 10px;
+        
+        -webkit-transform: perspective(1px) translateZ(0);
+        transform: perspective(1px) translateZ(0);
+
+        -webkit-transition-duration: 0.3s;
+        transition-duration: 0.3s;
+        -webkit-transition-property: transform;
+        transition-property: transform;
+            
+    }
+    .search_card:hover
+    .search_card:focus
+    .search_card:active{
+        -webkit-transform: scale(1.1);
+        transform: scale(1.1);
+    }
+    .search_phone{
+        text-align: center;
+        background: url('../media/Search/telephone.svg') center top no-repeat;
+        background-size: 100% 100%;
+    }
+    .search_map{
+        text-align: center;
+        background: url('../media/Search/map.svg')center center no-repeat;
+        background-size: 100% 100%;
+        
+    }
+    .search-text{
+        text-align: left;
+        margin-top: 20px;
+    }
+    .search_row{margin: -5px 0 0 0}
 }
 
+/*-------------------------------------------------------------------------------------------------*/
+/*-------------------------------------------------------------------------------------------------*/
+/*-------------------------------------------------------------------------------------------------*/
+/*-------------------------------------------------------------------------------------------------*/
+/*-------------------------------------------------------------------------------------------------*/
+/*-------------------------------------------------------------------------------------------------*/
+/*-------------------------------------------------------------------------------------------------*/
+/*-------------------------------------------------------------------------------------------------*/
 /*-------------------------------------------------------------------------------------------------*/
 /* FOR COMPUTER SCREENS*/
 
@@ -128,16 +187,18 @@
     #home {
         background: url('../media/frontpage/background.svg') no-repeat left center ;
         background-size:cover;
-        padding-bottom: 200px;
+        padding-bottom: 30vh;
         padding-top: 100px;
         background-size: none 100%;
         color: white;
         text-align: center;
         }
     #home h1 {font-size: 6vw;}
-    #home h3 {font-size: 3.2vw;}
+    #home h3 {font-size: 3.2vw;
+    padding-bottom: 4vh;}
     
     .mission{
+        margin-top: 5vh;
         font-size: 20px;   
         }
     .about_us_img{
@@ -189,56 +250,68 @@
         border-radius: 15px;
         font-size: 40px;
         background-color: white;
-        padding: 15px 50px 15px 50px;
+        padding: 15px 50px 15px 50px;  
     }
+    
     .btn1:hover {
-        color: white;
+        color: mediumaquamarine;
         text-decoration: none;
-        background-color: lightslategray;
     }
-    
-    /*--------------------------------------------*/
-    /* EDIT PAGES*/
-    
-    .edit_home{
-        text-align: center;
-        margin-top: 20vh;
-        background: url('../media/Background/edit_home.svg') center center no-repeat;
-        min-height: 80vh;
-        color: black;
-    }
-    .eh_block{
-        min-height: 50vh;
-        background-color: white;
-        border: 2px solid;
-        border-color: lightslategray;
+     .btn2 {
+        margin-top: 6vh;
+        color: mediumaquamarine;
         border-radius: 15px;
+        border: 2px solid;
+        border-color: #F5F5F5;
+        font-size: 40px;
+        background-color: white;
+        padding: 15px 50px 15px 50px;  
+    }
+    
+    .btn2:hover {
+        color: mediumaquamarine;
         text-decoration: none;
     }
-    .eh_block:hover{
-        background-color: lightslategray;
+    .btn_transition{
+        margin-top: -22vh;
+        text-align: center;
+        -webkit-transform: perspective(1px) translateZ(0);
+        transform: perspective(1px) translateZ(0);
+
+        -webkit-transition-duration: 0.3s;
+        transition-duration: 0.3s;
+        -webkit-transition-property: transform;
+        transition-property: transform;
     }
-    .eh_text{color: black;}
-    .eh_text:hover{
-        color: white;
-        text-decoration: none !important;
+    .btn_transition:hover,
+    .btn_transition:focus,
+    .btn_transition:active {
+        -webkit-transform: scale(1.1);
+        transform: scale(1.1);
     }
-    .eh_lock{
-        background: url('../media/accounts/edit%2520home/lock.svg') center center no-repeat;
-        background-size: 80% 80%;
-        min-height: 50vh; 
+    .btn_transition1{
+        text-align: center;
+        -webkit-transform: perspective(1px) translateZ(0);
+        transform: perspective(1px) translateZ(0);
+
+        -webkit-transition-duration: 0.3s;
+        transition-duration: 0.3s;
+        -webkit-transition-property: transform;
+        transition-property: transform;
     }
-    .eh_user{
-        background: url('../media/accounts/edit%2520home/user.svg') center center no-repeat;
-        background-size: 80% 80%;
-        min-height: 50vh; 
+    .btn_transition1:hover,
+    .btn_transition1:focus,
+    .btn_transition1:active {
+        -webkit-transform: scale(1.1);
+        transform: scale(1.1);
     }
+    
     /*--------------------------------------------*/
-    /* EDIT PAGES*/
+    /* SEARCH PAGES*/
     #search_result{
         color: black;
         text-align: center;
-        font-size: 1.3vw;
+        font-size: 20px;
     }
     #search_result:hover{
         text-decoration: none;
@@ -247,11 +320,25 @@
         border: 2px solid;
         border-color: black;
         border-radius: 15px;
-        padding-top: 5px 
+        padding-top: 5px;
+        margin-top: 10px;
+        margin-bottom: 10px;
+        
+        -webkit-transform: perspective(1px) translateZ(0);
+        transform: perspective(1px) translateZ(0);
+
+        -webkit-transition-duration: 0.3s;
+        transition-duration: 0.3s;
+        -webkit-transition-property: transform;
+        transition-property: transform;
+            
     }
-    .search_card:hover{
-        background-color: lightgray;
-        color: white;
+    .search_card:hover,
+    .search_card:focus,
+    .search_card:active {
+        -webkit-transform: scale(1.1);
+        transform: scale(1.1);
+        
     }
     .search_phone{
         text-align: center;
@@ -268,7 +355,7 @@
         text-align: left;
         margin-top: 20px;
     }
-    .search_row{margin: -5px 0 0px 0}
+    .search_row{margin: -5px 0 0 0}
 }
 
 
@@ -280,8 +367,9 @@
 
 #profile_background{
     background: url('../media/profile_page_4_Plan%20de%20travail%201.svg') no-repeat center center fixed;
+    margin-top: -10px;
     background-size: cover;
-    min-height: 550px;
+    min-height: 80vh;
     text-align: center;
 }
 
@@ -306,7 +394,7 @@
 }
 
 .profile_card_skin {
-    background-color: white;
+    background-color: #F5F5F5  ;
     border-radius: 10px;
     margin-top: 15px;
     min-height: 250px;
@@ -364,6 +452,15 @@
   height: 50px;
   border-radius: 50%;
   cursor: pointer;
+}
+
+.mapboxgl-popup {
+    max-width: 200px;
+}
+  
+.mapboxgl-popup-content {
+    text-align: center;
+    font-family: 'Open Sans', sans-serif;
 }
 
 

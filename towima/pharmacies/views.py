@@ -1,4 +1,11 @@
 import time
+<<<<<<< HEAD
+=======
+import json
+import os
+
+from django.conf import settings
+>>>>>>> 8840cb7c5c8821d391eebe18a2c22ef14215f60c
 from django.shortcuts import render, redirect, get_list_or_404, get_object_or_404
 from django.http import JsonResponse
 from pharmacies.models import Pharmacy, Employee, Rating
@@ -132,6 +139,18 @@ def search(request):
     return render(request, 'pharmacies/search.html', args)
 
 def find_pharma(request):
-    mapbox_access_token = 'pk.my_mapbox_access_token'
+    mapbox_access_token = 'pk.eyJ1IjoibWF4aW1lYW50b2luZTE5OTciLCJhIjoiY2pubTNmNmlrMWpvdjNxdGFsdGxxaXJlayJ9.0tDqrdUlSYEOqxMSiy7j3g'
     return render(request, 'pharmacies/find_pharma.html', {'mapbox_access_token': mapbox_access_token})
+
+def get_locations(request):
+    file_path = os.path.join(settings.BASE_DIR, 'pharma_locations.json')
+    pharma_locations = open(file_path)
+    with pharma_locations as data_file:    
+        data = json.load(data_file)
+    return JsonResponse(data)
+
+def pharma_settings(request):
+    template = "pharmacies/pharma_settings.html"
+    context={}
+    return render(request, template, context)
 

@@ -5,11 +5,13 @@
             <div class="landing-text">
                 <h1>PHARMATOWI</h1>
                 <h3>An online platform to order and connect with your local pharmacies</h3>
-                <a href="{% url 'signup' %}" class="btn btn-dark">Sign Up Now</a>
             </div>
     </div>
-
-<div class="container-fluid mission" style="padding-top: 20px; min-height: 300px;">
+    <div class="btn_transition">
+        <a href="#our_mission" class="btn2 scrollLink">Learn More</a>
+    </div>
+<br><br><br><br><br><br><br><br>
+<div class="container-fluid mission" id="our_mission" style="padding-top: 20px; min-height: 300px;">
     <h1 style="font-weight: bold">Our Mission</h1>
     <div class="row">
         <div class="col-8">
@@ -67,7 +69,10 @@
                 <h1>Get Started</h1>
                 <h3>Sign up now and get access to hundreds of pharmacies!</h3>
             </div>
-            <a class="btn1" href="{% url 'signup' %}">Sign Up</a>
+            <div class="btn_transition1">
+                <a class="btn1" href="{% url 'signup' %}">Sign Up</a>
+            </div>
+            
         </div>
     </div>
 
@@ -76,6 +81,13 @@
 
 <br><br><br><br><br><br>
 <br><br><br><br><br><br>
-
+<script>
+    $(document).ready(function(){
+    $( "a.scrollLink" ).click(function( event ) {
+        event.preventDefault();
+        $("html, body").animate({ scrollTop: $($(this).attr("href")).offset().top }, 500);
+    });
+});
+</script>
 
 {% endblock %}
