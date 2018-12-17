@@ -21,7 +21,7 @@
   
   <body>
     <header>
-      <nav class="navbar navbar-expand-md navbar-light bg-light fixed-top">
+      <nav class="navbar navbar-expand-md navbar-light bg-light">
           <a class="navbar-brand" href="{% url 'home' %}">
               <img src="{% static "../static/media/logo2.svg" %}" width="130" height="26" class="d-inline-block align-top"alt="">
             </a>
@@ -76,7 +76,7 @@
           </div>
         </nav>
     </header>
-          
+    
     <main>
       {% block content %}
       {% endblock %}

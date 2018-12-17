@@ -5,7 +5,7 @@
 <section id="profile_background">
     <section class="container-fluid">
         <div class="row">
-            <div class="col-md-12 col-sm-12" style="padding-top: 50px;">
+            <div class="col-md-12 col-sm-12" >
                 <img src="../../static/media/Profile/men_avatar.png" 
                      class="img-responsive rounded-circle tm-border"
                      style="margin-top: 20px;">
@@ -67,23 +67,6 @@
                 </div>
             </div>
         </div>
-        {% if user.profile.user_type == "Pharmacist" %}
-            <div class="row">
-                <div class="col-md-7 col-sm-12">
-                    <div class="profile_card_skin">
-                        <p>
-                            <span class="profile_title">
-                                Pharmacy
-                            </span>
-                            <br>
-                            <span class="profile_description">
-                                {{ pharmacys.name }}
-                            </span>
-                        </p>
-                    </div>
-                </div>
-            </div>
-        {%endif%}
     </section>
 
     <br><br><br><br><br><br><br><br><br><br><br><br><br>
