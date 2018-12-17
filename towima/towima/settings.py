@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     'pharmacies.apps.PharmaciesConfig',     #Pharmacy App
     'orders.apps.OrdersConfig',             #Orders App
     'rest_framework',
+    'crispy_forms',
     'api',
 ]
 

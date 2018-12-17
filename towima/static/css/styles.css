@@ -233,6 +233,42 @@
         background-size: 80% 80%;
         min-height: 50vh; 
     }
+    /*--------------------------------------------*/
+    /* EDIT PAGES*/
+    #search_result{
+        color: black;
+        text-align: center;
+        font-size: 1.3vw;
+    }
+    #search_result:hover{
+        text-decoration: none;
+    }
+    .search_card{
+        border: 2px solid;
+        border-color: black;
+        border-radius: 15px;
+        padding-top: 5px 
+    }
+    .search_card:hover{
+        background-color: lightgray;
+        color: white;
+    }
+    .search_phone{
+        text-align: center;
+        background: url('../media/Search/telephone.svg') center top no-repeat;
+        background-size: 100% 100%;
+    }
+    .search_map{
+        text-align: center;
+        background: url('../media/Search/map.svg')center center no-repeat;
+        background-size: 100% 100%;
+        
+    }
+    .search-text{
+        text-align: left;
+        margin-top: 20px;
+    }
+    .search_row{margin: -5px 0 0px 0}
 }
 
 
@@ -280,7 +316,7 @@
 /* LOGIN PAGE */
 
 #login_background{
-    height: 100%;
+    min-height: 100vh;
     background: url('../media/Background/login.jpg');
     background-attachment: fixed;
     background-size: cover;      
@@ -289,7 +325,7 @@
 .login_card {
     background-color: white;
     border-radius: 10px;
-    margin-top: 100px;
+    margin-top: 20vh;
     min-height: 250px;
     padding: 30px;
 }

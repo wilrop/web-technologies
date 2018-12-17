@@ -68,3 +68,7 @@ def search(request):
     num_results = len(results)
     args = {'results': results, 'query': query, 'time': processing_time, 'num_results': num_results}
     return render(request, 'pharmacies/search.html', args)
+
+def find_pharma(request):
+    mapbox_access_token = 'pk.my_mapbox_access_token'
+    return render(request, 'pharmacies/find_pharma.html', {'mapbox_access_token': mapbox_access_token})

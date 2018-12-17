@@ -1,0 +1,139 @@
+
+{% extends 'base.html' %}
+{% block title %}Find your local pharmacy{% endblock %}
+
+{% block content %}
+    <section class="container-fluid" style="padding-top: 50px;">
+        <div class="row" style="margin-top: 30px;">
+            <div class="col-md-4 col-sm-12 text-center">
+               <h2>Find your local pharmacy</h2>
+            </div>
+    <script type="text/javascript">
+
+                var map = null;
+                var geocoder = null;
+                // var navTap = null
+
+                mapboxgl.accessToken = 'pk.eyJ1IjoibWF4aW1lYW50b2luZTE5OTciLCJhIjoiY2pubTNmNmlrMWpvdjNxdGFsdGxxaXJlayJ9.0tDqrdUlSYEOqxMSiy7j3g';
+
+                function createMap(options) {
+                    map = new mapboxgl.Map({
+                    container: 'map_canvas', // HTML container id
+                    style: 'mapbox://styles/mapbox/streets-v10', // style URL
+                    center: [-77.0364,38.8951], // starting position as [lng, lat]
+                    zoom: 8
+                    });
+
+
+                    geocoder = new MapboxGeocoder({ accessToken: mapboxgl.accessToken });
+                    map.addControl(geocoder);
+                /**
+                In case that you wanted to add a positioning icon inside the map
+                You will not need a getCurrentLocation methond in this case
+                **/
+                    // navTap = new mapboxgl.GeolocateControl({
+                    // 	positionOptions: {
+                    // 		enableHighAccuracy: true
+                    // 	},
+                    // 	trackUserLocation: true
+                    // });
+                    // map.addControl(navTap);
+
+
+                    map.on( 'click', createMarker);
+
+                }
+
+
+                // QUESTION 1
+                function getCurrentLocation() {
+                    var onError = function(error) {
+                        alert("Could not get the current location.");
+                    };
+
+                    if(navigator.geolocation) {
+                        navigator.geolocation.getCurrentPosition(
+                            function(position) {
+                                var currentLocation = new mapboxgl.LngLat(position.coords.longitude,position.coords.latitude);
+
+                                map.setZoom(16);
+                                map.panTo(currentLocation);
+
+
+                                var output = "Your current position is: (" + position.coords.latitude + "," + position.coords.longitude + ")";
+                                document.getElementById("currentPosition").innerHTML = output;
+                            },
+                            //to added an event if something wrong happend  
+                            onError
+                        );
+                    }else{
+                        onError();
+                    }
+                }
+
+                // QUESTION 2
+                function doGeocoding(){
+                    var loc = document.getElementById("geoLoc").value; // Get the text value from the text field
+                    geocoder.query(loc);
+                }
+
+                // QUESTION 3 & // QUESTION 4
+                var markerIndex = 1;
+                function createMarker(event){
+                    var contentString = "<div class='weatherbox' id='weather_" +markerIndex + "'></div>";
+
+                    var popup = new mapboxgl.Popup()
+                    .setHTML(contentString);
+
+                    var marker = new mapboxgl.Marker()
+                    .setLngLat(event.lngLat)
+                    .setPopup(popup)
+                    .addTo(map);
+                    var coords = marker.getLngLat();
+                    popup.on('open', function(event){
+                        getWeather(coords.lng, coords.lat, "weather_" + markerIndex);
+                        markerIndex++;
+
+                    });
+
+                }
+
+
+                // QUESTION 5
+
+                function getWeather(lng, lat, el_id){
+                    var JSONP_callback = "?callback=test?";
+                    var target = "http://api.openweathermap.org/data/2.5/forecast?lat="+lat+"&lon="+lng+"&appid=c03dc1cb48c7a4c576e568566665747b&units=metric&" + JSONP_callback;
+
+                    $.getJSON(target, test);
+
+                    function test(data){
+                        var output = "<h3>" + data.city.name + "</h3><hr><table border=1><tr>";
+
+                                var fc = data.list[6];
+                                output += "<td>";
+                                output += "<img src = 'http://openweathermap.org/img/w/"+fc.weather[0].icon+".png' width = 80px hight=80px>" + "<br/>";
+                            output += "<u> Temp: " + fc.main.temp + "</u><br/>";
+                            output += "</td>";
+
+
+                        output += "</tr></table>";
+                    $("#"+el_id).html(output);
+                };
+            }
+
+            // QUESTION 6
+            function plotRoute(){
+                //Do it yourself 
+                //Look up the documentation
+                //Check this example 
+                //https://www.mapbox.com/mapbox-gl-js/example/mapbox-gl-directions/
+                //Add your code here
+                map.addControl(new MapboxDirections({accessToken: mapboxgl.accessToken}), 'top-left');
+            }
+    </script>
+        </div>
+        <div id="map_canvas" style="width: 750px; height: 750px; margin: 0 auto" class="mapboxgl-map"><div class="mapboxgl-canary" style="visibility: hidden;"></div><div class="mapboxgl-canvas-container mapboxgl-interactive mapboxgl-touch-drag-pan mapboxgl-touch-zoom-rotate"><canvas class="mapboxgl-canvas" tabindex="0" aria-label="Map" width="1500" height="1500" style="position: absolute; width: 750px; height: 750px;"></canvas></div><div class="mapboxgl-control-container"><div class="mapboxgl-ctrl-top-left"></div><div class="mapboxgl-ctrl-top-right"><div class="mapboxgl-ctrl-geocoder mapboxgl-ctrl"><span class="geocoder-icon geocoder-icon-search"></span><input type="text" placeholder="Search"><ul class="suggestions" style="display: none;"></ul><div class="geocoder-pin-right"><button class="geocoder-icon geocoder-icon-close" aria-label="Clear"></button><span class="geocoder-icon geocoder-icon-loading"></span></div></div></div><div class="mapboxgl-ctrl-bottom-left"><div class="mapboxgl-ctrl" style="display: block;"><a class="mapboxgl-ctrl-logo" target="_blank" href="https://www.mapbox.com/" aria-label="Mapbox logo" rel="noopener"></a></div></div><div class="mapboxgl-ctrl-bottom-right"><div class="mapboxgl-ctrl mapboxgl-ctrl-attrib"><a href="https://www.mapbox.com/about/maps/" target="_blank">© Mapbox</a> <a href="http://www.openstreetmap.org/about/" target="_blank">© OpenStreetMap</a> <a class="mapbox-improve-map" href="https://www.mapbox.com/feedback/?owner=mapbox&amp;id=streets-v10&amp;access_token=pk.eyJ1IjoibWF4aW1lYW50b2luZTE5OTciLCJhIjoiY2pubTNmNmlrMWpvdjNxdGFsdGxxaXJlayJ9.0tDqrdUlSYEOqxMSiy7j3g" target="_blank">Improve this map</a></div></div></div></div>
+        <br><br><br><br>
+    </section>
+{% endblock %}

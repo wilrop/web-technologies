@@ -2,16 +2,33 @@
 {% block title %}Search results{% endblock %}
 
 {% block content %}
-<h2 style="padding-top: 100px;">
+<section class="container-fluid" style="padding-top: 80px;">
+    <h1>Search Results</h1>
+    <p>
     {% if num_results == 1 %}
     1 result for {{ query }} in {{ time }} seconds.
     {% else %}
     {{ num_results }} results for {{ query }} in {{ time }} seconds.
     {% endif %}
-</h2>
-<ul>
-    {% for pharmacy in results %}
-    <li><a href= "{% url 'pharmacies:pharmacy' pk=pharmacy.pk %}">{{pharmacy.name}} at {{pharmacy.address}}</a></li>
-    {% endfor %}
-</ul>
+    </p>
+    <div class="row">
+        {% for pharmacy in results %}
+            <div class="col-2 offset-1 search_card">
+                <a id="search_result" href= "{% url 'pharmacies:pharmacy' pk=pharmacy.pk %}">
+                    <h4>{{pharmacy.name}}</h4>
+                    <div class="row search_row">
+                        <div class="col-3 search_map"></div>
+                        <div class="col-9 search-text"><p>{{pharmacy.address}}</p></div>
+                    </div>
+                    <br>
+                    <div class="row search_row">
+                        <div class="col-3 search_phone"></div>
+                        <div class="col-9 search-text"><p>{{pharmacy.phone_number}}</p></div>
+                    </div>
+                </a> 
+            </div>
+         {% endfor %}
+    </div>
+</section>
+
 {% endblock %}

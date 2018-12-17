@@ -9,4 +9,5 @@ urlpatterns = [
     url(r'^pharmacy/(?P<pk>\d+)/$', views.pharmacy, name='pharmacy'),
     url(r'^pharmacy/(?P<pk>\d+)/comment/$', views.add_comment_to_pharmacy, name='add_comment_to_pharmacy'),
     url(r'^pharmacy/(?P<pk>\d+)/rating/(?P<new_rating>\d+)/$', views.add_rating_to_pharmacy, name='add_rating_to_pharmacy'),
+    path('find_pharma/', views.find_pharma, name='findpharma'),
 ]
