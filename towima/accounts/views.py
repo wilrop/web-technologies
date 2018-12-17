@@ -1,13 +1,14 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_list_or_404, get_object_or_404
+from django.http import JsonResponse
 from django.contrib.auth import login, authenticate, update_session_auth_hash
 from django.contrib.auth.forms import PasswordChangeForm, AuthenticationForm
 from django.contrib.auth.models import User
 from accounts.forms import SignUpForm, EditProfileForm
 from django.core.mail import send_mail
-from accounts.models import Profile
+from accounts.models import Profile, Cart, Item
 from authy.api import AuthyApiClient
 from .forms import TokenForm, VerificationForm
-from orders.models import Order
+from orders.models import Order 
 
 authy_api = AuthyApiClient('jqr27nutYbPgCmIilN0ByqTTe1xBu6Wp')
 
@@ -21,17 +22,20 @@ def signup(request):
         if form.is_valid():                     # Check if the form is valid.
             form.save()
             request.session['username'] = form.cleaned_data['username']
-            '''request.session['phone_number'] = form.cleaned_data['phone_number'][1:]
-            request.session['country_code'] = 32
-            authy_api.phones.verification_start(
-                phone_number=form.cleaned_data['phone_number'][1:], # Drop the zero
-                country_code=32,                                     # Only Belgium
-                via='sms'
-            )'''
-            return redirect('phone_verification')
+            if form.cleaned_data['user_type'] == "Pharmacist":
+                return redirect('pharmacies:create_pharma')
+            else:
+                return redirect('phone_verification')
     else:                                       # When we GET the form.
         form = SignUpForm()                     # Provide the form to the user.
     return render(request, template, {'form': form})
+
+def validate_username(request):
+    username = request.GET.get('username', None)
+    data = {
+        'is_taken': User.objects.filter(username__iexact=username).exists()
+    }
+    return JsonResponse(data)
 
 def phone_verification(request):
     if request.method == 'POST':
@@ -66,6 +70,8 @@ def verify(request):
                 profile.verified = True
                 send_mail('Welcome to PharmaTowi', 'Welcome to our website, Your account has been verified!', 'pharmatowi@gmail.com', [getattr(user, 'email')], fail_silently=False,)
                 profile.save()
+                cart = Cart.objects.create(user=user)
+                cart.save()
                 return redirect('login')
             else:
                 for error_msg in verification.errors().values():
@@ -149,3 +155,32 @@ def orders(request):
     args = {'user': user, 'orders':orders}   
     return render(request, template, args)
 
+def cart(request):
+    template = 'accounts/cart.html'
+    user = request.user
+    cart = Cart.objects.get(user=user)
+    items = Item.objects.filter(cart=cart)
+    args = {'user': user, 'items':items}   
+    return render(request, template, args)
+
+def item_delete(request, pk):
+    item = Item.objects.get(pk=pk) 
+    item.delete()
+    return redirect(request.META['HTTP_REFERER'])
+
+def place_orders(request):
+    user = request.user
+    profile = Profile.objects.get(user=user)
+    cart = Cart.objects.get(user=user)
+    items = Item.objects.filter(cart=cart)
+    for item in items:
+        Order.objects.bulk_create([Order(user=user, first_name=user.first_name, last_name=user.last_name, email=user.email, address=profile.address, product=item.product, pharmacy=item.pharmacy, quantity=item.quantity)])
+        item.delete()
+    all_orders = Order.objects.all()
+    for order in all_orders:
+        order.save()
+    return redirect(request.META['HTTP_REFERER'])
+
+#"{% url accounts:'item_delete' pk=item.pk %}"
+#"{% url 'place_order' items=items %}"
+#path('item_delete/'), views.item_delete, name='delete'),

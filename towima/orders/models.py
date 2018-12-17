@@ -14,8 +14,6 @@ class Order(models.Model):
     last_name = models.CharField(max_length=50)
     email = models.EmailField()
     address = models.CharField(max_length=250)
-    postal_code = models.CharField(max_length=20)
-    city = models.CharField(max_length=100)
     product = models.ForeignKey(Product, on_delete=models.CASCADE, default=True)
     pharmacy = models.ForeignKey(Pharmacy, on_delete=models.CASCADE, default=True)
     unit_price = models.DecimalField(max_digits=10, decimal_places=0, default=0)

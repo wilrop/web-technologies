@@ -1,5 +1,27 @@
 {% extends 'base.html' %}
 
+{% block javascript %}
+  <script>
+    $("#id_username").change(function () {
+      var username = $(this).val();
+
+      $.ajax({
+        url: "{% url 'validate_username' %}",
+        data: {
+          'username': username
+        },
+        dataType: 'json',
+        success: function (data) {
+          if (data.is_taken) {
+            $("input[name=username]").after('<div class="row"><p style="color: red">A user with that username already exists.</p></div>');
+          }
+        }
+      });
+
+    });
+  </script>
+{% endblock %}
+
 {% block content %}
 <section id="signup_background">
     <section class="container">

@@ -1,7 +1,8 @@
 from django.shortcuts import render, redirect
 from pharmacies.models import Pharmacy
-from .forms import OrderForm
+from .forms import OrderForm, TestForm, TestFormSet, BaseTestFormSet
 from twilio.rest import Client
+from django.forms import formset_factory
 
 def create_order(request):
     if request.method == 'POST':
@@ -14,8 +15,6 @@ def create_order(request):
             product = form.cleaned_data.get('product')
             pharmacy = form.cleaned_data.get('pharmacy')
             address = form.cleaned_data.get('address')
-            postal_code = form.cleaned_data.get('postal_code')
-            city = form.cleaned_data.get('city')
 
             pharmacy_object = Pharmacy.objects.get(name=pharmacy)
             phone_number = pharmacy_object.phone_number
@@ -37,3 +36,18 @@ def create_order(request):
         form = OrderForm()
     form = OrderForm()
     return render(request, 'orders/order.html', {'form': form})
+
+def test_order(request):
+    TestFormSet = formset_factory(TestForm, extra=3)
+    context = dict()
+    formset = TestFormSet()
+
+    if request.method == 'POST':
+        formset = TestFormSet(request.POST)
+
+        if formset.is_valid():
+            print(formset.cleaned_data)
+
+    context['formset'] = formset
+
+    return render(request, 'orders/test.html', context)

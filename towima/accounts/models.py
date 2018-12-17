@@ -1,5 +1,11 @@
 from django.db import models
 from django.contrib.auth.models import User
+from products.models import Product
+from pharmacies.models import Pharmacy
+
+class Other(models.Model):
+    DEFAULT_PK=1
+    name=models.CharField(max_length=1024)
 
 # Create a user profile model. This model will have a OneToOne with User and some extra profile attributes.
 class Profile(models.Model):
@@ -9,3 +15,14 @@ class Profile(models.Model):
     address = models.CharField(max_length = 50)
     user_type = models.CharField(max_length=126, default='Customer')
     verified = models.BooleanField(default=False)
+
+class Cart(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    products = models.ManyToManyField(Product, through='Item', related_name="items+")
+
+class Item(models.Model):
+    product = models.ForeignKey(Product, on_delete=models.CASCADE)
+    cart = models.ForeignKey(Cart, on_delete=models.CASCADE)
+    pharmacy = models.ForeignKey(Pharmacy, on_delete=models.CASCADE, default=Other.DEFAULT_PK)
+    quantity = models.PositiveIntegerField(default=0)
+    unit_price = models.DecimalField(max_digits=10, decimal_places=2, default=0)
