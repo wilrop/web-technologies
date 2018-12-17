@@ -1,11 +1,8 @@
 import time
-<<<<<<< HEAD
-=======
 import json
 import os
 
 from django.conf import settings
->>>>>>> 8840cb7c5c8821d391eebe18a2c22ef14215f60c
 from django.shortcuts import render, redirect, get_list_or_404, get_object_or_404
 from django.http import JsonResponse
 from pharmacies.models import Pharmacy, Employee, Rating
