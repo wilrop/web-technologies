@@ -3,12 +3,14 @@ import time
 from django.shortcuts import render, redirect, get_list_or_404, get_object_or_404
 from django.http import JsonResponse
 from pharmacies.models import Pharmacy, Employee, Rating
+from pharmacies.models import Stock
 from pharmacies.forms import PharmacyForm, CommentForm
 from django.db.models import Q
 
 def pharmacy(request, pk):
     pharmacy = Pharmacy.objects.get(pk=pk)
     rated_list = Rating.objects.filter(pharmacy = pharmacy)
+    pharmacy_stock = Stock.objects.filter(pharmacy = pharmacy)
 
     if rated_list:
         acc_rating = 0
@@ -19,8 +21,16 @@ def pharmacy(request, pk):
         rating = None
 
     form = CommentForm
-    args = {'pharmacy': pharmacy, 'rating': rating, 'form': form}
+    args = {'pharmacy': pharmacy, 'rating': rating, 'form': form, 'pharmacy_stock':pharmacy_stock}
     return render(request, 'pharmacies/pharmacy_profile.html', args)
+
+def product_detail(request, pk, productpk):
+    pharmacy = Pharmacy.objects.get(pk=pk)
+    product = Product.objects.get(pk=productpk)
+    stock = Stock.objects.get(pharmacy=pharmacy, product=product)
+    args = {'pharmacy': pharmacy, 'product': product, 'stock': stock}
+    return render(request, 'pharmacies/product_detail.html', args)
+
 
 def create_pharma(request):
     if request.method == 'POST':                # When we POST the form.
