@@ -168,6 +168,11 @@ def item_delete(request, pk):
     item.delete()
     return redirect(request.META['HTTP_REFERER'])
 
+def order_delete(request, pk):
+    order = Order.objects.get(pk=pk) 
+    order.delete()
+    return redirect(request.META['HTTP_REFERER'])
+
 def place_orders(request):
     user = request.user
     profile = Profile.objects.get(user=user)
