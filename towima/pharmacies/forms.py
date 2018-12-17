@@ -1,5 +1,6 @@
 from django import forms
 from pharmacies.models import Pharmacy, Comments
+from accounts.models import Item
 
 class PharmacyForm(forms.ModelForm):
     name = forms.CharField(max_length = 70)
@@ -26,3 +27,12 @@ class CommentForm(forms.ModelForm):
         if commit:
             comment.save()
         return comment
+
+class AddToCartForm(forms.ModelForm):
+    quantity = forms.IntegerField()
+
+    class Meta:
+        model = Item
+        fields = (              # The order of the fields.
+            'quantity',
+        )

@@ -116,7 +116,18 @@
     <p>{{ comment.text|linebreaks }}</p>
 </div>
 {% endfor %}
+
 </div>
-
-
+<h2>Available Products</h2>
+<ul>
+    {% for stock in pharmacy_stock %}
+    <h1> {{stock.product}} </h1>
+    <h4> {{stock.price}} </h4>
+    <h4> {{stock.product.description}} </h4>
+    <a href="{% url 'pharmacies:product_detail' pk=pharmacy.pk ppk=stock.product.pk %}">
+        <button type="button" class="btn btn-secondary btn-lg active" type="submit">Detailsecht</button>
+    </a>
+    <a href="{{ stock.product.get_absolute_url }}" class="btn btn-secondary btn-lg active" role="button" aria-pressed="true">details</a>
+    {% endfor %}
+</ul>
 {% endblock %}

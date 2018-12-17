@@ -19,6 +19,9 @@
     <li> Unit Price: &euro; {{order.unit_price}}</li>
     <li> Total Price: &euro; {{order.total_price}}</li>
     <li> Order time: {{order.created}}</li>
+    <a href="{% url 'order_delete' order.pk %}">
+        <button type="button" class="btn btn-default btn-danger" type="submit">Delete Order</button>
+    </a>
     {% endif %}
     </p>    
     {% endfor %}
