@@ -52,7 +52,7 @@
                       </div>
                     </li> 
                     {% endif %}
-                    {% if user.profile.user_type == "Customer" %}
+                    {% if user.profile.user_type == "Pharmacist" %}
                     <li class="nav-item"><a  class="nav-link" 
                         href="{% url 'pharmacies:create_pharma' %}">My Pharmacy</a>
                     </li>
