@@ -160,7 +160,11 @@ def cart(request):
     user = request.user
     cart = Cart.objects.get(user=user)
     items = Item.objects.filter(cart=cart)
-    args = {'user': user, 'items':items}   
+
+    total_price = 0
+    for item in items:
+        total_price += item.unit_price * item.quantity
+    args = {'user': user, 'items': items, 'total_price': total_price}   
     return render(request, template, args)
 
 def item_delete(request, pk):
