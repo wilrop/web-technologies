@@ -1,33 +1,28 @@
 {% extends "base.html" %}
+{% load crispy_forms_tags %}
 
 {% block content %}
-<div class="row centered-form" style="padding-top: 50px;">
-  <div class="col-xs-12 col-sm-8 col-md-4 col-sm-offset-2 col-md-offset-4">
-    <div class="panel panel-default">
-      <div class="panel-heading">
-        <h3 class="panel-title">Phone Verification</h3>
-      </div>
-
-      <div class="panel-body">
-        <form role="form" method="POST">
-          {% csrf_token %}
-
-          {{ form.non_field_errors }}
-          {{ form.token.errors}}
-
-          <div class="row">
-            {{ form.token }}
-
-            <div class="col-xs-6 col-sm-6 col-md-6">
-              <div class="form-group">
-                <input type="submit" value="Verify Phone" class="btn btn-info btn-block">
-              </div>
+<section id="login_background">
+    <section class="container">
+        <div class="row">
+            <div class="col-md-6 offset-md-3 col-sm-12">
+                <div class="login_card">
+                    <h1> Phone Verification </h1>
+                    <p>Please type the 4 digit code sent to </p>
+                    <form method="post">
+                        {% csrf_token %}
+                        {{ form|crispy }}
+                        <br>
+                        <button type="submit" class="btn btn-dark">Sign in</button>
+                    </form>
+                    <hr>
+                    <h1>Didn't get one?</h1>
+                    <p>Verifiy that you typed the right phone number</p>
+                    <br>
+                    <a href="{% url 'phone_verification' %}" style="color: white; "class="btn btn-dark">Verify</a>
+                </div>
             </div>
-          </div>
-        </form>
-      </div>
+        </div>
+    </section>
 
-    </div>
-  </div>
-</div>
 {% endblock %}
