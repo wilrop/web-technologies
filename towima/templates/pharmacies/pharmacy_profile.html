@@ -1,7 +1,16 @@
 {% extends 'base.html' %}
+
 {% block title %}Pharmacy Profile{% endblock %}
 
 {% block content %}
+<!-- Add icon library -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<style>
+    .checked {
+        color: orange;
+    }
+</style>
+
  <div class="background_pharmacy">
         <h1>{{ pharmacy.name}}</h1>
  </div>
