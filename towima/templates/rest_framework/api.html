@@ -38,7 +38,7 @@
           <div class="container">
             <span>
               {% block branding %}
-                <a class='navbar-brand' rel="nofollow" href='https://www.django-rest-framework.org/'>
+                <a class='navbar-brand' rel="nofollow">
                     PharmaTowi Framework
                 </a>
               {% endblock %}
@@ -100,12 +100,13 @@
               </fieldset>
             </form>
           {% endif %}
-
+          <!--
           {% if options_form %}
             <form class="button-form" action="{{ request.get_full_path }}" data-method="OPTIONS">
               <button class="btn btn-primary js-tooltip" title="Make an OPTIONS request on the {{ name }} resource">OPTIONS</button>
             </form>
           {% endif %}
+          -->
 
           {% if delete_form %}
             <button class="btn btn-danger button-form js-tooltip" title="Make a DELETE request on the {{ name }} resource" data-toggle="modal" data-target="#deleteModal">DELETE</button>
