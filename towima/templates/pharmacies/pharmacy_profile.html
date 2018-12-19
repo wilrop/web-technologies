@@ -115,6 +115,7 @@
 
 {% block javascript %}
 <script>
+    const monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "June", "July", "Aug", "Sept", "Oct", "Nov", "Dec"];
     function add_rating(new_rating) {
         $.ajax({
             url: "{% url 'pharmacies:add_rating_to_pharmacy' %}",
@@ -158,10 +159,20 @@
                 if (data.valid){
                     $('#id_text').val('');
                     $(".collapse").collapse('hide');
-                    author = data.author;
-                    text = data.text;
-                    date = data.date;
-                    $(".comments").append('<div class="comment"><div class="date">'+ date +'</div><strong>'+ author +'</strong><p>'+ text +'</p></div>');;
+                    var author = data.author;
+                    var text = data.text;
+                    var date = new Date(data.date);
+                    var day = date.getDate();
+                    var month = monthNames[date.getMonth()];
+                    var year = date.getFullYear();
+                    var hours = date.getHours() - 1; // Server is one hour behind.
+                    var minutes = date.getMinutes();
+                    var ampm = hours >= 12 ? 'p.m.' : 'a.m.';
+                    hours = hours % 12;
+                    hours = hours ? hours : 12; // the hour '0' should be '12'
+                    minutes = minutes < 10 ? '0'+minutes : minutes;
+                    formattedDate = day + ' ' + month + ' ' + year + ', ' + hours + ':' + minutes + ' ' + ampm;
+                    $(".comments").append('<div class="comment"><div class="date">'+ formattedDate +'</div><strong>'+ author +'</strong><p>'+ text +'</p></div>');;
                 }else{
                     alert("The form was invalid. Try again!");
                 }
