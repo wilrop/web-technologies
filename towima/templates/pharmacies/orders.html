@@ -2,54 +2,105 @@
 {% block title %}Orders{% endblock %}
 
 {% block content %}
-<h2>Orders</h2>
-<ul>
-    <h1>Open Orders</h1>
+<section class="container-fluid">
+<h2>Open Orders</h2>
+    <div class="row" style="text-align: center;">
+        <div class="col">
+            <h5>Product: </h5>
+        </div>
+        <div class="col">
+            <h5>Pharmacy: </h5>
+        </div>
+        <div class="col">
+            <h5>Total Price: </h5>
+        </div>
+        <div class="col">
+            <h5>Date:</h5>
+        </div>
+        <div class="col">
+            <h5>Fill Order:</h5>
+        </div>
+        <div class="col">
+            <h5>Delete:</h5>
+        </div>
+        
+    </div>
+    <hr>
     {% for order in orders %}
-    <p>
-    {% if order.filled == False %}
-    <li> First name: {{order.first_name}} </li>
-    <li> Last name: {{order.last_name}}</li>
-    <li> email: {{order.email}}</li>
-    <li> address: {{order.address}}</li>
-    <li> Postal Code: {{order.postal_code}}</li>
-    <li> City: {{order.city}}</li>
-    <li> Product: {{order.product}}</li>
-    <li> Quantity: {{order.quantity}}</li>
-    <li> Unit Price: &euro; {{order.unit_price}}</li>
-    <li> Total Price: &euro; {{order.total_price}}</li>
-    <li> Order time: {{order.created}}</li>
-    <a href="{% url 'pharmacies:order_delete' order.pk %}">
-        <button type="button" class="btn btn-default btn-danger" type="submit">Delete Order</button>
-    </a>
-    <a href="{% url 'pharmacies:confirm_order' order.pk %}">
-        <button type="button" class="btn btn-default btn-succes" type="submit">Confirm Order</button>
-    </a>
-    {% endif %}
-    </p>    
+        {% if order.filled == False %}
+        <div class="row" style="text-align: center;">
+            <div class="col">
+                <p>{{order.product}}</p>
+            </div>
+            <div class="col">
+                {{order.pharmacy}}
+            </div>
+            <div class="col">
+                € {{order.unit_price}}
+            </div>
+            <div class="col">
+                {{order.created}}
+            </div>
+            <div class="col">
+                <a href="{% url 'pharmacies:confirm_order' order.pk %}">
+                    <button type="button" class="btn btn-sm btn-dark" type="submit">Fill Order</button>
+                </a>
+            </div>
+            <div class="col">
+                <a href="{% url 'order_delete' order.pk %}">
+                    <button type="button" class="btn btn-sm btn-danger" type="submit">Delete</button>
+                </a>
+            </div>
+        </div>
+        <hr>
+        {% endif %}
     {% endfor %}
-</ul>
-<ul>
-    <h1>Filled Orders</h1>
+
+
+
+
+<h2>Filled Orders</h2>
+    <div class="row" style="text-align: center;">
+        <div class="col">
+            <h5>Customer:</h5>
+        </div>
+        <div class="col">
+            <h5>Product: </h5>
+        </div>
+        <div class="col">
+            <h5>Quantity:</h5>
+        </div>
+        <div class="col">
+            <h5>Total Price: </h5>
+        </div>
+        <div class="col">
+            <h5>Delete:</h5>
+        </div>
+    </div>
+    <hr>
     {% for order in orders %}
-    <p>
     {% if order.filled == True %}
-    <li> First name: {{order.first_name}} </li>
-    <li> Last name: {{order.last_name}}</li>
-    <li> email: {{order.email}}</li>
-    <li> address: {{order.address}}</li>
-    <li> Postal Code: {{order.postal_code}}</li>
-    <li> City: {{order.city}}</li>
-    <li> Product: {{order.product}}</li>
-    <li> Quantity: {{order.quantity}}</li>
-    <li> Unit Price: &euro; {{order.unit_price}}</li>
-    <li> Total Price: &euro; {{order.total_price}}</li>
-    <li> Order time: {{order.created}}</li>
+        <div class="row" style="text-align: center;">
+            <div class="col">
+                {{order.first_name}} {{order.last_name}}
+            </div>
+            <div class="col">
+                <p>{{order.product}}</p>
+            </div>
+            <div class="col">
+                {{order.pharmacy}}
+            </div>
+            <div class="col">
+                € {{order.total_price}}
+            </div>
+            <div class="col">
+                <a href="{% url 'pharmacies:order_delete' order.pk %}">
+                    <button type="button" class="btn btn-sm btn-danger" type="submit">Delete</button>
+                </a>
+            </div>
+        </div>
+        <hr>
     {% endif %}
-    <a href="{% url 'pharmacies:order_delete' order.pk %}">
-        <button type="button" class="btn btn-default btn-danger" type="submit">Delete Order</button>
-    </a>
-    </p>
     {% endfor %}
-</ul>
+</section>
 {% endblock %}

@@ -4,6 +4,7 @@
 {% block content %}
 <section class="container-fluid" >
 <h3>My Shopping Cart</h3>
+<h5>Total: € {{total_price}}</h5>
     <br>
     <div class="row" style="text-align: center;">
         <div class="col">
@@ -47,7 +48,7 @@
     {% endfor %}
 <br>
 <a href="{% url 'place_orders' %}">
-    <button type="button" class="btn btn-dark btn-lg" type="submit">Place Orders</button>
+    <button type="button" class="btn btn-dark" type="submit">Place Orders</button>
 </a>
 <br><br><br><br><br><br><br><br>
 </section>

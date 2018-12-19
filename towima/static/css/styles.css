@@ -49,38 +49,84 @@
     .wannajoin{
         background: url('../media/wannajoin.svg') no-repeat left center;
         background-size: 100% 100%;
-        min-height: 200px;
+        min-height: 30vh;
         text-align: center;
     }
     .join_text{
         text-align: center;
-        padding-top: 40px;
+        padding-top: 7.5vh;
         color: white;
     }
     .join_text h1{font-size: 3vh;}
     .join_text h3{font-size: 1.5vh;}
     .supplement{
         background: url('../media/supplement.svg') no-repeat center center;
-        background-size: 80% 80%;
+        background-size: 70% 70%;
     }
     .btn1 {
+        text-align: center;
         color: mediumaquamarine;
         border-radius: 15px;
-        font-size: 18px;
+        font-size: 20px;
         background-color: white;
-        padding: 8px 20px 8px 20px
+        
+        padding: 5px 20px 5px 20px;  
     }
+    
     .btn1:hover {
-        color: black;
-        border-radius: 15px;
-        border-color: black;
-        border: 2px solid;
+        color: mediumaquamarine;
         text-decoration: none;
-        font-size: 14px;
-        background-color: white;
-        padding: 10px 20px 10px 20px;
     }
-     /*--------------------------------------------*/
+     .btn2 {
+        margin-top: 6vh;
+        color: mediumaquamarine;
+        border-radius: 15px;
+        border: 2px solid;
+        border-color: #F5F5F5;
+        font-size: 20px;
+        background-color: white;
+        padding: 15px 50px 15px 50px;  
+    }
+    
+    .btn2:hover {
+        color: mediumaquamarine;
+        text-decoration: none;
+    }
+    .btn_transition{
+        text-align: center;
+        -webkit-transform: perspective(1px) translateZ(0);
+        transform: perspective(1px) translateZ(0);
+
+        -webkit-transition-duration: 0.3s;
+        transition-duration: 0.3s;
+        -webkit-transition-property: transform;
+        transition-property: transform;
+    }
+    .btn_transition:hover,
+    .btn_transition:focus,
+    .btn_transition:active {
+        -webkit-transform: scale(1.1);
+        transform: scale(1.1);
+    }
+    .btn_transition1{
+        text-align: center;
+        -webkit-transform: perspective(1px) translateZ(0);
+        transform: perspective(1px) translateZ(0);
+
+        -webkit-transition-duration: 0.3s;
+        transition-duration: 0.3s;
+        -webkit-transition-property: transform;
+        transition-property: transform;
+    }
+    .btn_transition1:hover,
+    .btn_transition1:focus,
+    .btn_transition1:active {
+        -webkit-transform: scale(1.1);
+        transform: scale(1.1);
+    }
+    
+    /*--------------------------------------------*/
+    /*--------------------------------------------*/
     /* EDIT PAGES*/
     
     .edit_home{
@@ -119,7 +165,7 @@
     }
     .eh_sm_separator{min-height: 5vh;}
     
-    
+    /*--------------------------------------------*/
     /*--------------------------------------------*/
     /* SEARCH PAGES*/
     #search_result{
@@ -169,6 +215,52 @@
         margin-top: 20px;
     }
     .search_row{margin: -5px 0 0 0}
+    
+    /*--------------------------------------------*/
+    /*--------------------------------------------*/
+    /* PROFILE PAGE */
+    
+    #profile_background{
+    background: url('../media/profile_page_4_Plan%20de%20travail%201.svg') no-repeat center center fixed;
+    background-size: cover;
+    min-height: 60vh;
+    text-align: center;
+    }
+    
+    #profile_user_tile{
+        color: white;
+        font-weight: bold;
+        font-size: 7vw;
+        text-align: center;
+    }
+
+    .profile_title {
+        font-weight: bold;
+        font-size: 7vw;
+        text-align: center;
+    }
+
+    .profile_description {
+        font-size: 5.5vw;
+        text-align: left;
+    }
+
+    .profile_card_green {
+        background-color: #21db87;
+        color: white;
+        border-radius: 15px;
+        min-height: 30vh;;
+        margin-top: 3vh;
+        padding: 15px;
+    }
+
+    .profile_card_skin {
+        background-color: #F5F5F5  ;
+        border-radius: 15px;
+        min-height: 30vh;;
+        margin-top: 3vh;
+        padding: 15px;
+    }
 }
 
 /*-------------------------------------------------------------------------------------------------*/
@@ -307,6 +399,7 @@
     }
     
     /*--------------------------------------------*/
+    /*--------------------------------------------*/
     /* SEARCH PAGES*/
     #search_result{
         color: black;
@@ -356,6 +449,8 @@
         margin-top: 20px;
     }
     .search_row{margin: -5px 0 0 0}
+    
+    /*--------------------------------------------*/
     /*--------------------------------------------*/
     /* PHARMACY PAGES*/
     .background_pharmacy{
@@ -422,6 +517,51 @@
         transform: scale(1.1);
     }
     
+    /*--------------------------------------------*/
+    /*--------------------------------------------*/
+    /* PROFILE PAGE */
+    #profile_background{
+    background: url('../media/profile_page_4_Plan%20de%20travail%201.svg') no-repeat center center fixed;
+    background-size: cover;
+    min-height: 60vh;
+    text-align: center;
+    } 
+    
+    #profile_user_tile{
+        color: white;
+        font-weight: bold;
+        font-size: 3vw;
+        text-align: center;
+    }
+
+    .profile_title {
+        font-weight: bold;
+        font-size: 3vw;
+        text-align: center;
+    }
+
+    .profile_description {
+        font-size: 2vw;
+        text-align: left;
+    }
+
+    .profile_card_green {
+        background-color: #21db87;
+        color: white;
+        border-radius: 10px;
+        min-height: 250px;
+        margin-top: 15px;
+        padding: 30px;
+    }
+
+    .profile_card_skin {
+        background-color: #F5F5F5  ;
+        border-radius: 10px;
+        margin-top: 15px;
+        min-height: 250px;
+        padding: 30px;
+    }
+
     
     
 
@@ -434,41 +574,7 @@
 
 /* PROFILE PAGE */
 
-#profile_background{
-    background: url('../media/profile_page_4_Plan%20de%20travail%201.svg') no-repeat center center fixed;
-    margin-top: -10px;
-    background-size: cover;
-    min-height: 80vh;
-    text-align: center;
-}
 
-.profile_title {
-    font-weight: bold;
-    font-size: 25pt;
-    text-align: center;
-}
-
-.profile_description {
-    font-size: 20pt;
-    text-align: left;
-}
-
-.profile_card_green {
-    background-color: #21db87;
-    color: white;
-    border-radius: 10px;
-    min-height: 250px;
-    margin-top: 15px;
-    padding: 30px;
-}
-
-.profile_card_skin {
-    background-color: #F5F5F5  ;
-    border-radius: 10px;
-    margin-top: 15px;
-    min-height: 250px;
-    padding: 30px;
-}
 
 /* LOGIN PAGE */
 
@@ -515,10 +621,10 @@
 /* MAPBOX */
 
 .marker {
-  background-image: url('../media/mapbox/mapbox-icon.png');
+  background-image: url('../media/mapbox/logo_mb.png');
   background-size: cover;
-  width: 50px;
-  height: 50px;
+  width: 30px;
+  height: 30px;
   border-radius: 50%;
   cursor: pointer;
 }

@@ -2,11 +2,56 @@
 {% block title %}Orders{% endblock %}
 
 {% block content %}
+<section class="container-fluid">
     <h1>Open Orders</h1>
     <div class="row" style="text-align: center;">
         <div class="col">
-            <h5>More info</h5>
+            <h5>Product: </h5>
         </div>
+        <div class="col">
+            <h5>Pharmacy: </h5>
+        </div>
+        <div class="col">
+            <h5>Total Price: </h5>
+        </div>
+        <div class="col">
+            <h5>Date:</h5>
+        </div>
+        <div class="col">
+            <h5>Delete:</h5>
+        </div>
+    </div>
+    <hr>
+    {% for order in orders %}
+        {% if order.filled == False %}
+        <div class="row" style="text-align: center;">
+            <div class="col">
+                <p>{{order.product}}</p>
+            </div>
+            <div class="col">
+                {{order.pharmacy}}
+            </div>
+            <div class="col">
+                € {{order.total_price}}
+            </div>
+            <div class="col">
+                {{order.created}}
+            </div>
+            <div class="col">
+                <a href="{% url 'order_delete' order.pk %}">
+                    <button type="button" class="btn btn-sm btn-danger" type="submit">Delete</button>
+                </a>
+            </div>
+        </div>
+        <hr>
+        {% endif %}
+    {% endfor %}
+<br><br>
+
+
+
+    <h1>Filled Orders</h1>
+    <div class="row" style="text-align: center;">
         <div class="col">
             <h5>Product: </h5>
         </div>
@@ -22,11 +67,8 @@
     </div>
     <hr>
     {% for order in orders %}
-        {% if order.filled == False %}
+    {% if order.filled == True %}
         <div class="row" style="text-align: center;">
-            <div class="col">
-
-            </div>
             <div class="col">
                 <p>{{order.product}}</p>
             </div>
@@ -34,58 +76,14 @@
                 {{order.pharmacy}}
             </div>
             <div class="col">
-                € {{order.unit_price}}
+                € {{order.total_price}}
             </div>
             <div class="col">
                 {{order.created}}
             </div>
         </div>
         <hr>
-        {% endif %}
-    {% endfor %}
-
-
-
-
-    <h1>Filled Orders</h1>
-    <div class="row" style="text-align: center;">
-        <div class="col">
-            <h5>More info</h5>
-        </div>
-        <div class="col">
-            <h5>Product: </h5>
-        </div>
-        <div class="col">
-            <h5>Pharmacy: </h5>
-        </div>
-        <div class="col">
-            <h5>Total Price: </h5>
-        </div>
-        <div class="col">
-            <h5>Delete:</h5>
-        </div>
-    </div>
-    <hr>
-    {% for order in orders %}
-    {% if order.filled == True %}
-        <div class="row" style="text-align: center;">
-            <div class="col">
-
-            </div>
-            <div class="col">
-                <p>{{order.product}}</p>
-            </div>
-            <div class="col">
-                {{order.pharmacy}}
-            </div>
-            <div class="col">
-                € {{order.unit_price}}
-            </div>
-            <div class="col">
-                
-            </div>
-        </div>
-        <hr>
     {% endif %}
     {% endfor %}
+</section>
 {% endblock %}

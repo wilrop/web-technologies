@@ -13,7 +13,9 @@
         dataType: 'json',
         success: function (data) {
           if (data.is_taken) {
-            $("input[name=username]").after('<div class="row"><p style="color: red">A user with that username already exists.</p></div>');
+            $("input[name=username]").after('<div id="error" class="row"><p style="color: red">A user with that username already exists.</p></div>');
+          }else{
+            $("#error").remove();
           }
         }
       });
