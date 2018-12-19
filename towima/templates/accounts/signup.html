@@ -30,7 +30,7 @@
         <div class="row">
             <div class="col-md-6 offset-md-3 col-sm-12">
                 <div class="signup_card">
-                    <h1> Sign Up </h1>
+                    <h1 id="sign_up_title"> Sign Up </h1>
                     <form method="post">
                       {% csrf_token %}
                       {% for field in form %}
@@ -42,7 +42,7 @@
                                 <div class="col-lg-5 col-md-12">
                                     <h4>{{ field.label_tag }}</h4>
                                 </div>
-                                <div class="col-lg-7 col-md-12">
+                                <div class="col-lg-7 col-md-12 fields_mobile">
                                     {{ field }}
                                 </div>
                             </div>
