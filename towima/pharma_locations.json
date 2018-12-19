@@ -1,1 +1,4 @@
-{"type": "FeatureCollection", "features": [{"type": "Feature", "geometry": {"type": "Point", "coordinates": [4.39, 50.82]}, "properties": {"title": "Willem's Pharmacy", "description": "0477035498"}}, {"type": "Feature", "geometry": {"type": "Point", "coordinates": [-75.69, 45.46]}, "properties": {"title": "MaxiPharma", "description": "0475595152"}}, {"type": "Feature", "geometry": {"type": "Point", "coordinates": [-75.69, 45.46]}, "properties": {"title": "MaxiPharma", "description": "0475595152"}}, {"type": "Feature", "geometry": {"type": "Point", "coordinates": [-75.69, 45.46]}, "properties": {"title": "MaxiPharmas", "description": "0475595152"}}, {"type": "Feature", "geometry": {"type": "Point", "coordinates": [-75.69, 45.46]}, "properties": {"title": "MaxiPharma", "description": "0475595152"}}, {"type": "Feature", "geometry": {"type": "Point", "coordinates": [4.35, 50.85]}, "properties": {"title": "BXLPharma", "description": "0475595152"}}, {"type": "Feature", "geometry": {"type": "Point", "coordinates": [4.35, 50.85]}, "properties": {"title": "BXLPharma", "description": "0475595152"}}]}
+{
+	"type": "FeatureCollection",
+	"features": []
+}
