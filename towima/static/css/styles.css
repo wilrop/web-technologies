@@ -271,6 +271,74 @@
         margin-top: 3vh;
         padding: 15px;
     }
+    
+    /*--------------------------------------------*/
+    /*--------------------------------------------*/
+    /* PHARMACY PAGES*/
+    .background_pharmacy{
+        padding-top: 5vh;
+        background: url('../media/Background/profile_bg.svg') left center no-repeat;
+        background-size: cover;
+        min-height: 40vh;
+        color: white;
+        text-align: center;
+        margin-bottom: -15vh;
+    }
+    .background_pharmacy h1 {font-size: 8vw;}
+    #profile_email{
+        background: url('../media/Pharmacy/profile/email.svg') left center no-repeat;
+        background-size: 100% 100%;
+        min-height: 10vh;
+    }
+    #profile_phone{
+        background: url('../media/Pharmacy/profile/telephone.svg') left center no-repeat;
+        background-size: 100% 100%;
+        min-height: 10vh;
+    }
+    #profile_address{
+        background: url('../media/Pharmacy/profile/map.svg') left center no-repeat;
+        background-size: 100% 100%;
+        min-height: 10vh;
+    }
+    .pharma_profile{
+        margin-top: 5vh;
+        text-align: center;
+        border: 1px solid;
+        border-color: #C0C0C0;
+        border-radius: 15px;
+        padding-bottom: 2vh; 
+    }
+    #btn_pharma{
+        border: 1px solid;
+        border-color: #C0C0C0;
+        border-radius: 30px;
+        font-size: 20px;
+        padding: 3px 10px 3px 10px;
+        color: white;
+        background-color: darkcyan;       
+    }
+    #btn_pharma{
+        text-decoration: none;
+        color: white;
+        background-color: darkcyan;   
+    }
+    .btn_transition_pharma{
+        text-align: center;
+        -webkit-transform: perspective(1px) translateZ(0);
+        transform: perspective(1px) translateZ(0);
+
+        -webkit-transition-duration: 0.3s;
+        transition-duration: 0.3s;
+        -webkit-transition-property: transform;
+        transition-property: transform;
+    }
+    .btn_transition_pharma:hover,
+    .btn_transition_pharma:focus,
+    .btn_transition_pharma:active {
+        -webkit-transform: scale(1.1);
+        transform: scale(1.1);
+    }
+    
 }
 
 /*-------------------------------------------------------------------------------------------------*/
@@ -577,55 +645,20 @@
 
 }
 
-
-
-
-
-
-/* PROFILE PAGE */
-
-
-
-/* LOGIN PAGE */
-
-#login_background{
-    min-height: 100vh;
-    background: url('../media/Background/login.jpg');
-    background-attachment: fixed;
-    background-size: cover;      
-}
-
-.login_card {
-    background-color: white;
-    border-radius: 10px;
-    margin-top: 20vh;
-    min-height: 250px;
-    padding: 30px;
-}
-
-/* SIGNUP PAGE */
-
-#signup_background{
-    height: 100%;
-    background: url('../media/Background/signup_background.jpg');
-    background-attachment: fixed;
-    background-size: cover;      
-}
-
-.signup_card {
-    background-color: white;
-    border-radius: 10px;
-    margin-top: 100px;
-    min-height: 250px;
-    padding: 30px;
-}
-
 /* EDIT PROFILE PAGE */
 #edit_background {
     height: 100%;
     background: url('../media/Background/edit_profile.jpg');
     background-attachment: fixed;
     background-size: cover;           
+}
+
+#base_search{
+    color: black !important;
+}
+#base_search:hover{
+    color: black !important;
+    text-decoration: none;
 }
 
 /* MAPBOX */
@@ -642,11 +675,31 @@
 .mapboxgl-popup {
     max-width: 200px;
 }
+
+.mapboxgl-popup:hover {
+    max-width: 200px;
+    text-decoration: none;
+}
   
 .mapboxgl-popup-content {
     text-align: center;
     font-family: 'Open Sans', sans-serif;
 }
+
+.mapboxgl-popup-content:hover {
+    color: black;
+    text-align: center;
+    font-family: 'Open Sans', sans-serif;
+}
+
+#mb_pop{
+    color: black;
+    font-size: 15px;
+}
+#mb_pop:hover{
+    text-decoration: none;
+}
+
 
 
     

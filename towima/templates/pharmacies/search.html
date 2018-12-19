@@ -86,7 +86,7 @@
                     el.className = 'marker';
                     var pk = marker.properties.description;
                     var title = marker.properties.title
-                    var link = '<a href="{% url 'pharmacies:pharmacy' 1234 %}">' + title + '</a>';
+                    var link = '<a id="mb_pop" href="{% url 'pharmacies:pharmacy' 1234 %}">' + title + '</a>';
                     link = link.replace(/1234/, pk);
                     // make a marker for each feature and add to the map
                     new mapboxgl.Marker(el)

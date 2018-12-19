@@ -6,13 +6,14 @@ from django.contrib.auth.models import User
 
 class PharmacyForm(forms.ModelForm):
     name = forms.CharField(max_length = 70)
+    email = forms.CharField(max_length = 50)
     phone_number = forms.CharField(max_length=12)
     address = forms.CharField(max_length = 50)
     
     
     class Meta:
         model = Pharmacy
-        fields = ('name','address','phone_number')
+        fields = ('name','address', 'email', 'phone_number')
         widgets = {'slug': forms.HiddenInput()}
 
     def save(self, user, commit = True):
@@ -20,10 +21,11 @@ class PharmacyForm(forms.ModelForm):
         name = self.cleaned_data['name']
         phone_number = self.cleaned_data['phone_number']
         address = self.cleaned_data['address']
+        email = self.cleaned_data['email']
         if commit:         
-            pharmacy = Pharmacy(owner=user_id, name=name, address=address, phone_number=phone_number)
-            pharmacy.save()  
-
+            pharmacy = Pharmacy(owner=user_id, name=name, address=address, phone_number=phone_number, email=email)
+            pharmacy.save()
+            
 class CommentForm(forms.ModelForm):
     class Meta:
         model = Comments
