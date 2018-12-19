@@ -644,6 +644,39 @@
     
 
 }
+/* LOGIN PAGE */
+
+#login_background{
+    min-height: 100vh;
+    background: url('../media/Background/login.jpg');
+    background-attachment: fixed;
+    background-size: cover;      
+}
+
+.login_card {
+    background-color: white;
+    border-radius: 10px;
+    margin-top: 20vh;
+    min-height: 250px;
+    padding: 30px;
+}
+
+/* SIGNUP PAGE */
+
+#signup_background{
+    height: 100%;
+    background: url('../media/Background/signup_background.jpg');
+    background-attachment: fixed;
+    background-size: cover;      
+}
+
+.signup_card {
+    background-color: white;
+    border-radius: 10px;
+    margin-top: 100px;
+    min-height: 250px;
+    padding: 30px;
+}
 
 /* EDIT PROFILE PAGE */
 #edit_background {
@@ -680,6 +713,10 @@
     max-width: 200px;
     text-decoration: none;
 }
+
+.mapboxgl-popup-close-button {
+    display: none;
+  }
   
 .mapboxgl-popup-content {
     text-align: center;
