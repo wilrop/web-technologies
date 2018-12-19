@@ -21,7 +21,7 @@
                 <div class="col-12" id="profile_email"></div>
                 <div class="col-12">
                     <br>
-                    <h5>Email: {{ pharmacy.email }}</h5>
+                    <h5>{{ pharmacy.email }}</h5>
                 </div>
             </div>
         </div>
@@ -30,7 +30,7 @@
                 <div class="col-12" id="profile_phone"> </div>
                 <div class="col-12">
                     <br>
-                    <h5>Phone number: {{ pharmacy.phone_number }}</h5>
+                    <h5>{{ pharmacy.phone_number }}</h5>
                 </div>
             </div>
             
@@ -40,7 +40,7 @@
                 <div class="col-12" id="profile_address"></div>
                 <div class="col-12">
                     <br>
-                    <h5>Address: {{ pharmacy.address }}</h5>
+                    <h5>{{ pharmacy.address }}</h5>
                 </div>
             </div>
         </div>
@@ -48,7 +48,7 @@
     
 <hr>
 
-<h2>Available Products</h2>
+<h4>Available Products</h4>
     <div class="row">
         {% for stock in pharmacy_stock %}
         <div class="col-1"></div>
@@ -69,7 +69,7 @@
     </div>
 
 <hr>
-<h2>Rate This Pharmacy</h2>
+<h4>Rate This Pharmacy</h4>
     
 <div class="rating">
     {% if rating %}
@@ -87,8 +87,7 @@
     {% endfor %}
     {% endif %}
 </div>
-
-<hr>
+<br>
 <a class="btn btn-secondary" data-toggle="collapse" href="#commentCollapse" role="button" aria-expanded="false" aria-controls="commentCollapse">Add comment</a>    
 <div class="collapse multi-collapse" id="commentCollapse">
     <div class="card card-body">
@@ -98,12 +97,15 @@
         </form>
     </div>
 </div>
-<div class="comments">
+<hr>
+<h4>Comments</h4>
+<div class="comments" style="text-align: center;">
 {% for comment in pharmacy.comments.all %}
 <div class="comment">
-    <div class="date">{{ comment.created_date }}</div>
     <strong>{{ comment.author }}</strong>
+    <div class="date">{{ comment.created_date }}</div>
     <p>{{ comment.text|linebreaks }}</p>
+    <br>
 </div>
 {% endfor %}
 

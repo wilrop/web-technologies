@@ -2,44 +2,46 @@
 {% block title %}Products{% endblock %}
 
 {% block content %}
-<h1>Product detail</h1>
-<p>
-    <h1> {{product.name}} </h1>
-    <img src= "{{ product.image }}">
-    <li> Available: {{product.available}} </li>
-    <li> Description: {{product.description}} </li>  
-    <li> Price: &euro; {{stock.product_price}}</li>
-</p>
-<h1> Add to cart </h1>
-<form method="post">
-    {% csrf_token %}
-    {% for field in form %}
-      <div class="field">
-        <label for="{{ field.id_for_label }}" class="label">
-            {{ field.hyml_name }} 
-        </label>
-          <div class="row">
-              <div class="col-lg-5 col-md-12">
-                  <h4>{{ field.label_tag }}</h4>
-              </div>
-              <div class="col-lg-7 col-md-12">
-                  {{ field }}
-              </div>
-          </div>
-          <div class="row">
-              {% for error in field.errors %}
-                  <p style="color: red">{{ error }}</p>
-              {% endfor %}
-          </div> 
-      </div>
-    {% endfor %}
-    <br>
-        <button type="submit" class="btn btn-secondary">Submit</button>
-    </form>
-</div>
-</div>
-</div>
-</section>
-<br><br><br><br><br><br><br><br><br><br><br><br><br>
-</section>
+<section id="signup_background">
+    <section class="container">
+        <div class="row">
+            <div class="col-md-6 offset-md-3 col-sm-12">
+                <div class="signup_card">
+                    <h1> Order </h1>
+                    <hr>
+                    <h3>{{product.name}}</h3>
+                    <h5>Description:</h5> <p>{{product.description}}</p>
+                    <h5>Price:</h5> <p>€ {{stock.product_price}}</p>
+                    <hr>
+                    <h6>How many {{product.name}}s do you want to order?</h6>
+                    <form method="post">
+                      {% csrf_token %}
+                      {% for field in form %}
+                        <div class="field">
+                          <label for="{{ field.id_for_label }}" class="label">
+                              {{ field.hyml_name }} 
+                          </label>
+                            <div class="row">
+                                <div class="col-lg-4 col-md-12">
+                                    <h4>{{ field.label_tag }}</h4>
+                                </div>
+                                <div class="col-lg-8 col-md-12">
+                                    {{ field }}
+                                </div>
+                            </div>
+                            <div class="row">
+                                {% for error in field.errors %}
+                                    <p style="color: red">{{ error }}</p>
+                                {% endfor %}
+                            </div>    
+                        </div>
+                      {% endfor %}
+                        <br>
+                        <button type="submit" class="btn btn-secondary">Order</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+<br><br><br><br><br><br><br><br>
 {% endblock %}

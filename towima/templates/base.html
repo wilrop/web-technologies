@@ -21,7 +21,7 @@
     <header>
       <nav class="navbar navbar-expand-md navbar-light bg-light">
           <a class="navbar-brand" href="{% url 'home' %}">
-              <img src="{% static "../static/media/logo2.svg" %}" width="130" height="26" class="d-inline-block align-top"alt="">
+              <img src="{% static '../static/media/logo2.svg' %}" width="130" height="26" class="d-inline-block align-top"alt="">
             </a>
           <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#NavbarHeader" aria-controls="navbarsExample04" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -29,9 +29,6 @@
 
           <div class="collapse navbar-collapse " id="NavbarHeader">
             <ul class="navbar-nav mr-auto">
-                <li class="nav-item"><a  class="nav-link" 
-                        href="{% url 'pharmacies:findpharma' %}">Find Pharmacy</a>
-                    </li>
             </ul>
             <ul class="navbar-nav mr-auto">
                 {% if user.is_authenticated %}

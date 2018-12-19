@@ -2,23 +2,54 @@
 {% block title %}Orders{% endblock %}
 
 {% block content %}
-<h2>Cart</h2>
-<ul>
+<section class="container-fluid" >
+<h3>My Shopping Cart</h3>
+    <br>
+    <div class="row" style="text-align: center;">
+        <div class="col">
+            <h5>Product: </h5>
+        </div>
+        <div class="col">
+            <h5>Pharmacy: </h5>
+        </div>
+        <div class="col">
+            <h5>Unit Price: </h5>
+        </div>
+        <div class="col">
+           <h5> Quantity:</h5>
+        </div>
+        <div class="col">
+            <h5>Delete:</h5>
+        </div>
+    </div>
+    <hr>
     {% for item in items %}
-    <p>
-    <li> Product: {{item.product}} </li>
-    <li> Pharmacy: {{item.pharmacy}}</li>
-    <li> Unit Price: &euro; {{item.unit_price}}</li>
-    <li> Quantity: {{item.quantity}}</li>
-    <a href="{% url 'item_delete' item.pk %}">
-        <button type="button" class="btn btn-default btn-danger" type="submit">Delete</button>
-    </a>
-    </p>    
+    <div class="row" style="text-align: center;">
+        <div class="col">
+            {{item.product}}
+        </div>
+        <div class="col">
+            {{item.pharmacy}}
+        </div>
+        <div class="col">
+            € {{item.unit_price}}
+        </div>
+        <div class="col">
+            {{item.quantity}}
+        </div>
+        <div class="col">
+            <a href="{% url 'item_delete' item.pk %}">
+                <button type="button" class="btn btn-sm btn-danger" type="submit">Delete</button>
+            </a>
+        </div>
+    </div>
+    <hr>
     {% endfor %}
-</ul>
-<ul>
-    <a href="{% url 'place_orders' %}">
-        <button type="button" class="btn btn-default btn-succes" type="submit">Place Orders</button>
-    </a>
-</ul>
+<br>
+<a href="{% url 'place_orders' %}">
+    <button type="button" class="btn btn-dark btn-lg" type="submit">Place Orders</button>
+</a>
+<br><br><br><br><br><br><br><br>
+</section>
+
 {% endblock %}

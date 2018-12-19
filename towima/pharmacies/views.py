@@ -52,7 +52,7 @@ def product_detail(request, pk, ppk):
             item = Item.objects.create(
                 product=product, cart=cart, pharmacy=pharmacy, quantity=quantity, unit_price=unit_price)
             item.save()
-            return redirect('home')
+            return redirect('pharmacies:pharmacy', pk=pk) 
     pharmacy = Pharmacy.objects.get(pk=pk)
     product = Product.objects.get(pk=ppk)
     stock = Stock.objects.get(pharmacy=pharmacy, product=product)
