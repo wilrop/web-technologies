@@ -222,11 +222,8 @@ def add_product(request):
     user = request.user
     pharmacy = Pharmacy.objects.get(owner=user)
     if request.method == 'POST':
-        form = AddToCartForm(request.POST)
-        print("binnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnen")
-        print(form.errors)
+        form = AddStockForm(request.POST)
         if form.is_valid():
-            print("vaaaaaaaaaaaaaaaaalid")
             form.save(pharmacy)
             return redirect('home')
     form = AddStockForm()

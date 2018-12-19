@@ -61,7 +61,6 @@ class AddStockForm(forms.ModelForm):
             'price',
         )
     def save(self, pharmacy, commit = True):
-        print("binnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnen")
         product = self.cleaned_data['product']
         stock = self.cleaned_data['stock']
         price = self.cleaned_data['price']
