@@ -66,17 +66,21 @@ def create_pharma(request):
     if request.method == 'POST':                # When we POST the form.
         form = PharmacyForm(request.POST)
         if form.is_valid():                     # Check if the form is valid.
+            user = request.session['username']
+            form.save(user)
+    
             name = form.cleaned_data.get('name')
             address = form.cleaned_data.get('address')
             phone_number = form.cleaned_data.get('phone_number')
-            user = request.session['username']
 
+            pharmacy = Pharmacy.objects.get(name = name)
+            pk = pharmacy.pk
             geocoder = Geocoder(access_token=mapbox_access_token)
             response = geocoder.forward(address)
             first = response.geojson()['features'][0]
             coords = [round(coord, 2)
                       for coord in first['geometry']['coordinates']]
-            new_location = '{ "type": "Feature", "geometry": { "type": "Point", "coordinates": ' + str(coords) + '}, "properties": { "title": "' + name + '", "description": "' + phone_number +'"}}'
+            new_location = '{ "type": "Feature", "geometry": { "type": "Point", "coordinates": ' + str(coords) + '}, "properties": { "title": "' + name + '", "description": "' + str(pk) + '"}}'
             new_location = json.loads(new_location)
 
             file_path = os.path.join(settings.BASE_DIR, 'pharma_locations.json')
@@ -91,7 +95,6 @@ def create_pharma(request):
             with pharma_locations as outfile:
                 json.dump(data, outfile)
                 
-            form.save(user)
             return redirect('phone_verification')
     else:
         form = PharmacyForm()
