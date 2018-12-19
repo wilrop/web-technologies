@@ -8,7 +8,9 @@ from django.core.mail import send_mail
 from accounts.models import Profile, Cart, Item
 from authy.api import AuthyApiClient
 from .forms import TokenForm, VerificationForm
-from orders.models import Order 
+from orders.models import Order
+from twilio.rest import Client
+from pharmacies.models import Pharmacy
 
 authy_api = AuthyApiClient('jqr27nutYbPgCmIilN0ByqTTe1xBu6Wp')
 
@@ -184,6 +186,7 @@ def place_orders(request):
     items = Item.objects.filter(cart=cart)
     for item in items:
         Order.objects.bulk_create([Order(user=user, first_name=user.first_name, last_name=user.last_name, email=user.email, address=profile.address, product=item.product, pharmacy=item.pharmacy, quantity=item.quantity)])
+        send_mail('New Order', 'You have a new order from a customer!', 'pharmatowi@gmail.com', [getattr(item.pharmacy, 'email')], fail_silently=False,)
         item.delete()
     all_orders = Order.objects.all()
     for order in all_orders:
