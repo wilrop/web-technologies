@@ -150,6 +150,8 @@ def edit_home(request):
     context={}
     return render(request, template, context)
 
+# Define a order view. This is a view that is used for displaying the orders of the user. There are 2 types of orders, open orders
+# and filled orders. Open orders are orders that are not filled by the pharmacy and filled orders are orders that are filled by the pharmacy.
 def orders(request):
     template = 'accounts/orders.html'
     user = request.user
@@ -157,6 +159,8 @@ def orders(request):
     args = {'user': user, 'orders':orders}   
     return render(request, template, args)
 
+# Define a cart view. This is a view that is used for displaying the cart of the user. This view also calculates the total price
+# of the items that are present in the cart.
 def cart(request):
     template = 'accounts/cart.html'
     user = request.user
@@ -169,16 +173,22 @@ def cart(request):
     args = {'user': user, 'items': items, 'total_price': total_price}   
     return render(request, template, args)
 
+# Define an item delete view. This is a view that is used to remove an item (product) from the cart of the customer.
 def item_delete(request, pk):
     item = Item.objects.get(pk=pk) 
     item.delete()
     return redirect(request.META['HTTP_REFERER'])
 
+# Define an order delete view. This is a view that is used for the delete button in the customer his orders. The customer can only delete
+# orders that are not filled by the pharmacy.
 def order_delete(request, pk):
     order = Order.objects.get(pk=pk) 
     order.delete()
     return redirect(request.META['HTTP_REFERER'])
 
+# Define a place order view. This view will remove all the items (products) from the user his cart and it it will change the items
+# into orders. These orders will be displayed in the order page of the user and the order page of the pharmacy. An email will also
+# be send to the pharmacy to inform the pharmacy that a user has placed an order.
 def place_orders(request):
     user = request.user
     profile = Profile.objects.get(user=user)
@@ -192,7 +202,3 @@ def place_orders(request):
     for order in all_orders:
         order.save()
     return redirect(request.META['HTTP_REFERER'])
-
-#"{% url accounts:'item_delete' pk=item.pk %}"
-#"{% url 'place_order' items=items %}"
-#path('item_delete/'), views.item_delete, name='delete'),

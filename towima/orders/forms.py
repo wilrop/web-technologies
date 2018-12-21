@@ -2,8 +2,9 @@ from django import forms
 from .models import Order
 from products.models import Product
 from pharmacies.models import Pharmacy
-from django.forms import formset_factory, BaseFormSet
 
+ # Form to create a seperate order in the database. This is currently not used in our website, but not removed because it
+ # is something that could be used on a later date.
 class OrderForm(forms.ModelForm):
     first_name = forms.CharField()
     last_name = forms.CharField()
@@ -23,24 +24,4 @@ class OrderForm(forms.ModelForm):
             'product',
             'pharmacy',
             'quantity',
-        ) 
-
-class TestForm(forms.Form):
-    product = forms.ModelChoiceField(queryset=Product.objects.all())
-    pharmacy = forms.ModelChoiceField(queryset=Pharmacy.objects.all())
-    quantity = forms.IntegerField()
-
-    class Meta:
-        model = Order
-        fields = (              # The order of the fields.
-            'product', 
-            'pharmacy', 
-            'quantity',
         )
-
-class BaseTestFormSet(BaseFormSet):
-    def add_fields(self, form, index):
-        super().add_fields(form, index)
-        form.fields["my_field"] = forms.CharField()
-
-TestFormSet = formset_factory(TestForm)
