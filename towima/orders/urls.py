@@ -4,5 +4,5 @@ from orders import views
 
 app_name = 'orders'
 urlpatterns = [
-    path('create/', views.create_order, name='create'),
+    #path('create/', views.create_order, name='create'),  URL to create an order, currently not used.
 ]

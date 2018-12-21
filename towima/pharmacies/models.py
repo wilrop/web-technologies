@@ -8,6 +8,7 @@ class Other(models.Model):
     DEFAULT_PK=1
     name=models.CharField(max_length=1024)
 
+# Definition of the Pharmacy model. A pharmacy is created by a pharmacist.
 class Pharmacy(models.Model):
     owner = models.OneToOneField(User, on_delete=models.CASCADE, default=Other.DEFAULT_PK)
     name = models.CharField(max_length=200, db_index=True)
@@ -30,11 +31,15 @@ class Pharmacy(models.Model):
     def get_absolute_url(self):
        return reverse('pharmacies:pharmacy', args=[self.pk])
 
+# definition of a model to create a relation between a pharmacy and a pharmacist. This is usefull to add employees to the pharmacy.
+# The relation contains the salary of the employee.
 class Employee(models.Model):
     pharmacist = models.ForeignKey(User, on_delete=models.CASCADE)
     pharmacy = models.ForeignKey(Pharmacy, on_delete=models.CASCADE)
     salary= models.PositiveIntegerField(default=0)
 
+# Definition of a model to create a relation between a product and a pharmacy. A pharmacy can have multiple products and a product can be
+# present in multiple pharmacies. The relation contains a price and an amount.
 class Stock(models.Model):
     product = models.ForeignKey(Product, on_delete=models.CASCADE)
     pharmacy = models.ForeignKey(Pharmacy, on_delete=models.CASCADE)

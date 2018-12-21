@@ -4,6 +4,8 @@ from products.models import Product
 from accounts.models import Item
 from django.contrib.auth.models import User
 
+# Definition of the form the create a pharmacy. A pharmacy is created when a pharmacist does a sign up on the website. This also contains a
+# custom save funtion for the Pharmacy to save the owner of the pharmacy (the currenlty logged in user).
 class PharmacyForm(forms.ModelForm):
     name = forms.CharField(max_length = 70)
     email = forms.CharField(max_length = 50)
@@ -50,6 +52,9 @@ class AddToCartForm(forms.ModelForm):
             'quantity',
         )
 
+# Definition of the form to add stock and price of a certain product in the database to the pharmacy. The pharmacist needs to select
+# a product and choose the amount in Stock and the price of the product in the pharmacy. This also contains a custom save function so there
+# is only one relation between a product and a pharmcy, otherwise the current relation needs to be removed or modified.
 class AddStockForm(forms.ModelForm):
     product = forms.ModelChoiceField(queryset=Product.objects.all())
     stock = forms.IntegerField()

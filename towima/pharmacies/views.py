@@ -187,12 +187,12 @@ def get_locations(request):
         data = json.load(data_file)
     return JsonResponse(data)
 
-
 def pharma_settings(request):
     template = "pharmacies/pharma_settings.html"
     context = {}
     return render(request, template, context)
 
+# definition of the view to display all the orders of a pharmacy.
 def pharmacy_orders(request):
     template = 'pharmacies/orders.html'
     user = request.user
@@ -201,19 +201,13 @@ def pharmacy_orders(request):
     args = {'user': user, 'orders':orders}   
     return render(request, template, args)
 
-def pharmacy_orders(request):
-    template = 'pharmacies/orders.html'
-    user = request.user
-    pharmacy = Pharmacy.objects.get(owner=user)
-    orders = Order.objects.filter(pharmacy=pharmacy)
-    args = {'user': user, 'orders':orders}   
-    return render(request, template, args)
-
+# Definition of a view for the button on the orders page of a pharmacy to delete an order.
 def order_delete(request, pk):
     order = Order.objects.get(pk=pk) 
     order.delete()
     return redirect(request.META['HTTP_REFERER'])
 
+# Definition of a view for the button on the orders page of a pharmacy to fill an order.
 def confirm_order(request, pk):
     order = Order.objects.get(pk=pk)
     order.filled = True
@@ -221,6 +215,7 @@ def confirm_order(request, pk):
     send_mail('Your order is ready!', 'Your order is ready in your local pharmacy!', 'pharmatowi@gmail.com', [getattr(order, 'email')], fail_silently=False,)
     return redirect(request.META['HTTP_REFERER'])
 
+# Definition of a view to add a product to a pharmacy.
 def add_product(request):
     user = request.user
     pharmacy = Pharmacy.objects.get(owner=user)

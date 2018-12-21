@@ -8,6 +8,10 @@ class Other(models.Model):
     DEFAULT_PK=1
     name=models.CharField(max_length=1024)
 
+# Definition of the model to save and order in the database. An order is placed by a customer and can be deleted by the user or pharmacist
+# and be filled by the pharmacist if it is ready. The order constains the user that placed the order, the first name, the last name, the email
+# the address, the product, the pharmacy, the price of the product, the quantity, the total price, field if the order is filled and dates 
+# When the orders are created and updated. This model also contains a custom save function to calculate the total price and a function to get the price.
 class Order(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, default=Other.DEFAULT_PK)
     first_name = models.CharField(max_length=50)
