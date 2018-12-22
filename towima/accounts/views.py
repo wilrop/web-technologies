@@ -32,6 +32,7 @@ def signup(request):
         form = SignUpForm()                     # Provide the form to the user.
     return render(request, template, {'form': form})
 
+# This view will check if a username is already taken or not and respond with JSON code.
 def validate_username(request):
     username = request.GET.get('username', None)
     data = {
@@ -39,13 +40,14 @@ def validate_username(request):
     }
     return JsonResponse(data)
 
+# This view will let the user input their phone number for the phone verification process.
 def phone_verification(request):
     if request.method == 'POST':
         form = VerificationForm(request.POST)
         if form.is_valid():
             request.session['phone_number'] = form.cleaned_data['phone_number']
             request.session['country_code'] = form.cleaned_data['country_code']
-            authy_api.phones.verification_start(
+            authy_api.phones.verification_start(  # Send a SMS to the user with their code through the API.
                 form.cleaned_data['phone_number'],
                 form.cleaned_data['country_code'],
                 via='sms'
@@ -60,7 +62,7 @@ def verify(request):
     if request.method == 'POST':
         form = TokenForm(request.POST)
         if form.is_valid():
-            verification = authy_api.phones.verification_check(
+            verification = authy_api.phones.verification_check( # Check the verification code throught the API.
                 request.session['phone_number'],
                 request.session['country_code'],
                 form.cleaned_data['token']
@@ -69,13 +71,15 @@ def verify(request):
                 user = User.objects.get(username=request.session['username'])
                 profile = Profile.objects.get(user=user)
                 profile.phone_number = request.session['phone_number']
-                profile.verified = True
+                profile.verified = True # Set the verified field in the profile model to true, because the user has been verified.
+
+                # Send an email.
                 send_mail('Welcome to PharmaTowi', 'Welcome to our website, Your account has been verified!', 'pharmatowi@gmail.com', [getattr(user, 'email')], fail_silently=False,)
                 profile.save()
-                cart = Cart.objects.create(user=user)
+                cart = Cart.objects.create(user=user) # Create a cart for the user.
                 cart.save()
                 return redirect('login')
-            else:
+            else: # If verification was not successful, add an error.
                 for error_msg in verification.errors().values():
                     form.add_error(None, error_msg)
     else:
@@ -120,6 +124,7 @@ def change_password(request):
         form = PasswordChangeForm(user=request.user) 
     return render(request, template, {'form': form})
 
+# The login view that will be requested whenever a user tries to log in on our website.
 def login_view(request):
     template = 'accounts/login.html'
 
@@ -128,16 +133,16 @@ def login_view(request):
 
         if form.is_valid():
             user = User.objects.get(username=form.cleaned_data['username'])
-            profile = Profile.objects.get(user=user)
+            profile = Profile.objects.get(user=user) # Get the frofile from the user.
             request.session['username'] = form.cleaned_data.get('username')
-            if profile.verified:
+            if profile.verified: # If the profile is verified, let the user log in.
                 username = form.cleaned_data.get('username')
                 raw_password = form.cleaned_data.get('password')
                 user = authenticate(username=username, password=raw_password)
                 login(request, user)
                 return redirect('home')
 
-            else:
+            else: # If not, redirect to phone verification.
                 return redirect('phone_verification')
 
     else:
