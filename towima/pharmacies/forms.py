@@ -27,12 +27,14 @@ class PharmacyForm(forms.ModelForm):
         if commit:         
             pharmacy = Pharmacy(owner=user_id, name=name, address=address, phone_number=phone_number, email=email)
             pharmacy.save()
-            
+
+# The comment form. This form has only one field, namely a text field.            
 class CommentForm(forms.ModelForm):
     class Meta:
         model = Comments
         fields = ('text',)
 
+    # We created a custom save function, to correctly save the information in the database.
     def save(self, pk, user, commit = True):
         comment = super().save(commit=False)
         pharmacy = Pharmacy.objects.get(pk = pk)
@@ -43,6 +45,7 @@ class CommentForm(forms.ModelForm):
             comment.save()
         return comment
 
+# The add to cart form. This form has only one field, namely the quantity.
 class AddToCartForm(forms.ModelForm):
     quantity = forms.IntegerField()
 

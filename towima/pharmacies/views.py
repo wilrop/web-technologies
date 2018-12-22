@@ -3,7 +3,7 @@ import json
 import os
 
 from django.conf import settings
-from django.shortcuts import render, redirect, get_list_or_404, get_object_or_404
+from django.shortcuts import render, redirect
 from django.http import JsonResponse
 from pharmacies.models import Pharmacy, Employee, Rating
 from products.models import Product
@@ -16,15 +16,16 @@ from mapbox import Geocoder
 from orders.models import Order
 from django.core.mail import send_mail
 
+# The access token used for the Mapbox API.
 mapbox_access_token = 'pk.eyJ1IjoibWF4aW1lYW50b2luZTE5OTciLCJhIjoiY2pubTNmNmlrMWpvdjNxdGFsdGxxaXJlayJ9.0tDqrdUlSYEOqxMSiy7j3g'
 
-
+# The view that is created when requesting the profile of a pharmacy.
 def pharmacy(request, pk):
     pharmacy = Pharmacy.objects.get(pk=pk)
-    rated_list = Rating.objects.filter(pharmacy=pharmacy)
-    pharmacy_stock = Stock.objects.filter(pharmacy=pharmacy)
+    rated_list = Rating.objects.filter(pharmacy=pharmacy)       # Get the different ratings.
+    pharmacy_stock = Stock.objects.filter(pharmacy=pharmacy)    # Get the stock.
 
-    if rated_list:
+    if rated_list:                  # Calculate the average rating and round this to an integer.
         acc_rating = 0
         for rating in rated_list:
             acc_rating += rating.rating
@@ -32,7 +33,7 @@ def pharmacy(request, pk):
     else:
         rating = None
 
-    form = CommentForm
+    form = CommentForm             # We also include the comment form, so users can post comments on this page.
     args = {'pharmacy': pharmacy, 'rating': rating,
             'form': form, 'pharmacy_stock': pharmacy_stock}
     return render(request, 'pharmacies/pharmacy_profile.html', args)
@@ -159,14 +160,14 @@ def add_rating_to_pharmacy(request):
     }
     return JsonResponse(data)
 
-
+# This view is utilized when a user searches something on the website.
 def search(request):
-    start = time.time()
+    start = time.time()             # We compute the time spent searching.
     query = request.GET.get('q')
     results = []
     if query:
         results = Pharmacy.objects.filter(
-            Q(name__icontains=query) | Q(address__icontains=query))
+            Q(name__icontains=query) | Q(address__icontains=query))     # Get all the results that match the query in the correct attributes.
 
     end = time.time()
     processing_time = format((end - start), '.4f')
@@ -175,18 +176,15 @@ def search(request):
             'time': processing_time, 'num_results': num_results}
     return render(request, 'pharmacies/search.html', args)
 
-
-def find_pharma(request):
-    return render(request, 'pharmacies/find_pharma.html', {'mapbox_access_token': mapbox_access_token})
-
-
+# This view responds with JSON data. The JSON is recieved from a local file with all the locations of pharmacies.
 def get_locations(request):
-    file_path = os.path.join(settings.BASE_DIR, 'pharma_locations.json')
+    file_path = os.path.join(settings.BASE_DIR, 'pharma_locations.json') # Open the file on the correct path.
     pharma_locations = open(file_path)
     with pharma_locations as data_file:
         data = json.load(data_file)
     return JsonResponse(data)
 
+# Definition of the view to show the settings for a pharmacy.
 def pharma_settings(request):
     template = "pharmacies/pharma_settings.html"
     context = {}

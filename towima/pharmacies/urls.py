@@ -7,7 +7,6 @@ urlpatterns = [
     path('create_pharma/', views.create_pharma, name='create_pharma'),                                  # URL to create a pharmacy
     path('search/', views.search, name='search'),                                                       # URL to search a pharmacy
     url(r'^pharmacy/(?P<pk>\d+)/$', views.pharmacy, name='pharmacy'),                                   # URL to a pharmacy
-    path('find_pharma/', views.find_pharma, name='findpharma'),                                         # URL to find a pharmacy
     path('add_comment_to_pharmacy/', views.add_comment_to_pharmacy, name='add_comment_to_pharmacy'),    # URL to add a comment to a pharmacy
     path('add_rating_to_pharmacy/', views.add_rating_to_pharmacy, name='add_rating_to_pharmacy'),       # URL to add a rating to  a pharmacy
     path('product_detail/<pk>/<ppk>', views.product_detail, name='product_detail'),                     # URL to see a product of a pharmacy
