@@ -40,7 +40,6 @@ INSTALLED_APPS = [
     'accounts.apps.AccountsConfig',         # The account app
     'towima',                               # Our own app
     'products.apps.ProductsConfig',         #products App
-    'pharmacists.apps.PharmacistsConfig',   #Pharmacists App
     'pharmacies.apps.PharmaciesConfig',     #Pharmacy App
     'orders.apps.OrdersConfig',             #Orders App
     'rest_framework',

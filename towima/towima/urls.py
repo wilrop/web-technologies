@@ -24,7 +24,6 @@ urlpatterns = [
     path('admin/', admin.site.urls, name='admin'),                      # The url for the admin page
     path('accounts/', include('accounts.urls')),                        # This url pattern will be visitid for the signup and profile functionality
     path('accounts/', include('django.contrib.auth.urls')),             # The url where the accounts app runs
-    path('pharmacists/', include('pharmacists.urls')),                  # The url where the pharmacists app is
     path('pharmacies/', include('pharmacies.urls')),
     path('products/', include('products.urls', namespace='products')),  # The url where the products app is
     path('orders/', include('orders.urls', namespace='orders')),        # The url where the products app is
