@@ -10,7 +10,7 @@ class Other(models.Model):
 
 # Definition of the Pharmacy model. A pharmacy is created by a pharmacist.
 class Pharmacy(models.Model):
-    owner = models.OneToOneField(User, on_delete=models.CASCADE, default=Other.DEFAULT_PK)
+    owner = models.OneToOneField(User, on_delete=models.CASCADE, default=Other.DEFAULT_PK) # Only one person can be the owner, and you can only own one pharmacy.
     name = models.CharField(max_length=200, db_index=True)
     slug = models.SlugField(max_length=200, db_index=True)
     address = models.CharField(max_length = 50)

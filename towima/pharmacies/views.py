@@ -39,9 +39,10 @@ def pharmacy(request, pk):
     return render(request, 'pharmacies/pharmacy_profile.html', args)
 
 
+# The product detail view. This view is used to buy stock from a pharmacist.
 def product_detail(request, pk, ppk):
     if request.method == 'POST':
-        form = AddToCartForm(request.POST)
+        form = AddToCartForm(request.POST)      # Get the quantity of the particular product that they wish to order.
         if form.is_valid():
             product = Product.objects.get(pk=ppk)
             pharmacy = Pharmacy.objects.get(pk=pk)
@@ -51,23 +52,23 @@ def product_detail(request, pk, ppk):
             stock = Stock.objects.get(product=product, pharmacy=pharmacy)
             unit_price = stock.product_price
             item = Item.objects.create(
-                product=product, cart=cart, pharmacy=pharmacy, quantity=quantity, unit_price=unit_price)
+                product=product, cart=cart, pharmacy=pharmacy, quantity=quantity, unit_price=unit_price) # Create an object.
             item.save()
-            return redirect('pharmacies:pharmacy', pk=pk) 
+            return redirect('pharmacies:pharmacy', pk=pk) # Redirect to the pharmacy.
     pharmacy = Pharmacy.objects.get(pk=pk)
     product = Product.objects.get(pk=ppk)
     stock = Stock.objects.get(pharmacy=pharmacy, product=product)
-    form = AddToCartForm()
+    form = AddToCartForm()      # The form that will let a user add certain products to their car.
     args = {'pharmacy': pharmacy, 'product': product,
             'stock': stock, 'form': form}
     return render(request, 'pharmacies/product_detail.html', args)
 
-
+# This view will let a pharmacist create a pharmacy.
 def create_pharma(request):
     if request.method == 'POST':                # When we POST the form.
         form = PharmacyForm(request.POST)
         if form.is_valid():                     # Check if the form is valid.
-            user = request.session['username']
+            user = request.session['username']  # Get the username.
             form.save(user)
     
             name = form.cleaned_data.get('name')
@@ -76,13 +77,13 @@ def create_pharma(request):
 
             pharmacy = Pharmacy.objects.get(name = name)
             pk = pharmacy.pk
-            geocoder = Geocoder(access_token=mapbox_access_token)
+            geocoder = Geocoder(access_token=mapbox_access_token) # Use a geocoder to turn the address into coordinates.
             response = geocoder.forward(address)
             first = response.geojson()['features'][0]
-            coords = [round(coord, 2)
+            coords = [round(coord, 2)                                       # Get the coords from the JSON response.
                       for coord in first['geometry']['coordinates']]
             new_location = '{ "type": "Feature", "geometry": { "type": "Point", "coordinates": ' + str(coords) + '}, "properties": { "title": "' + name + '", "description": "' + str(pk) + '"}}'
-            new_location = json.loads(new_location)
+            new_location = json.loads(new_location) # Add the new location to the GeoJSON data.
 
             file_path = os.path.join(settings.BASE_DIR, 'pharma_locations.json')
             
@@ -92,16 +93,16 @@ def create_pharma(request):
 
             data["features"].append(new_location)
 
-            pharma_locations = open(file_path, 'w')
+            pharma_locations = open(file_path, 'w') # Write the new file.
             with pharma_locations as outfile:
                 json.dump(data, outfile)
                 
-            return redirect('phone_verification')
+            return redirect('phone_verification')   # After registering a pharmacy, they still have to verify their phonenumber.
     else:
         form = PharmacyForm()
     return render(request, 'pharmacies/create_pharmacy.html', {'form': form})
 
-
+# The view that will let a user comment on a pharmacy. The return value is JSON with the necessary data.
 def add_comment_to_pharmacy(request):
     user = request.user
     author = user.username
@@ -117,7 +118,7 @@ def add_comment_to_pharmacy(request):
         valid = False
         date = None
 
-    data = {
+    data = {                        # This data will be used to show the comment with AJAX to the user.
         'valid': valid,
         'author': author,
         'text': text,
@@ -125,37 +126,37 @@ def add_comment_to_pharmacy(request):
     }
     return JsonResponse(data)
 
-
+# This view is used whenever a user rates a pharmacy. This also returns JSON.
 def add_rating_to_pharmacy(request):
     pk = request.GET.get('pk', None)
     new_rating = int(request.GET.get('new_rating', None))
     pharmacy = Pharmacy.objects.get(pk=pk)
     user = request.user
 
-    rated_list = Rating.objects.filter(pharmacy=pharmacy)
+    rated_list = Rating.objects.filter(pharmacy=pharmacy)  # Get all the individual ratings for the pharmacy.
     acc_rating = 0
 
     if rated_list:
         for rating in rated_list:
             acc_rating += rating.rating
-        old_rating = int(round(acc_rating / len(rated_list)))
+        old_rating = int(round(acc_rating / len(rated_list)))       # Calculate the old rating. 
     else:
-        old_rating = 1
+        old_rating = 1      # This is necessary for calculating the new rating.
 
-    try:
+    try: # First we try to update the rating that the user already placed on this pharmacy.
         rating = Rating.objects.get(pharmacy=pharmacy, user=user)
         previous_rating = rating.rating
         rating.rating = new_rating
         new_rating = int(
-            round((acc_rating - previous_rating + new_rating)/len(rated_list)))
-    except Rating.DoesNotExist:
+            round((acc_rating - previous_rating + new_rating)/len(rated_list))) # Calculate the new rating.
+    except Rating.DoesNotExist: # If this has not happened before, we add a new rating.
         rating = Rating(user=user, pharmacy=pharmacy, rating=new_rating)
         new_rating = int(
-            round((acc_rating + new_rating)/(len(rated_list) + 1)))
+            round((acc_rating + new_rating)/(len(rated_list) + 1))) # Calculate the new rating.
     rating.save()
 
     data = {
-        'old_rating': old_rating,
+        'old_rating': old_rating, # The old rating is used to calculate the difference later. This way we know which stars to change the color for.
         'new_rating': new_rating
     }
     return JsonResponse(data)
