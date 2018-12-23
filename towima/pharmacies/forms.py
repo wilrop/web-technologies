@@ -4,6 +4,8 @@ from products.models import Product
 from accounts.models import Item
 from django.contrib.auth.models import User
 
+# Definition of the form the create a pharmacy. A pharmacy is created when a pharmacist does a sign up on the website. This also contains a
+# custom save funtion for the Pharmacy to save the owner of the pharmacy (the currenlty logged in user).
 class PharmacyForm(forms.ModelForm):
     name = forms.CharField(max_length = 70)
     email = forms.CharField(max_length = 50)
@@ -25,12 +27,14 @@ class PharmacyForm(forms.ModelForm):
         if commit:         
             pharmacy = Pharmacy(owner=user_id, name=name, address=address, phone_number=phone_number, email=email)
             pharmacy.save()
-            
+
+# The comment form. This form has only one field, namely a text field.            
 class CommentForm(forms.ModelForm):
     class Meta:
         model = Comments
         fields = ('text',)
 
+    # We created a custom save function, to correctly save the information in the database.
     def save(self, pk, user, commit = True):
         comment = super().save(commit=False)
         pharmacy = Pharmacy.objects.get(pk = pk)
@@ -41,6 +45,7 @@ class CommentForm(forms.ModelForm):
             comment.save()
         return comment
 
+# The add to cart form. This form has only one field, namely the quantity.
 class AddToCartForm(forms.ModelForm):
     quantity = forms.IntegerField()
 
@@ -50,6 +55,9 @@ class AddToCartForm(forms.ModelForm):
             'quantity',
         )
 
+# Definition of the form to add stock and price of a certain product in the database to the pharmacy. The pharmacist needs to select
+# a product and choose the amount in Stock and the price of the product in the pharmacy. This also contains a custom save function so there
+# is only one relation between a product and a pharmcy, otherwise the current relation needs to be removed or modified.
 class AddStockForm(forms.ModelForm):
     product = forms.ModelChoiceField(queryset=Product.objects.all())
     stock = forms.IntegerField()

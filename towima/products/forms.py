@@ -5,6 +5,7 @@ from pharmacies.models import Pharmacy
 from products.models import Product
 from django.contrib.auth.models import User
 
+# Definition of the Form to add a Product to the database. This currently not used in our website but it could be used in the future.
 class AddProductForm(forms.ModelForm):
     category = forms.ModelChoiceField(queryset=Category.objects.all())
     name = forms.CharField()
@@ -22,6 +23,8 @@ class AddProductForm(forms.ModelForm):
             'available',
         )
 
+# Definiton of the form displayed on the product page of a product to add a certain quantity of the product to the cart of the
+# currently logged in user.
 class AddtoCartForm(forms.ModelForm):
     pharmacy = forms.ModelChoiceField(queryset=Pharmacy.objects.all())
     quantity = forms.IntegerField()

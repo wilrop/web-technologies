@@ -1,9 +1,10 @@
 from django.shortcuts import render, redirect
 from pharmacies.models import Pharmacy
-from .forms import OrderForm, TestForm, TestFormSet, BaseTestFormSet
+from .forms import OrderForm
 from twilio.rest import Client
-from django.forms import formset_factory
 
+# View that is created for making a seperate order. There is also sms notification for the order to the pharmacy.
+# This is currently not used in our website but is nog removed because it could be used in the furure if needed.
 def create_order(request):
     if request.method == 'POST':
         form = OrderForm(request.POST)
@@ -36,18 +37,3 @@ def create_order(request):
         form = OrderForm()
     form = OrderForm()
     return render(request, 'orders/order.html', {'form': form})
-
-def test_order(request):
-    TestFormSet = formset_factory(TestForm, extra=3)
-    context = dict()
-    formset = TestFormSet()
-
-    if request.method == 'POST':
-        formset = TestFormSet(request.POST)
-
-        if formset.is_valid():
-            print(formset.cleaned_data)
-
-    context['formset'] = formset
-
-    return render(request, 'orders/test.html', context)

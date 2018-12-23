@@ -1,6 +1,5 @@
 # Imports
 import phonenumbers
-
 from django import forms
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
@@ -91,10 +90,12 @@ class EditProfileForm(forms.ModelForm):
 
         return user
 
+# The verification form take two inputs, a country code and a phone number. This form is used for the phone verification process.
 class VerificationForm(forms.Form):
     country_code = forms.CharField(max_length=3)
     phone_number = forms.CharField(max_length=20)
 
+    # Get a correct country code.
     def clean_country_code(self):
         country_code = self.cleaned_data['country_code']
         if not country_code.startswith('+'):
@@ -106,11 +107,11 @@ class VerificationForm(forms.Form):
         phone_number = data['country_code'] + data['phone_number']
         try:
             phone_number = phonenumbers.parse(phone_number, None)
-            if not phonenumbers.is_valid_number(phone_number):
+            if not phonenumbers.is_valid_number(phone_number):      # Check if the phonenumber is a valid phonenumber.
                 self.add_error('phone_number', 'Invalid phone number')
-        except NumberParseException as e:
+        except NumberParseException as e:   # if not, add an error.
             self.add_error('phone_number', e)
 
-
+# The token form only takes one input, namely a token.
 class TokenForm(forms.Form):
     token = forms.CharField(max_length=6)

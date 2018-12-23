@@ -16,10 +16,14 @@ class Profile(models.Model):
     user_type = models.CharField(max_length=126, default='Customer')
     verified = models.BooleanField(default=False)
 
+# Create a Cart model. Every user on the website will have a Cart. This cart is used for placing orders on the website.
+# The cart contains products with a through model called Item. An Item is a product that is in the Cart. It contains the name of the product
+# the name of the pharmacy, the quantity and the unit price of the product.
 class Cart(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     products = models.ManyToManyField(Product, through='Item', related_name="items+")
 
+# The model for items. These items can be stored in a cart.
 class Item(models.Model):
     product = models.ForeignKey(Product, on_delete=models.CASCADE)
     cart = models.ForeignKey(Cart, on_delete=models.CASCADE)

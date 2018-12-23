@@ -4,11 +4,13 @@ from pharmacies.models import Stock
 from accounts.models import Item, Cart
 from .forms import AddtoCartForm, AddProductForm
 
+# Definition of the view to display all the products in the database.
 def products_list(request):
     products = Product.objects.all()
     args = {'products_list': products}
     return render(request, 'products/list.html', args)
 
+# Definition of the view to display all the specific product page of a product. There is also a form to add this product to the Cart of the user.
 def product_detail(request, product_id, slug):  
     if request.method == 'POST':
         form = AddtoCartForm(request.POST, request.FILES)
@@ -29,7 +31,7 @@ def product_detail(request, product_id, slug):
     args = {'product': product, 'entries': entries, 'form': form}
     return render(request, 'products/detail.html', args)
 
-
+# Definition of the form to add a new product of a new product to the database (currently not used).
 def add_product(request):
     if request.method == 'POST':
         form = AddProductForm(request.POST, request.FILES)
