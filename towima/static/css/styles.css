@@ -166,20 +166,6 @@
         text-decoration: none !important;
     }
 
-    /*
-    .eh_lock{
-        background: url('../media/accounts/edit%2520home/lock.svg') center center no-repeat;
-        background-size: 60% 60%;
-        min-height: 20vh; 
-    }
-    .eh_user{
-        background: url('../media/accounts/edit%2520home/user.svg') center center no-repeat;
-        background-size: 60% 60%;
-        min-height: 20vh; 
-    }
-
-    */
-    
     .eh_sm_separator{min-height: 5vh;}
     
     /*--------------------------------------------*/
