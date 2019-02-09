@@ -1,1 +1,1 @@
-web: gunicorn pharmatowi.wsgi --log-file -
+web: gunicorn towima.wsgi --log-file -
