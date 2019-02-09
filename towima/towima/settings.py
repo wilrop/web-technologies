@@ -37,14 +37,14 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'accounts',         # The account app
+    '''accounts',         # The account app
     'towima',           # Our own app
     'products',         #products App
     'pharmacies',       #Pharmacy App
     'orders',           #Orders App
     'rest_framework',
     'crispy_forms',
-    'api',
+    'api','''
 ]
 
 MIDDLEWARE = [
