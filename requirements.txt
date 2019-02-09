@@ -10,6 +10,7 @@ Django==2.1.2
 django-crispy-forms==1.7.2
 djangorestframework==3.9.0
 docutils==0.14
+gunicorn==19.9.0
 idna==2.7
 imageio==2.4.1
 iso3166==0.9
