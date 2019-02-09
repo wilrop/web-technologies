@@ -1,1 +1,1 @@
-web: gunicorn towima.towima.wsgi --log-file -
+web:cd towima && gunicorn towima.wsgi --log-file -
