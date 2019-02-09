@@ -37,11 +37,11 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'accounts.apps.AccountsConfig',         # The account app
+    'accounts',         # The account app
     'towima',                               # Our own app
-    'products.apps.ProductsConfig',         #products App
-    'pharmacies.apps.PharmaciesConfig',     #Pharmacy App
-    'orders.apps.OrdersConfig',             #Orders App
+    'products',         #products App
+    'pharmacies',     #Pharmacy App
+    'orders',             #Orders App
     'rest_framework',
     'crispy_forms',
     'api',
