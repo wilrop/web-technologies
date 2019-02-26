@@ -59,7 +59,7 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-ROOT_URLCONF = 'towima.towima.urls'
+ROOT_URLCONF = 'towima.urls'
 
 TEMPLATES = [
     {
