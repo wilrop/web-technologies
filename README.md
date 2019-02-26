@@ -21,7 +21,7 @@ In order to provide the different functionalities we had to employ a range of te
 
 - Django: The platform was developed using the Django framework
 - HTML(5)
-- CSS: The bootstrap framework was used. This allowed us to provide a good mobile experience as well as desktop.
+- CSS: The Bootstrap framework was used. This allowed us to provide a good mobile experience as well as desktop.
 - Javascript
 - Ajax: Ajax was used multiple times throughout this platform. For example in generating the map with the pharmacies and when rating and posting comments. This allows us to display new content without the user having to reload the page.
 - Mapbox and Twilio API
