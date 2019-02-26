@@ -1,1 +1,1 @@
-web: env PYTHONPATH=$PYTHONPATH:$PWD/towima/towima gunicorn towima.towima.wsgi --log-file -
+web: env PYTHONPATH=$PYTHONPATH:$PWD/towima/ gunicorn towima.towima.wsgi --log-file -
