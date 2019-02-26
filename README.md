@@ -27,6 +27,6 @@ In order to provide the different functionalities we had to employ a range of te
 - Mapbox and Twilio API
 
 ## Contributors
-- Maxime Antoine
-- Thomas Vaeyens
-- Willem Röpke
+Maxime Antoine  
+Thomas Vaeyens  
+Willem Röpke
